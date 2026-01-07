@@ -286,3 +286,28 @@ if(btnToggle){
 checkTheme();
 init();
 animate();
+
+const menuIcon = document.getElementById('menu-icon');
+const navbar = document.querySelector('nav'); 
+
+menuIcon.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+    
+    if(navbar.classList.contains('active')){
+        menuIcon.innerHTML = '&#10005;'; 
+    } else {
+        menuIcon.innerHTML = '&#9776;'; 
+    }
+});
+
+window.onscroll = () => {
+    navbar.classList.remove('active');
+    menuIcon.innerHTML = '&#9776;';
+};
+
+document.querySelectorAll('header nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        navbar.classList.remove('active');
+        menuIcon.innerHTML = '&#9776;';
+    });
+});

@@ -1133,3 +1133,137 @@ body.dark-mode .sun {
   box-shadow: 0 0 20px rgba(37, 211, 102, 0.7);
   transform: translateY(-5px);
 }
+
+#menu-icon {
+    font-size: 3.6rem;
+    color: #005A9C;
+    display: none; 
+    cursor: pointer;
+    z-index: 1001; 
+}
+
+.dark-mode #menu-icon {
+    color: #FFC300;
+}
+
+@media (max-width: 991px) {
+    header {
+        padding: 2rem 4%;
+    }
+    section {
+        padding: 10rem 4% 2rem;
+    }
+    .home {
+        gap: 3rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block; 
+    }
+    
+    header nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;  
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s ease;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 1000; 
+    }
+
+    header nav.active {
+        right: 0;
+    }
+    #modo-toggle{
+        position: absolute;
+        align-items: center;
+        left: 100px;
+        top: 100px;
+        height: 100px;
+        width: 100px;
+        z-index: 1001;
+    }
+    .typing-text{
+        display: none;
+    }
+    header nav a {
+        display: block;
+        font-size: 2.4rem;
+        margin: 2rem 0; 
+        margin-left: 0; 
+    }
+
+    .dark-mode header nav {
+        background-color: rgba(51, 51, 51, 0.95);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+
+    .home {
+        flex-direction: column-reverse; 
+        text-align: center;
+        padding-top: 12rem; 
+    }
+
+    .home-content {
+        align-items: center; 
+    }
+    
+    .home-content h3 {
+        font-size: 2.6rem;
+    }
+
+    .home-img img {
+        width: 70vw; 
+        height: 70vw; 
+        max-width: 350px;
+        max-height: 350px;
+    }
+
+    h1 {
+        font-size: 3.5rem; 
+    }
+
+    #mi-cursor {
+        display: none;
+    }
+    body {
+        cursor: auto;
+    }
+
+    .portafolio-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .card-container {
+        width: 100%; 
+        max-width: 320px; 
+    }
+
+    .producto-card img {
+        height: 300px; 
+    }
+
+    .search-container {
+        width: 100%;
+        padding: 0 2rem;
+    }
+
+    #lista-libros li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .lista-item-precio {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+}
