@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <title>Jesús Daniel</title>
+</head>
+<body>
+    <div id="mi-cursor"></div>
+    <canvas id="canvas-particulas"></canvas>
+    <header>
+        <a href="#inicio" class="logo">
+            <span>Jesús</span>
+            
+        </a>
+
+        <nav>
+            <br>
+            <a href="#inicio">Inicio</a>
+            <a href="#yo">¿Quien Soy?</a>
+            <a href="#portafolio">Portafolio</a>
+            <a href="#Conocimientos">Conocimientos</a>
+            <a href="#contacto">Contacto</a>
+
+            <button id="modo-toggle" aria-label="Cambiar modo claro/oscuro">
+                <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+
+                    <g class="sun">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </g>
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <section class="home" id="inicio">
+        <div class="home-img">
+            <img id="imagen-cambiante" src="media/yop.jpg" alt="Galería automática">
+        </div>
+
+        <div class="home-content">
+            <h1>Hola yo soy <span class="energia-span">Jesús Daniel</span></h1>
+            
+            <h3 class="typing-text"><span></span></h3> 
+            
+            <p>
+                Desarrollando distintatas soluciones para problematicas que surgen en el mundo digital, o en el mundo real.
+            </p>
+            
+            <a href="#yo" class="btn">¿Quien Soy?</a>
+            <a href="#portafolio" class="btn">Portafolio</a>
+            <a href="#conocimientos" class="btn">Conocimientos</a>
+            <a href="#contacto" class="btn">Contacto</a>
+        </div>
+    </section>
+    
+    <section class="seccion-general" id="yo">
+        <h1>¿Quien <span class="energia-span">Soy</span>?</h1>
+        <div class="box-descripcion">
+            <p>Hola, soy Jesús Daniel, un programador que le encanta resolver problemas y crear soluciones innovadoras. <br> <br>Actualmente tengo 16 años y estoy estudiando en la <a href="">Escuela Industrial y Preparatoria Tecnica Alvaro Obregon</a>, en ella estudio la carrera tecnica de Inteligencia Artificial. <br> <br>
+            Lo que me caracteriza es que soy alguien que le gusta resolver todo tipo de problemas, desde problemas matematicos, sociales, hasta problemas tecnologicos, por lo que siempre estoy haciendo algo nuevo, desde aprendiendo algo nuevo, hasta creando algo nuevo.</p>
+        </div>
+        <div class="productos-text">
+            <div class="producto-text">
+                <div class="card-content">
+                    <h1>1+</h1>
+                    <h3>Experiencia </h3>
+                </div>
+            </div>
+
+            <div class="producto-text">
+                <div class="card-content">
+                    <h1>5+</h1>
+                    <h3>Proyectos </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="seccion-general" id="portafolio">
+        <h1>Proyectos que eh <span class="energia-span">desarrollado</span></h1>
+        <p class="seccion-descripcion">
+            Estos son los Proyectos mas relevantes que he hecho.
+        </p>
+        <div class="portafolio-grid">
+
+            <div class="card-container style-1">
+                <div class="card-inner">
+                    
+                    <div class="card-front">
+                        <img src="media/proyecto-stem.png" alt="Imagen Proyecto" class="project-img">
+                        <h3 class="project-title" style="color: white;">Proyecto STEM</h3>
+                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+                    </div>
+    
+                    <div class="card-back">
+                        
+                    <div class="card-header">
+                            <h3 style="color: white;">Proyecto STEM</h3>
+                            <div class="icons">
+                            <a href="https://github.com/JDHVa/STEM_Semestre_3" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
+                            <a href="https://stem-semestre-3.onrender.com" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
+                            </div>
+                    </div>
+    
+                    <div class="card-body">
+                        <p style="color: white;">Este proyecto consisten en una pagina web, en la cual se proponen soluciones para problemas sobre la energia, para el medio ambiente, agua, residuos organicos y mucho mas.</p>
+                    </div>
+    
+                    <div class="card-footer">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JS</span>
+                    </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-container style-2">
+                <div class="card-inner">
+                    
+                    <div class="card-front">
+                        <img src="media/clasificador.png" alt="Imagen Proyecto" style="width: 200px; height: 300px;" class="project-img">
+
+                        <h3 class="project-title" style="color: white;">Clasificador de imagenes</h3>
+                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+                    </div>
+    
+                    <div class="card-back">
+                        
+                    <div class="card-header">
+                            <h3 style="color: white;">Clasificador de imagenes</h3>
+                            <div class="icons">
+                            <a href="https://github.com/JDHVa/Clasificador-Imagenes" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
+                            <a href="https://clasificador-imagenes.onrender.com" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
+                            </div>
+                    </div>
+    
+                    <div class="card-body">
+                        <p style="color: white;">En este proyecto como bien dice el nombre se clasifican imagenes, el proceso es, envias una imagen, para despues ser revisada mediante random forest y dar el resultado (Esto con el fin de no usar CNN).</p>
+                    </div>
+    
+                    <div class="card-footer">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JS</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Excel</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Flask</span>
+                    </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-container style-3">
+                <div class="card-inner">
+                    
+                    <div class="card-front">
+                        <img src="media/robot.jpg" alt="Imagen Proyecto" style="width: 200px; height: 300px;" class="project-img">
+                        <h3 class="project-title" style="color: white;">Robot controlado manualmente</h3>
+                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+                    </div>
+    
+                    <div class="card-back">
+                        
+                    <div class="card-header">
+                            <h3 style="color: white;">Robot controlado manualmente</h3>
+                            <div class="icons">
+                            <a href="https://github.com/JDHVa/Robot-Controlled-by-hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
+                            </div>
+                    </div>
+    
+                    <div class="card-body">
+                        <p style="color: white;">Este proyecto consiste en controlar un robot mediante las manos, pero sin la necesidad de tener que tocas algo fisico, todos los movimiento que se hagan seran procesados digitalmente para depsues pasar al robot.</p>
+                    </div>
+    
+                    <div class="card-footer">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flet</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">DC motors</span>
+                        <span class="tech-tag">Shield L298D</span>
+                    </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-container style-4">
+                <div class="card-inner">
+                    
+                    <div class="card-front">
+                        <img src="media/mano.jpg" alt="Imagen Proyecto" style="width: 200px; height: 300px;" class="project-img">
+                        <h3 class="project-title" style="color: white;">Mano Imitadora</h3>
+                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+                    </div>
+    
+                    <div class="card-back">
+                        
+                    <div class="card-header">
+                            <h3 style="color: white;">Mano Imitadora</h3>
+                            <div class="icons">
+                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
+                            </div>
+                    </div>
+    
+                    <div class="card-body">
+                        <p style="color: white;">Este proyecto lo realice junto con un compañero llamado Áaron Wayas, este consiste en una mano imitadora que como el nombre dice imita cualquier gesto que realices.</p>
+                    </div>
+    
+                    <div class="card-footer">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flet</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Servomotores</span>
+                    </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-container style-5">
+                <div class="card-inner">
+                    
+                    <div class="card-front">
+                        <img src="media/edumarket.png" alt="Imagen Proyecto" style="width: 200px; height: 200px;" class="project-img">
+                        <h3 class="project-title" style="color: white;">Edu Market</h3>
+                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+                    </div>
+    
+                    <div class="card-back">
+                        
+                    <div class="card-header">
+                            <h3 style="color: white;">Edu Market</h3>
+                            <div class="icons">
+                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
+                            </div>
+                    </div>
+    
+                    <div class="card-body">
+                        <p style="color: white;">Este proyecto fue realizado con el fin de realizar una pagina web simple la cual simula una tienda de libros.</p>
+                    </div>
+    
+                    <div class="card-footer">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JS</span>
+                        <span class="tech-tag">Bootstrap</span>
+                    </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+            <div class="card-container style-6">
+                <div class="card-inner">
+                    
+                    <div class="card-front">
+                        <img src="media/AI.jpg" alt="Imagen Proyecto" style="width: 200px; height: 200px;" class="project-img">
+                        <h3 class="project-title" style="color: white;">AI House</h3>
+                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+                    </div>
+    
+                    <div class="card-back">
+                        
+                    <div class="card-header">
+                            <h3 style="color: white;">AI House</h3>
+                            <div class="icons">
+                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
+                            </div>
+                    </div>
+    
+                    <div class="card-body">
+                        <p style="color: white;">Este proyecto todavia no esta finalizado, pero consiste en un proyecto de IA en el que puedes controlar tu hogar mediante gestos simples de la mano.</p>
+                    </div>
+    
+                    <div class="card-footer">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Flet</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Servomotores</span>
+                        <span class="tech-tag">Sensores</span>
+                    </div>
+    
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="skills-section" id="Conocimientos">
+    <div class="container text-center">
+        
+        <h1 class="section-title mb-4" style="text-align: center;">Mis conocimientos mas importantes</h1>
+
+        <div class="skills-wrapper">
+
+        <div class="skill-tag" style="--color: #E34F26;">
+            <i class="fab fa-html5"></i> HTML
+        </div>
+        <div class="skill-tag" style="--color: #1572B6;">
+            <i class="fab fa-css3-alt"></i> CSS
+        </div>
+        <div class="skill-tag" style="--color: #F7DF1E;">
+            <i class="fab fa-js"></i> JavaScript
+        </div>
+        <div class="skill-tag" style="--color: #7952B3;">
+            <i class="fab fa-bootstrap"></i> Bootstrap
+        </div>
+
+        <div class="skill-tag" style="--color: #007396;">
+            <i class="fab fa-java"></i> Java
+        </div>
+        <div class="skill-tag" style="--color: #3776AB;">
+            <i class="fab fa-python"></i> Python
+        </div>
+        <div class="skill-tag" style="--color: #00599C;">
+            <i class="fas fa-code"></i> C++
+        </div>
+        <div class="skill-tag" style="--color: #00979D;">
+            <i class="fas fa-microchip"></i> Arduino
+        </div>
+
+        <div class="skill-tag" style="--color: #336791;">
+            <i class="fas fa-database"></i> PostgreSQL
+        </div>
+        <div class="skill-tag" style="--color: #47A248;">
+            <i class="fas fa-leaf"></i> MongoDB
+        </div>
+        <div class="skill-tag" style="--color: #217346;">
+            <i class="fas fa-file-excel"></i> Excel
+        </div>
+
+        <div class="skill-tag" style="--color: #FF5733;">
+            <i class="fas fa-language"></i> Inglés
+        </div>
+        <div class="skill-tag" style="--color: #C70039;">
+            <i class="fas fa-torii-gate"></i> Chino
+        </div>
+        <div class="skill-tag" style="--color: #DAF7A6;">
+            <i class="fas fa-square-root-alt"></i> Matemáticas
+        </div>
+
+        </div>
+    </div>
+    </section>
+    <section class="contact-section" id="contacto">
+        <div class="container-contact">
+            
+            <h1 class="contact-title">¿Buscas hablar conmigo?</h1>
+            <p class="contact-text">Puedes hablar conmigo por aquí</p>
+
+            <div class="social-links">
+            
+            <a href="https://instagram.com/jesus_.hdzv/" target="_blank" class="social-btn instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://discord.com/users/jesust9x" target="_blank" class="social-btn discord">
+                <i class="fab fa-discord"></i>
+            </a>
+
+            <a href="https://github.com/JDHVa" target="_blank" class="social-btn github">
+                <i class="fab fa-github"></i>
+            </a>
+
+            <a href="https://wa.me/8128926313" target="_blank" class="social-btn whatsapp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            </div>
+        </div>
+    </section>
+    
+
+    <script src="js.js"></script>
+</body>
+</html>
