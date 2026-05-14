@@ -32,19 +32,14 @@
 
 ## GitHub Stats
 
-![GitHub Streak](https://streak-stats.demolab.com?user=JDHVa&theme=tokyonight)
-
-![Top Languages](https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight)
-
-## GitHub Stats
-
 <p align="center">
   <img src="https://streak-stats.demolab.com?user=JDHVa&theme=tokyonight" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats-git-masterrstaa-rickstaa.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=JDHVa&theme=tokyonight" />
 </p>
+
 ```python
 class Developer:
     def __init__(self):
