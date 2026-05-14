@@ -31,9 +31,15 @@
   I’ve been developing programming solutions since I was 12 years old. Currently 16.
 
 ## GitHub Stats
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&theme=tokyonight)
+## GitHub Stats
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight)
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&theme=tokyonight" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight" />
+</p>
 ```python
 class Developer:
     def __init__(self):
@@ -42,7 +48,7 @@ class Developer:
         self.focus = [
             "Computer Vision",
             "Machine Learning",
-            "Robotics"
+            "Robotics",
             "Help People"
         ]
 
