@@ -32,16 +32,6 @@
 
 ## GitHub Stats
 
-![Jesús's GitHub stats](https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&include_all_commits=true&count_private=true&theme=tokyonight)
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&langs_count=8&theme=tokyonight)
-## GitHub Stats
-
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&theme=tokyonight"/>
-
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight"/>
-## GitHub Stats
-
 ![GitHub Streak](https://streak-stats.demolab.com?user=JDHVa&theme=tokyonight)
 
 ![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight)****
