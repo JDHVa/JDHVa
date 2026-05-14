@@ -15,13 +15,13 @@ html {
   font-size: 62.5%;
 }
 #canvas-particulas {
-    position: fixed; /* Se queda fijo aunque hagas scroll */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Se coloca DETRÁS de todo el contenido */
-    pointer-events: none; /* Permite dar clic a lo que está encima */
+    z-index: -1; 
+    pointer-events: none; 
 }
 body {
   cursor: none;
@@ -34,18 +34,17 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;  /* Tamaño solicitado */
+    width: 20px; 
     height: 20px;
-    background-color: white; /* Color base (el filtro lo cambiará) */
-    border-radius: 50%;      /* Para hacerlo redondo */
-    pointer-events: none;    /* IMPORTANTE: Permite hacer click a través de la bolita */
-    z-index: 9999;           /* Que esté siempre encima de todo */
-    transform: translate(-50%, -50%); /* Para centrarlo exacto en la punta del mouse */
-    mix-blend-mode: difference;       /* El efecto de contraste automático */
-    transition: transform 0.1s ease;  /* Un movimiento suavizado muy sutil */
+    background-color: white; 
+    border-radius: 50%;     
+    pointer-events: none;   
+    z-index: 9999;         
+    transform: translate(-50%, -50%); 
+    mix-blend-mode: difference;      
+    transition: transform 0.1s ease;  
 }
 
-/* Opcional: Si quieres que crezca un poco al pasar sobre enlaces/botones */
 a:hover ~ #mi-cursor, button:hover ~ #mi-cursor {
     transform: translate(-50%, -50%) scale(1.5);
 }
@@ -1005,24 +1004,12 @@ body.dark-mode .sun {
 }
 
 
-
-.style-1 .card-front { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-.style-1 .card-back  { background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%); }
-
-.style-2 .card-front { background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); }
-.style-2 .card-back  { background: linear-gradient(135deg, #cb2d3e 0%, #ef473a 100%); }
-
-.style-3 .card-front { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
-.style-3 .card-back  { background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); }
-
-.style-4 .card-front { background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%); }
-.style-4 .card-back  { background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%); }
-
 .style-5 .card-front { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
 .style-5 .card-back  { background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%); }
 
-.style-6 .card-front { background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); }
-.style-6 .card-back  { background: linear-gradient(135deg, #e65c00 0%, #F9D423 100%); }
+
+.dark-mode .style-5 .card-front{background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); }
+.dark-mode .style-5 .card-back { background: linear-gradient(135deg, #e65c00 0%, #F9D423 100%); }
 
 .skills-wrapper {
   display: flex;
@@ -1184,13 +1171,12 @@ body.dark-mode .sun {
         right: 0;
     }
     #modo-toggle{
-        position: absolute;
+        position: relative;
         align-items: center;
-        left: 100px;
-        top: 100px;
-        height: 100px;
-        width: 100px;
-        z-index: 1001;
+        left: 5px;
+        margin-left: 0;      
+        margin-top: 2rem;    
+        transform: scale(1.2);
     }
     .typing-text{
         display: none;

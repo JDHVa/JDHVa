@@ -2,20 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleButton = document.getElementById('modo-toggle');
     const body = document.body;
 
-    // 1. Verificamos preferencia guardada al cargar
     if (localStorage.getItem('modo-oscuro') === 'true') {
         body.classList.add('dark-mode');
-        // YA NO cambiamos el textContent aquí
     } else {
         body.classList.remove('dark-mode');
-        // YA NO cambiamos el textContent aquí
     }
 
-    // 2. Evento Click
     toggleButton.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
         
-        // Guardamos la preferencia y nada más
         if (body.classList.contains('dark-mode')) {
             localStorage.setItem('modo-oscuro', 'true');
         } else {
@@ -127,10 +122,6 @@ const observador = new IntersectionObserver((entradas) => {
 const elementosOcultos = document.querySelectorAll('.animar-oculto');
 elementosOcultos.forEach((el) => observador.observe(el));
 
-/* -------------------------------------------
-   FONDO DE PARTÍCULAS: CONEXIONES Y MODO OSCURO
-------------------------------------------- */
-
 const canvas = document.getElementById('canvas-particulas');
 const ctx = canvas.getContext('2d');
 
@@ -143,7 +134,6 @@ let currentColor = colorClaro;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// --- NUEVO: OBJETO MOUSE ---
 let mouse = {
     x: null,
     y: null,
@@ -222,7 +212,7 @@ class Particle {
 
 function init() {
     particlesArray = [];
-    let numberOfParticles = (canvas.height * canvas.width) / 5000;
+    let numberOfParticles = (canvas.height * canvas.width) / 9000;
 
     for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 3) + 1;
