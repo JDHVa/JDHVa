@@ -31,15 +31,15 @@
   I’ve been developing programming solutions since I was 12 years old. Currently 16.
 
 ## GitHub Stats
+
+![Jesús's GitHub stats](https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&include_all_commits=true&count_private=true&theme=tokyonight)
+
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&langs_count=8&theme=tokyonight)
 ## GitHub Stats
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&theme=tokyonight" />
-</p>
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&theme=tokyonight"/>
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight" />
-</p>
+<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight"/>
 ```python
 class Developer:
     def __init__(self):
