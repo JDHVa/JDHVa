@@ -88,9 +88,9 @@ Founder of a tutoring initiative focused on:
 ---
 
 ## GitHub Stats
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=JDHVa&show_icons=true&theme=tokyonight)
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=JDHV_a&show_icons=true&theme=tokyonight)
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JDHVa&layout=compact&theme=tokyonight)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=JDHV_a&layout=compact&theme=tokyonight)
 ```python
 class Developer:
     def __init__(self):
