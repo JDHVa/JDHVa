@@ -1,6 +1,6 @@
-# Hi there, I'm Jesús Daniel Hernández Valero 👋
+# Hi there, I'm Jesús Daniel Hernández Valero
 
-## AI & Robotics Developer
+## AI & try of Robotics Developer
 
 - I’m currently studying Artificial Intelligence at the *Escuela Industrial y Preparatoria Técnica Álvaro Obregón (EIAO)*.  
   I really enjoy everything related to AI, especially Computer Vision, Data Analysis, and Machine Learning.
