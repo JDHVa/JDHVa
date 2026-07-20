@@ -3,589 +3,517 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        
-    <title>Jesús Daniel</title>
+    <link rel="stylesheet" href="styles.css?v=23" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Jesús Daniel | Portafolio</title>
 </head>
 <body>
-    <div id="mi-cursor"></div>
-    <canvas id="canvas-particulas"></canvas>
+
     <header>
-        <a href="#inicio" class="logo">
-            <span>Jesús</span>
-            
-        </a>
-        <div id="menu-icon">&#9776;</div>
-        <nav>
-            <br>
-            <a href="#inicio">Inicio</a>
-            <a href="#yo">¿Quien Soy?</a>
-            <a href="#portafolio">Portafolio</a>
-            <a href="#Conocimientos">Conocimientos</a>
-            <a href="#contacto">Contacto</a>
-
-            <button id="modo-toggle" aria-label="Cambiar modo claro/oscuro">
-                <svg class="theme-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path class="moon" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-
-                    <g class="sun">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </g>
-                </svg>
-            </button>
-        </nav>
+        <div class="header-inner">
+            <a href="#inicio" class="logo">JD<span>.</span></a>
+            <div id="menu-icon"><i class="fas fa-bars"></i></div>
+            <nav>
+                <a href="#inicio">Inicio</a>
+                <a href="#sobre-mi">Sobre mí</a>
+                <a href="#portafolio">Proyectos</a>
+                <a href="#conocimientos">Skills</a>
+                <a href="#contacto">Contacto</a>
+                <button id="modo-toggle" aria-label="Cambiar tema">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <section class="home" id="inicio">
-        <div class="home-img">
-            <img id="imagen-cambiante" src="media/yop.jpg" alt="Galería automática">
-        </div>
-
-        <div class="home-content">
-            <h1>Hola yo soy <span class="energia-span">Jesús Daniel</span></h1>
-            
-            <h3 class="typing-text"><span></span></h3> 
-            
-            <p>
-                Desarrollando distintatas soluciones para problematicas que surgen en el mundo digital, o en el mundo real.
-            </p>
-            
-            <a href="#yo" class="btn">¿Quien Soy?</a>
-            <a href="#portafolio" class="btn">Portafolio</a>
-            <a href="#conocimientos" class="btn">Conocimientos</a>
-            <a href="#contacto" class="btn">Contacto</a>
-        </div>
-    </section>
-    
-    <section class="seccion-general" id="yo">
-        <h1>¿Quien <span class="energia-span">Soy</span>?</h1>
-        <div class="box-descripcion">
-            <p>Hola, soy Jesús Daniel, un programador que le encanta resolver problemas y crear soluciones innovadoras. <br> <br>Actualmente tengo 16 años y estoy estudiando en la <a href="">Escuela Industrial y Preparatoria Tecnica Alvaro Obregon</a>, en ella estudio la carrera tecnica de Inteligencia Artificial. <br> <br>
-            Lo que me caracteriza es que soy alguien que le gusta resolver todo tipo de problemas, desde problemas matematicos, sociales, hasta problemas tecnologicos, por lo que siempre estoy haciendo algo nuevo, desde aprendiendo algo nuevo, hasta creando algo nuevo.</p>
-        </div>
-        <div class="productos-text">
-            <div class="producto-text">
-                <div class="card-content">
-                    <h1>1+</h1>
-                    <h3>Experiencia </h3>
-                </div>
-            </div>
-
-            <div class="producto-text">
-                <div class="card-content">
-                    <h1>10+</h1>
-                    <h3>Proyectos </h3>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="seccion-general" id="portafolio">
-        <h1>Proyectos que eh <span class="energia-span">desarrollado</span></h1>
-        <p class="seccion-descripcion">
-            Estos son los Proyectos mas relevantes que he hecho.
-        </p>
-        <div class="portafolio-grid">
-
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/logo.png" alt="Imagen Proyecto" class="project-img" style="width: 240px; height: 250px;">
-                        <h3 class="project-title" style="color: white;">Young Devs</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content">
+                <div class="terminal glass-card">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="terminal-title">jesus@portfolio ~ </span>
                     </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Young Devs</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Young-Devs" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            <a href="https://young-devs-beta.vercel.app/" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Esta es la pagina web de mi proyecto social, en el mismo se proponen ayudas para evitar distintos tipos de problemas que podria tener la comunidad en cuestion de aprendizaje o desarrollo tecnologico.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JS</span>
-                    </div>
-    
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="cmd">python</span>
+                            <span class="file">about_me.py</span>
+                        </div>
+                        <div class="terminal-output">
+                            <span class="keyword">class</span> <span class="class-name">Developer</span>:
+                        </div>
+                        <div class="terminal-output indent">
+                            <span class="keyword">def</span> <span class="func">__init__</span>(<span class="param">self</span>):
+                        </div>
+                        <div class="terminal-output indent2">
+                            <span class="param">self</span>.<span class="prop">name</span> = <span class="string">"Jesús Daniel"</span>
+                        </div>
+                        <div class="terminal-output indent2">
+                            <span class="param">self</span>.<span class="prop">role</span> = <span class="string">"Creador de soluciones"</span>
+                        </div>
+                        <div class="terminal-output indent2">
+                            <span class="param">self</span>.<span class="prop">skills</span> = [<span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"C++"</span>, <span class="string">"Rust"</span>]
+                        </div>
+                        <div class="terminal-output indent2">
+                            <span class="param">self</span>.<span class="prop">passion</span> = <span class="string">"IA & Tecnología"</span>
+                        </div>
+                        <br>
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="cmd">g++</span>
+                            <span class="file">mission.cpp</span>
+                            <span class="flag">-o</span>
+                            <span class="file">mission</span>
+                            <span class="flag">&&</span>
+                            <span class="file">./mission</span>
+                        </div>
+                        <div class="terminal-output output-text">
+                            > Desarrollo soluciones innovadoras para
+                        </div>
+                        <div class="terminal-output output-text">
+                            &nbsp; problemas del mundo digital y real.
+                        </div>
+                        <br>
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="cmd">java</span>
+                            <span class="file">Status.java</span>
+                        </div>
+                        <div class="terminal-output output-text">
+                            > Estudiante de IA con pasión por crear
+                        </div>
+                        <div class="terminal-output output-text">
+                            &nbsp; tecnología que impacte. <span class="cursor-blink">█</span>
+                        </div>
                     </div>
                 </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/clasificador.png" alt="Imagen Proyecto" style="width: 200px; height: 300px;" class="project-img">
-
-                        <h3 class="project-title" style="color: white;">Clasificador de imagenes</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Clasificador de imagenes</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Clasificador-Imagenes" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            <a href="https://clasificador-imagenes.onrender.com" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">En este proyecto como bien dice el nombre se clasifican imagenes, el proceso es, envias una imagen, para despues ser revisada mediante random forest y dar el resultado (Esto con el fin de no usar CNN).</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JS</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Excel</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                        <span class="tech-tag">Flask</span>
-                    </div>
-    
-                    </div>
+                <div class="hero-cta">
+                    <a href="#portafolio" class="btn btn-primary">Ver proyectos</a>
+                    <a href="#contacto" class="btn btn-glass">Contacto</a>
                 </div>
-                
             </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/robot.jpg" alt="Imagen Proyecto" style="width: 200px; height: 300px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Robot controlado manualmente</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Robot controlado manualmente</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Robot-Controlled-by-hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Este proyecto consiste en controlar un robot mediante las manos, pero sin la necesidad de tener que tocas algo fisico, todos los movimiento que se hagan seran procesados digitalmente para depsues pasar al robot.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Flet</span>
-                        <span class="tech-tag">Arduino</span>
-                        <span class="tech-tag">DC motors</span>
-                        <span class="tech-tag">Shield L298D</span>
-                    </div>
-    
-                    </div>
+            <div class="hero-image">
+                <div class="hero-rays"></div>
+                <div class="hero-img-wrapper">
+                    <img src="media/jesus-home-transparent.png" alt="Jesús Daniel">
+                    <div class="energy-flow"></div>
                 </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/mano.jpg" alt="Imagen Proyecto" style="width: 200px; height: 300px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Mano Imitadora</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Mano Imitadora</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Este proyecto lo realice junto con un compañero llamado Áaron Wayas, este consiste en una mano imitadora que como el nombre dice imita cualquier gesto que realices.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Flet</span>
-                        <span class="tech-tag">Arduino</span>
-                        <span class="tech-tag">Servomotores</span>
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/edumarket.png" alt="Imagen Proyecto" style="width: 200px; height: 200px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Edu Market</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Edu Market</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Este proyecto fue realizado con el fin de realizar una pagina web simple la cual simula una tienda de libros.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JS</span>
-                        <span class="tech-tag">Bootstrap</span>
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/AI.jpg" alt="Imagen Proyecto" style="width: 200px; height: 200px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">AI House</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">AI House</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Este proyecto todavia no esta finalizado, pero consiste en un proyecto de IA en el que puedes controlar tu hogar mediante gestos simples de la mano.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Flet</span>
-                        <span class="tech-tag">Arduino</span>
-                        <span class="tech-tag">Servomotores</span>
-                        <span class="tech-tag">Sensores</span>
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/avvolto.png" alt="Imagen Proyecto" style="width: 200px; height: 250px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Avvolto</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Avvolto</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/avvolto" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            <a href="https://avvolto.vercel.app/" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Alguna vez has querido tener un spotify wrapped, pero para whatsapp?, esta es la respuesta, este proyecto incluye NLP, parser, visualizacion de estadisticas y etiquetas hacia los tipos de mensajes (La interfaz es 100% IA).</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Flask</span>
-                        <span class="tech-tag">Rest API</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">Plotly</span>
-                        <span class="tech-tag">Spacy</span>
-
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/kreslit.png" alt="Imagen Proyecto" style="width: 250px; height: 200px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Kreslit</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Kreslit</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/kreslit" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            <a href="https://kreslit.vercel.app/" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
-                             </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Has querido dibujar pero sin tocar un lapiz?, este proyecto presenta la solucion, aqui vas a poder dibujar dentro de un lienzo digital, que es tu camra, y podras dibujar lo que sea, e incluso dejar tu huella en el modo de paneles cooperati.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Tesseract</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">TypeScript</span>
-
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/nova-css-v3.png" alt="Imagen Proyecto" style="width: 250px; height: 275px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Nova</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Nova</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Nova" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            <a href="https://nova-ia-liart.vercel.app/" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Aqui podras consultar un ChatBot, medico con la caracterisitica principal de que tiene un x-ray analyzer, por lo que si tienes una radeografia del pecho la podrias insertar y el modelo entrenado por DenseNet, dara multiples resultados.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Gemini API</span>
-                        <span class="tech-tag">Inteligencia Artificial</span>
-
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5 pi-gem" style="height: 450px;">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/nova-css-v3.png" alt="Imagen Proyecto" style="width: 250px; height: 275px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Pi-Gem</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Pi-Gem</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/PI-Gem" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Cuando viste iron man no quisiste tener tu propio Jarvis?, o bien no has querido tener un asistente virtual con un cuerpo desarrollado en 3D, este proyecto responde a eso, el mismo puede ejecutar acciones completas o bien hablar y reconocer voz.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Vertex AI</span>
-                        <span class="tech-tag">Inteligencia Artificial</span>
-                        <span class="tech-tag">TTS</span>
-                        <span class="tech-tag">STT</span>
-                        <span class="tech-tag">Parser</span>
-                        <span class="tech-tag">ChromaDB</span>
-                        <span class="tech-tag">DeepFace</span>
-                        <span class="tech-tag">Mediapipe</span>
-                        <span class="tech-tag">Rust</span>
-                        <span class="tech-tag">VRStudio</span>
-
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-            <div class="card-container style-5">
-                <div class="card-inner">
-                    
-                    <div class="card-front">
-                        <img src="media/theraplay.png" alt="Imagen Proyecto" style="width: 250px; height: 275px;" class="project-img">
-                        <h3 class="project-title" style="color: white;">Theraplay</h3>
-                        <p class="hover-text">👋Acerca el cursor para detalles</p>
-                    </div>
-    
-                    <div class="card-back">
-                        
-                    <div class="card-header">
-                            <h3 style="color: white;">Theraplay</h3>
-                            <div class="icons">
-                            <a href="https://github.com/JDHVa/Theraplay-WebApp" target="_blank" title="Ver repositorio"><i class="fab fa-github"></i></a>
-                            <a href="https://theraplay-web-app.vercel.app/" target="_blank" title="Ver sitio web"><i class="fas fa-globe"></i></a>
-                            </div>
-                    </div>
-    
-                    <div class="card-body">
-                        <p style="color: white;">Este es uno de los proyectos realizados por mi, pero para el proyecto de young devs, este es un proyecto medico, puedes consultar mas info en el website.</p>
-                    </div>
-    
-                    <div class="card-footer">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JavaScript</span>
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Gemini API</span>
-
-
-                    </div>
-    
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-
-    </section>
-
-    <section class="skills-section" id="Conocimientos">
-    <div class="container text-center">
-        
-        <h1 class="section-title mb-4" style="text-align: center;">Mis conocimientos mas importantes</h1>
-
-        <div class="skills-wrapper">
-
-        <div class="skill-tag" style="--color: #E34F26;">
-            <i class="fab fa-html5"></i> HTML
-        </div>
-        <div class="skill-tag" style="--color: #1572B6;">
-            <i class="fab fa-css3-alt"></i> CSS
-        </div>
-        <div class="skill-tag" style="--color: #F7DF1E;">
-            <i class="fab fa-js"></i> JavaScript
-        </div>
-        <div class="skill-tag" style="--color: #7952B3;">
-            <i class="fab fa-bootstrap"></i> Bootstrap
-        </div>
-
-        <div class="skill-tag" style="--color: #007396;">
-            <i class="fab fa-java"></i> Java
-        </div>
-        <div class="skill-tag" style="--color: #3776AB;">
-            <i class="fab fa-python"></i> Python
-        </div>
-        <div class="skill-tag" style="--color: #00599C;">
-            <i class="fas fa-code"></i> C++
-        </div>
-        <div class="skill-tag" style="--color: #00979D;">
-            <i class="fas fa-microchip"></i> Arduino
-        </div>
-
-        <div class="skill-tag" style="--color: #336791;">
-            <i class="fas fa-database"></i> PostgreSQL
-        </div>
-        <div class="skill-tag" style="--color: #47A248;">
-            <i class="fas fa-leaf"></i> MongoDB
-        </div>
-        <div class="skill-tag" style="--color: #217346;">
-            <i class="fas fa-file-excel"></i> Excel
-        </div>
-
-        <div class="skill-tag" style="--color: #FF5733;">
-            <i class="fas fa-language"></i> Inglés
-        </div>
-        <div class="skill-tag" style="--color: #C70039;">
-            <i class="fas fa-torii-gate"></i> Chino
-        </div>
-        <div class="skill-tag" style="--color: #DAF7A6;">
-            <i class="fas fa-square-root-alt"></i> Matemáticas
-        </div>
-
-        </div>
-    </div>
-    </section>
-    <section class="contact-section" id="contacto">
-        <div class="container-contact">
-            
-            <h1 class="contact-title">¿Buscas hablar conmigo?</h1>
-            <p class="contact-text">Puedes hablar conmigo por aquí</p>
-
-            <div class="social-links">
-            
-            <a href="https://instagram.com/jesus_.hdzv/" target="_blank" class="social-btn instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-
-            <a href="https://discord.com/users/jesust9x" target="_blank" class="social-btn discord">
-                <i class="fab fa-discord"></i>
-            </a>
-
-            <a href="https://github.com/JDHVa" target="_blank" class="social-btn github">
-                <i class="fab fa-github"></i>
-            </a>
-
-            <a href="https://wa.me/8128926313" target="_blank" class="social-btn whatsapp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
-
             </div>
         </div>
     </section>
-    
 
-    <script src="js.js"></script>
+    <section class="section" id="sobre-mi">
+        <div class="container">
+            <h2 class="section-title">Mi <span class="accent">camino</span></h2>
+            <p class="section-subtitle">Un recorrido por los momentos que me han definido.</p>
+
+            <div class="roadmap">
+                <svg class="roadmap-snake" viewBox="0 0 900 1600" preserveAspectRatio="none" fill="none">
+                    <path class="snake-path" d="M 450 0 C 450 50, 150 80, 150 120 C 150 160, 750 200, 750 240 C 750 280, 150 320, 150 360 C 150 400, 750 440, 750 480 C 750 520, 150 560, 150 600 C 150 640, 750 680, 750 720 C 750 760, 150 800, 150 840 C 150 880, 750 920, 750 960 C 750 1000, 150 1040, 150 1080 C 150 1120, 750 1160, 750 1200 C 750 1240, 150 1280, 150 1320 C 150 1360, 750 1400, 750 1440 C 750 1480, 450 1520, 450 1600" stroke="url(#snake-gradient)" stroke-width="3" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="snake-gradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.5"/>
+                            <stop offset="50%" stop-color="var(--navy)" stop-opacity="0.3"/>
+                            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.5"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+                <div class="roadmap-item left">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">2022</span>
+                                <h3>Descubriendo STEM a través de la robótica</h3>
+                                <p>La robótica despertó mi interés por STEM. Empecé a construir y programar mis primeros robots con fischertechnik, entendiendo la conexión entre hardware y software.</p>
+                                <div class="roadmap-tags">
+                                    <span>Robótica</span><span>STEM</span><span>fischertechnik</span>
+                                </div>
+                            </div>
+                            <div class="roadmap-img">
+                                <img src="media/road-1-etapa.jpeg" alt="Robótica fischertechnik">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item right">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">2023</span>
+                                <h3>Primeras líneas de código</h3>
+                                <p>Empecé a programar con Python por curiosidad. Creé scripts básicos, automatizaciones y mi primer chatbot. La programación se convirtió en mi herramienta favorita.</p>
+                                <div class="roadmap-tags">
+                                    <span>Python</span><span>Automatización</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item left">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">2024</span>
+                                <h3>Ingreso a EIPTAO — Carrera de IA</h3>
+                                <p>Entré a la Escuela Industrial y Preparatoria Técnica Álvaro Obregón en la carrera técnica de Inteligencia Artificial. Aprendí fundamentos de ML, estructuras de datos y desarrollo web.</p>
+                                <div class="roadmap-tags">
+                                    <span>Machine Learning</span><span>C++</span><span>Java</span>
+                                </div>
+                            </div>
+                            <div class="roadmap-img">
+                                <img src="media/road-2-etapa.png" alt="EIPTAO Expo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item right">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">2024</span>
+                                <h3>Robótica e IA aplicada</h3>
+                                <p>Construí un robot controlado por gestos y una mano robótica imitadora. Combiné visión por computadora con Arduino y servomotores.</p>
+                                <div class="roadmap-tags">
+                                    <span>Arduino</span><span>OpenCV</span><span>Hardware</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item left">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">2024</span>
+                                <h3>Nova — Chatbot médico con IA</h3>
+                                <p>Desarrollé Nova, un asistente médico que analiza rayos X usando DenseNet y conversa con pacientes mediante Gemini API. Desplegado en producción.</p>
+                                <div class="roadmap-tags">
+                                    <span>FastAPI</span><span>DenseNet</span><span>Gemini</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item right">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">2025</span>
+                                <h3>Pi-Gem — Asistente virtual tipo Jarvis</h3>
+                                <p>Mi proyecto más ambicioso: un asistente con cuerpo 3D, reconocimiento facial, voz y ejecución de acciones. Backend en Rust y Python con Vertex AI.</p>
+                                <div class="roadmap-tags">
+                                    <span>Rust</span><span>Vertex AI</span><span>DeepFace</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item left">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">Marzo 2025</span>
+                                <h3>Lumen — Red de apoyo estudiantil</h3>
+                                <p>Fundé Lumen, una red de apoyo para mi preparatoria que conecta estudiantes con recursos, mentoría y herramientas para su desarrollo académico y personal.</p>
+                                <div class="roadmap-tags">
+                                    <span>Liderazgo</span><span>Comunidad</span><span>Impacto social</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="roadmap-item right">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-card glass-card">
+                        <div class="roadmap-card-content">
+                            <div class="roadmap-text">
+                                <span class="roadmap-date">Presente</span>
+                                <h3>Siguiendo construyendo</h3>
+                                <p>5to semestre de IA, 10+ proyectos, 2+ años programando. Siempre buscando el siguiente reto que me empuje a crecer.</p>
+                                <div class="roadmap-tags">
+                                    <span>IA</span><span>Full Stack</span><span>Innovación</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="portafolio">
+        <div class="container">
+            <h2 class="section-title">Proyectos que he <span class="accent">desarrollado</span></h2>
+            <p class="section-subtitle">Estos son los proyectos más relevantes que he creado.</p>
+
+            <div class="projects-grid">
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/nova-css-v3.png" alt="Pi-Gem"></div>
+                    <div class="project-info">
+                        <h3>Pi-Gem</h3>
+                        <p>Asistente virtual estilo Jarvis con cuerpo 3D, reconocimiento de voz, ejecución de acciones y reconocimiento facial.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>FastAPI</span><span>Vertex AI</span>
+                            <span>Rust</span><span>ChromaDB</span><span>DeepFace</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/PI-Gem" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/nova-css-v3.png" alt="Nova"></div>
+                    <div class="project-info">
+                        <h3>Nova</h3>
+                        <p>ChatBot médico con analizador de rayos X. Modelo DenseNet para detectar condiciones en radiografías.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>FastAPI</span><span>Gemini API</span><span>DenseNet</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Nova" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://nova-ia-liart.vercel.app/" target="_blank"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/avvolto.png" alt="Avvolto"></div>
+                    <div class="project-info">
+                        <h3>Avvolto</h3>
+                        <p>Spotify Wrapped para WhatsApp. NLP, parser de chats, visualización de estadísticas y etiquetado.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Flask</span><span>Spacy</span><span>Pandas</span><span>Plotly</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/avvolto" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://avvolto.vercel.app/" target="_blank"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/kreslit.png" alt="Kreslit"></div>
+                    <div class="project-info">
+                        <h3>Kreslit</h3>
+                        <p>Dibuja en un lienzo digital usando tu cámara, sin tocar nada físico. Paneles cooperativos.</p>
+                        <div class="project-tags">
+                            <span>Node.js</span><span>TypeScript</span><span>Tesseract</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/kreslit" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://kreslit.vercel.app/" target="_blank"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/theraplay.png" alt="Theraplay"></div>
+                    <div class="project-info">
+                        <h3>Theraplay</h3>
+                        <p>Plataforma médica con IA para terapia. Proyecto desarrollado para Young Devs.</p>
+                        <div class="project-tags">
+                            <span>HTML/CSS/JS</span><span>Python</span><span>Gemini API</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Theraplay-WebApp" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://theraplay-web-app.vercel.app/" target="_blank"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/robot.jpg" alt="Robot"></div>
+                    <div class="project-info">
+                        <h3>Robot por gestos</h3>
+                        <p>Robot controlado con gestos de manos, procesados digitalmente sin contacto físico.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Flet</span><span>Arduino</span><span>DC Motors</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Robot-Controlled-by-hand" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/mano.jpg" alt="Mano Imitadora"></div>
+                    <div class="project-info">
+                        <h3>Mano Imitadora</h3>
+                        <p>Mano robótica que replica tus gestos en tiempo real. Colaboración con Áaron Wayas.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Flet</span><span>Arduino</span><span>Servomotores</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/clasificador.png" alt="Clasificador"></div>
+                    <div class="project-info">
+                        <h3>Clasificador de imágenes</h3>
+                        <p>Clasificación con Random Forest en vez de CNN. Sube una imagen y el modelo la analiza.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Flask</span><span>Scikit-learn</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Clasificador-Imagenes" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://clasificador-imagenes.onrender.com" target="_blank"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/logo.png" alt="Young Devs"></div>
+                    <div class="project-info">
+                        <h3>Young Devs</h3>
+                        <p>Proyecto social para ayudar a la comunidad con aprendizaje y desarrollo tecnológico.</p>
+                        <div class="project-tags">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Young-Devs" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="https://young-devs-beta.vercel.app/" target="_blank"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/AI.jpg" alt="AI House"></div>
+                    <div class="project-info">
+                        <h3>AI House</h3>
+                        <p>Controla tu hogar con gestos de la mano mediante inteligencia artificial.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>Arduino</span><span>Servomotores</span><span>Sensores</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card glass-card">
+                    <div class="project-image"><img src="media/edumarket.png" alt="Edu Market"></div>
+                    <div class="project-info">
+                        <h3>Edu Market</h3>
+                        <p>Tienda de libros simulada con diseño responsive.</p>
+                        <div class="project-tags">
+                            <span>HTML</span><span>CSS</span><span>JS</span><span>Bootstrap</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/JDHVa/Imitator-Hand" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="conocimientos">
+        <div class="container">
+            <h2 class="section-title">Mis <span class="accent">skills</span></h2>
+            <div class="skills-container">
+                <div class="skills-category glass-card">
+                    <h3><i class="fas fa-code"></i> Lenguajes</h3>
+                    <div class="skills-list">
+                        <div class="skill-chip" style="--chip-color: #3776AB;"><i class="fab fa-python"></i> Python</div>
+                        <div class="skill-chip" style="--chip-color: #F7DF1E;"><i class="fab fa-js"></i> JavaScript</div>
+                        <div class="skill-chip" style="--chip-color: #3178C6;"><i class="fas fa-code"></i> TypeScript</div>
+                        <div class="skill-chip" style="--chip-color: #007396;"><i class="fab fa-java"></i> Java</div>
+                        <div class="skill-chip" style="--chip-color: #00599C;"><i class="fas fa-code"></i> C++</div>
+                        <div class="skill-chip" style="--chip-color: #DEA584;"><i class="fas fa-cog"></i> Rust</div>
+                    </div>
+                </div>
+                <div class="skills-category glass-card">
+                    <h3><i class="fas fa-layer-group"></i> Frontend</h3>
+                    <div class="skills-list">
+                        <div class="skill-chip" style="--chip-color: #E34F26;"><i class="fab fa-html5"></i> HTML</div>
+                        <div class="skill-chip" style="--chip-color: #1572B6;"><i class="fab fa-css3-alt"></i> CSS</div>
+                        <div class="skill-chip" style="--chip-color: #7952B3;"><i class="fab fa-bootstrap"></i> Bootstrap</div>
+                    </div>
+                </div>
+                <div class="skills-category glass-card">
+                    <h3><i class="fas fa-server"></i> Backend & DB</h3>
+                    <div class="skills-list">
+                        <div class="skill-chip" style="--chip-color: #009688;"><i class="fas fa-bolt"></i> FastAPI</div>
+                        <div class="skill-chip" style="--chip-color: #666;"><i class="fas fa-pepper-hot"></i> Flask</div>
+                        <div class="skill-chip" style="--chip-color: #339933;"><i class="fab fa-node-js"></i> Node.js</div>
+                        <div class="skill-chip" style="--chip-color: #336791;"><i class="fas fa-database"></i> PostgreSQL</div>
+                        <div class="skill-chip" style="--chip-color: #47A248;"><i class="fas fa-leaf"></i> MongoDB</div>
+                    </div>
+                </div>
+                <div class="skills-category glass-card">
+                    <h3><i class="fas fa-brain"></i> IA & Hardware</h3>
+                    <div class="skills-list">
+                        <div class="skill-chip" style="--chip-color: #FF6F00;"><i class="fas fa-robot"></i> ML/DL</div>
+                        <div class="skill-chip" style="--chip-color: #00979D;"><i class="fas fa-microchip"></i> Arduino</div>
+                        <div class="skill-chip" style="--chip-color: #4285F4;"><i class="fas fa-cloud"></i> Vertex AI</div>
+                    </div>
+                </div>
+                <div class="skills-category glass-card">
+                    <h3><i class="fas fa-language"></i> Idiomas & Otros</h3>
+                    <div class="skills-list">
+                        <div class="skill-chip" style="--chip-color: #e74c3c;"><i class="fas fa-globe-americas"></i> Inglés</div>
+                        <div class="skill-chip" style="--chip-color: #e67e22;"><i class="fas fa-globe-asia"></i> Chino</div>
+                        <div class="skill-chip" style="--chip-color: #2ecc71;"><i class="fas fa-square-root-alt"></i> Matemáticas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Hablemos<span class="accent">.</span></h2>
+            <p class="section-subtitle">Si tienes un proyecto en mente o quieres colaborar, escríbeme.</p>
+            <div class="contact-links">
+                <a href="https://github.com/JDHVa" target="_blank" class="contact-btn glass-card">
+                    <i class="fab fa-github"></i><span>GitHub</span>
+                </a>
+                <a href="https://instagram.com/jesus_.hdzv/" target="_blank" class="contact-btn glass-card">
+                    <i class="fab fa-instagram"></i><span>Instagram</span>
+                </a>
+                <a href="https://discord.com/users/jesust9x" target="_blank" class="contact-btn glass-card">
+                    <i class="fab fa-discord"></i><span>Discord</span>
+                </a>
+                <a href="https://wa.me/8128926313" target="_blank" class="contact-btn glass-card">
+                    <i class="fab fa-whatsapp"></i><span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <canvas id="neural-bg"></canvas>
+
+    <footer>
+        <p>Jesús Daniel Hernández Valero &copy; 2025</p>
+    </footer>
+
+    <script src="js.js?v=5"></script>
 </body>
 </html>
