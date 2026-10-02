@@ -28,7 +28,7 @@
 - Pronouns: **he/him**
 
 - Fun fact:  
-  I’ve been developing programming solutions since I was 12 years old. Currently 16.
+  I’ve been developing programming solutions since I was 12 years old. Currently 17.
 
 ## GitHub Stats
 
