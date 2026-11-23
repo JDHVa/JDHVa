@@ -1,62 +1,118 @@
-# Hi there, I'm Jesús Daniel Hernández Valero
-
-## AI & try of Robotics Developer
-
-- I’m currently studying Artificial Intelligence at the *Escuela Industrial y Preparatoria Técnica Álvaro Obregón (EIAO)*.  
-  I really enjoy everything related to AI, especially Computer Vision, Data Analysis, and Machine Learning.
-
-- I’m currently learning how to develop real-world solutions using AI.  
-  I already have experience in software development, but now I want to improve my hardware and electronics skills to transform my ideas into real tangible prototypes.
-
-- I’m looking to collaborate on any project related to AI or Robotics.  
-  If I had to choose a favorite field, it would definitely be Computer Vision. I love the idea of computers understanding the world through cameras and making decisions based on their environment.
-
-- I can help with topics related to:
-  - Artificial Intelligence
-  - Programming Logic
-  - Mathematics
-  - English
-
-- Ask me about technology, programming, AI, robotics, or anything interesting.  
-  I always try to improve my skills and get out of my comfort zone.
-
-- How to reach me:
-  - Instagram: **@jesus._hdzv**
-  - Email: **jdhva.dev@gmail.com**
-  - Phone: **+52 81 2892 6313**
-
-- Pronouns: **he/him**
-
-- Fun fact:  
-  I’ve been developing programming solutions since I was 12 years old. Currently 17.
-
-## GitHub Stats
-
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=JDHVa&theme=tokyonight" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1B1D4F,50:9B8CFF,100:6FA8FF&height=200&section=header&text=Jes%C3%BAs%20Daniel%20Hern%C3%A1ndez%20Valero&fontSize=38&fontColor=F6E3A1&animation=fadeIn&fontAlignY=38&desc=AI%20%C2%B7%20Robotics%20%C2%B7%20Automation&descAlignY=58&descSize=18" alt="Jesús Daniel Hernández Valero" />
 </p>
 
-## Contribution Graph
+<p align="center">
+  <i>"We are what we repeatedly do. <s>Excellence</s> <b>Larping</b>, then, is not an act, but a habit."</i><br/>
+  <sub>— Aristotle (probably)</sub>
+</p>
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=JDHVa&theme=tokyo-night" />
+  <a href="https://www.linkedin.com/in/jdhva/"><img src="https://img.shields.io/badge/LinkedIn-jdhva-6FA8FF?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  <a href="https://huggingface.co/JDHVa"><img src="https://img.shields.io/badge/Hugging%20Face-JDHVa-9B8CFF?style=for-the-badge&logo=huggingface&logoColor=white" alt="Hugging Face" /></a>
+  <a href="https://www.instagram.com/jesus.lstm/"><img src="https://img.shields.io/badge/Instagram-jesus.lstm-C9B8FF?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" /></a>
+  <a href="mailto:jesust9x@gmail.com"><img src="https://img.shields.io/badge/Email-say%20hi-8FF0F0?style=for-the-badge&logo=gmail&logoColor=1B1D4F" alt="Email" /></a>
 </p>
-<h3 align="left">Main Languages and Tools</h3>
-<p align="left"> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://dotnet.microsoft.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/><a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> 
 
-```python
-class Developer:
-    def __init__(self):
-        self.name = "Jesús Daniel"
-        self.role = "AI & Robotics Developer"
-        self.focus = [
-            "Computer Vision",
-            "Machine Learning",
-            "Robotics",
-            "Help People"
-        ]
+---
 
-    def status(self):
-        return "Learning, Building, and Scaling."
+### About me
+
+Science enthusiast and builder of projects in my free time. I work across **AI, robotics and automation**.
+
+- Studying a **Technical Degree in Artificial Intelligence** at EIAO · UANL (5th semester)
+- **AI Intern Developer** at **Fourier**, building automations (full-stack + n8n)
+- **Lead Programmer** at **Iron Lion 4977** (FIRST Robotics Competition)
+- **Founder & General Coordinator** of **Lumen**, a peer-to-peer learning network with 23 tutors and 150+ students reached
+- **AI Projects Coordinator** at EIAO's Artificial Intelligence Coordination
+- Currently training a **world model** that learns to drive in TrackMania
+
+---
+
+### Featured projects
+
+| | Project | What it is |
+|---|---|---|
+| I | **[Lumen](https://github.com/JDHVa/Lumen)** · [live](https://proyecto-lumen.vercel.app) | Student-to-student tutoring network and platform. 23 zhenshis (tutors), 150+ people reached, 3 independent clubs. |
+| II | **TerraOrbis 2.0** · *private repo* | Autonomous agricultural rover: YOLOv8 on Hailo-8, DINOv2 anomalies, a spatial SEIR + GraphSAGE "world model" of the field and Monte Carlo risk forecasting. Podium at UANL Inter-High School Contest 2026. |
+| III | **[Centinel](https://github.com/JDHVa/altur-hackmty)** | Human vs. AI caller detection for bank phone calls. Frozen XLS-R + WavLM + conversational rhythm features. **Top 3 at HackMTY 2026**, 99.2% accuracy on the test set. |
+| IV | **World Model × TrackMania** | DreamerV3 agent that learns by dreaming the game. Its best lap (28.65 s) beat my own (28.75 s). |
+| | **[WC-ML Dixon-Coles](https://github.com/JDHVa/WC-ML-DixonColes)** | 2026 World Cup predictions with the Dixon-Coles model. |
+| | **[PI-Gem](https://github.com/JDHVa/PI-Gem)** | Gaming assistant that reads your emotions and talks with you (HackDays Tec prototype). |
+
+---
+
+### Repertoire
+
+**AI & ML**<br/>
+<img src="https://img.shields.io/badge/PyTorch-1B1D4F?style=flat-square&logo=pytorch&logoColor=EE4C2C" />
+<img src="https://img.shields.io/badge/Hugging%20Face-1B1D4F?style=flat-square&logo=huggingface&logoColor=FFD21E" />
+<img src="https://img.shields.io/badge/scikit--learn-1B1D4F?style=flat-square&logo=scikitlearn&logoColor=F7931E" />
+<img src="https://img.shields.io/badge/YOLOv8-1B1D4F?style=flat-square" />
+<img src="https://img.shields.io/badge/DreamerV3-1B1D4F?style=flat-square" />
+<img src="https://img.shields.io/badge/Whisper-1B1D4F?style=flat-square" />
+<img src="https://img.shields.io/badge/n8n-1B1D4F?style=flat-square&logo=n8n&logoColor=EA4B71" />
+
+**Robotics & hardware**<br/>
+<img src="https://img.shields.io/badge/ROS%202-1B1D4F?style=flat-square&logo=ros&logoColor=white" />
+<img src="https://img.shields.io/badge/Raspberry%20Pi-1B1D4F?style=flat-square&logo=raspberrypi&logoColor=A22846" />
+<img src="https://img.shields.io/badge/Arduino-1B1D4F?style=flat-square&logo=arduino&logoColor=00979D" />
+<img src="https://img.shields.io/badge/Hailo--8-1B1D4F?style=flat-square" />
+<img src="https://img.shields.io/badge/FRC-1B1D4F?style=flat-square" />
+
+**Backend, web & infra**<br/>
+<img src="https://img.shields.io/badge/Python-1B1D4F?style=flat-square&logo=python&logoColor=3776AB" />
+<img src="https://img.shields.io/badge/TypeScript-1B1D4F?style=flat-square&logo=typescript&logoColor=3178C6" />
+<img src="https://img.shields.io/badge/FastAPI-1B1D4F?style=flat-square&logo=fastapi&logoColor=009688" />
+<img src="https://img.shields.io/badge/React-1B1D4F?style=flat-square&logo=react&logoColor=61DAFB" />
+<img src="https://img.shields.io/badge/Astro-1B1D4F?style=flat-square&logo=astro&logoColor=FF5D01" />
+<img src="https://img.shields.io/badge/PostgreSQL-1B1D4F?style=flat-square&logo=postgresql&logoColor=4169E1" />
+<img src="https://img.shields.io/badge/Docker-1B1D4F?style=flat-square&logo=docker&logoColor=2496ED" />
+<img src="https://img.shields.io/badge/Vercel-1B1D4F?style=flat-square&logo=vercel&logoColor=white" />
+
+---
+
+### Ovations
+
+- **Top 3** · HackMTY 2026 (Altur Challenge)
+- **Podium** · UANL Inter-High School Contest 2026 (TerraOrbis)
+- **State Physics Olympiad finalist**
+- **Exhibitor representing UANL** · Global Transportation & Innovation Summit
+- **Progressive Bilingual scholar** · UANL
+- **Organizer** · Haven Hack Club MTY · Sábado de Ciencia
+
+---
+
+### Off stage
+
+English (~B2) · Chinese (A1) · Japanese (basic) · 900+ day Duolingo streak (for larping purposes)<br/>
+One Piece · Olivia Rodrigo (GUTS on repeat) · Vegeta777 · Furina
+
+---
+
+### Stats
+
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=JDHVa&theme=tokyonight" alt="GitHub stats" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=JDHVa&bg_color=1B1D4F&color=C9B8FF&line=9B8CFF&point=F6E3A1&area=true&area_color=6FA8FF&hide_border=true" alt="Contribution graph" />
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:6FA8FF,50:9B8CFF,100:1B1D4F&height=110&section=footer" alt="" />
+</p>
+
+<details>
+<summary>This repo also hosts my portfolio</summary>
+
+The source of my personal portfolio lives in [`web/`](web/): Astro, React, Tailwind CSS v4, GSAP and Lenis, in Spanish and English.
+
+```bash
+cd web
+npm install
+npm run dev
 ```
-# JDHVa
+
+</details>

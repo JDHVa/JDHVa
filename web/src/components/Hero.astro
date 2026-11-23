@@ -1,0 +1,883 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource-variable/fraunces/opsz-italic.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { useTranslations, ownerName, quote, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const homeHref = getRelativeLocaleUrl(lang);
+const esHref = getRelativeLocaleUrl('es');
+const enHref = getRelativeLocaleUrl('en');
+const projectsHref = '#proyectos';
+
+const nameLines = ownerName.lines.map((line) => line.split(' ').map((word) => Array.from(word)));
+const oldChars = Array.from(quote.oldWord);
+
+const sparklePath = 'M12 0C12.9 7.4 16.6 11.1 24 12C16.6 12.9 12.9 16.6 12 24C11.1 16.6 7.4 12.9 0 12C7.4 11.1 11.1 7.4 12 0Z';
+
+const bubbles = [
+  { x: 3, y: 31, s: 74, mobile: false },
+  { x: 87, y: 17, s: 118, mobile: true },
+  { x: 76, y: 74, s: 58, mobile: false },
+  { x: 13, y: 83, s: 42, mobile: true },
+  { x: 47, y: 9, s: 26, mobile: false },
+  { x: 94, y: 86, s: 36, mobile: true },
+  { x: 38, y: 92, s: 20, mobile: false },
+  { x: 60, y: 46, s: 16, mobile: false },
+];
+
+const sparkles = [
+  { x: 23, y: 13, s: 22, c: '#F6E3A1', mobile: true },
+  { x: 79, y: 9, s: 32, c: '#FFFFFF', mobile: true },
+  { x: 63, y: 28, s: 15, c: '#8FF0F0', mobile: false },
+  { x: 92, y: 50, s: 22, c: '#C9B8FF', mobile: true },
+  { x: 4, y: 55, s: 15, c: '#F6E3A1', mobile: false },
+  { x: 31, y: 74, s: 17, c: '#FFFFFF', mobile: false },
+  { x: 68, y: 90, s: 26, c: '#F6E3A1', mobile: true },
+  { x: 53, y: 62, s: 12, c: '#8FF0F0', mobile: false },
+  { x: 88, y: 66, s: 14, c: '#FFFFFF', mobile: false },
+];
+
+const shards = [
+  { x: 82, y: 4, s: 64, r: 18, d: 'M4 38L30 2L58 30L22 70Z', mobile: true },
+  { x: 96, y: 34, s: 46, r: -24, d: 'M2 20L40 4L34 58Z', mobile: false },
+  { x: 1, y: 36, s: 50, r: 12, d: 'M10 4L44 22L26 62L2 40Z', mobile: true },
+  { x: 72, y: 93, s: 54, r: -10, d: 'M4 50L24 2L56 36Z', mobile: false },
+  { x: 56, y: 18, s: 30, r: 30, d: 'M2 26L18 2L30 30L12 40Z', mobile: false },
+  { x: 24, y: 96, s: 38, r: 4, d: 'M6 30L30 0L40 40Z', mobile: false },
+];
+
+const smallStars = [
+  [140, 120], [380, 70], [610, 180], [870, 90], [1020, 230], [1300, 120],
+  [220, 470], [1370, 330], [1100, 620], [480, 820], [760, 600], [1250, 820],
+  [60, 300], [940, 420], [330, 640],
+];
+---
+
+<section
+  id="inicio"
+  class="hero relative isolate flex min-h-svh flex-col overflow-hidden bg-night-900 text-ink"
+  data-hero
+>
+  <div class="hero-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div class="absolute inset-0 bg-[radial-gradient(120%_90%_at_70%_10%,#2E2880_0%,#22236A_38%,#1B1D4F_70%,#15163F_100%)]"></div>
+
+    <div class="layer absolute -inset-[7%]" data-depth="10">
+      <div class="drift h-full w-full" data-drift="back">
+        <svg class="h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <path id="rb1" d="M-220 650C120 520 300 770 620 650S1000 300 1260 330S1560 520 1720 380" />
+            <path id="rb2" d="M-220 190C100 110 270 330 530 260S870 40 1110 120S1410 300 1720 170" />
+            <path id="rb3" d="M560 1120C700 900 980 860 1100 700S1320 420 1560 470" />
+          </defs>
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#rb1" stroke="#5463D6" stroke-width="168" />
+            <use href="#rb1" stroke="#3A47AE" stroke-width="156" />
+            <use href="#rb1" stroke="#4A59C8" stroke-width="22" stroke-dasharray="160 70 60 120" transform="translate(0 -34)" />
+            <use href="#rb2" stroke="#6754C4" stroke-width="124" />
+            <use href="#rb2" stroke="#41348F" stroke-width="112" />
+            <use href="#rb2" stroke="#5544A8" stroke-width="16" stroke-dasharray="90 60 200 80" transform="translate(0 26)" />
+            <use href="#rb3" stroke="#4F70C9" stroke-width="138" />
+            <use href="#rb3" stroke="#33509F" stroke-width="126" />
+          </g>
+          <g fill="#C9B8FF" opacity="0.55">
+            {smallStars.map(([cx, cy], i) => (
+              <circle cx={cx} cy={cy} r={i % 3 === 0 ? 2.6 : 1.6} />
+            ))}
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="layer absolute -inset-[7%]" data-depth="24">
+      <div class="drift h-full w-full" data-drift="front">
+        <svg class="h-full w-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <path id="rf1" d="M-140 770C160 640 380 870 660 770S1020 520 1220 500S1480 600 1620 520" />
+            <path id="rf2" d="M1640 60C1400 120 1310 270 1160 270S900 190 830 310S990 530 1130 470" />
+            <path id="rf3" d="M-120 150C80 100 170 240 330 205S530 95 660 135" />
+            <path id="rf4" d="M1250 640C1180 560 1240 465 1322 488C1404 510 1402 612 1340 622C1300 628 1284 590 1306 572" />
+            <path id="rf5" d="M880 1020C950 870 1100 830 1180 770S1370 700 1520 770" />
+            <path id="rf6" d="M1000 -50C1040 80 1160 120 1200 210S1180 370 1310 410" />
+            <path id="rf7" d="M-100 560C40 520 110 600 210 590S330 520 380 540" />
+          </defs>
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#rf5" stroke="#E4DAFF" stroke-width="68" />
+            <use href="#rf5" stroke="#9B8CFF" stroke-width="60" />
+            <use href="#rf5" stroke="#C9B8FF" stroke-width="12" stroke-dasharray="70 40 140 60" transform="translate(0 -14)" />
+
+            <use href="#rf1" stroke="#CFE4FF" stroke-width="96" />
+            <use href="#rf1" stroke="#6FA8FF" stroke-width="86" />
+            <use href="#rf1" stroke="#5B92EC" stroke-width="40" transform="translate(0 18)" />
+            <use href="#rf1" stroke="#9EC9FF" stroke-width="14" stroke-dasharray="180 60 80 120" transform="translate(0 -22)" />
+            <use href="#rf1" stroke="#CFE4FF" stroke-width="6" stroke-dasharray="40 300" transform="translate(0 -30)" />
+
+            <use href="#rf2" stroke="#E4DAFF" stroke-width="74" />
+            <use href="#rf2" stroke="#9B8CFF" stroke-width="66" />
+            <use href="#rf2" stroke="#8574EE" stroke-width="28" transform="translate(0 14)" />
+            <use href="#rf2" stroke="#C9B8FF" stroke-width="12" stroke-dasharray="120 50 60 90" transform="translate(0 -18)" />
+
+            <use href="#rf3" stroke="#CBFBFB" stroke-width="30" />
+            <use href="#rf3" stroke="#8FF0F0" stroke-width="24" />
+            <use href="#rf3" stroke="#5FD6DE" stroke-width="8" transform="translate(0 5)" />
+
+            <use href="#rf7" stroke="#C9B8FF" stroke-width="26" />
+            <use href="#rf7" stroke="#9B8CFF" stroke-width="20" />
+
+            <use href="#rf4" stroke="#E4DAFF" stroke-width="30" />
+            <use href="#rf4" stroke="#C9B8FF" stroke-width="22" />
+
+            <use href="#rf6" stroke="#FBF1CF" stroke-width="18" opacity="0.85" />
+            <use href="#rf6" stroke="#F6E3A1" stroke-width="12" opacity="0.85" />
+          </g>
+          <g fill="#E4DAFF">
+            <path d="M1185 395l6 13 14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2z" />
+            <path d="M300 300l4 9 10 1.5-7 7 1.5 10-8.5-5-8.5 5 1.5-10-7-7 10-1.5z" opacity="0.8" />
+            <path d="M980 160l4 9 10 1.5-7 7 1.5 10-8.5-5-8.5 5 1.5-10-7-7 10-1.5z" opacity="0.7" />
+            <path d="M700 860l5 11 12 1.8-9 8.4 2 12-10-6-10 6 2-12-9-8.4 12-1.8z" opacity="0.85" />
+          </g>
+          <g fill="#FFFFFF" opacity="0.65">
+            <ellipse cx="880" cy="320" rx="10" ry="6" transform="rotate(-30 880 320)" />
+            <ellipse cx="1200" cy="560" rx="7" ry="4" transform="rotate(20 1200 560)" />
+            <ellipse cx="420" cy="760" rx="8" ry="5" transform="rotate(-10 420 760)" />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="scrim absolute inset-0"></div>
+
+    <div class="layer absolute inset-0" data-depth="44">
+      {shards.map((sh) => (
+        <div
+          class:list={['fx absolute', !sh.mobile && 'hidden md:block']}
+          style={`left:${sh.x}%;top:${sh.y}%;width:${sh.s}px;height:${sh.s}px;--r:${sh.r}deg`}
+          data-fx="shard"
+        >
+          <svg class="shard h-full w-full overflow-visible" viewBox="0 0 60 72">
+            <path d={sh.d} fill="rgba(201,184,255,0.32)" stroke="#E4DAFF" stroke-width="2" stroke-linejoin="round" />
+            <path d={sh.d} fill="rgba(255,255,255,0.22)" transform="scale(0.45) translate(18 18)" />
+          </svg>
+        </div>
+      ))}
+      {bubbles.map((b) => (
+        <div
+          class:list={['fx absolute', !b.mobile && 'hidden md:block']}
+          style={`left:${b.x}%;top:${b.y}%;width:${b.s}px;height:${b.s}px`}
+          data-fx="bubble"
+        >
+          <span class="bubble block h-full w-full rounded-full"></span>
+        </div>
+      ))}
+      {sparkles.map((sp) => (
+        <div
+          class:list={['fx absolute', !sp.mobile && 'hidden md:block']}
+          style={`left:${sp.x}%;top:${sp.y}%;width:${sp.s}px;height:${sp.s}px;color:${sp.c}`}
+          data-fx="sparkle"
+        >
+          <svg class="sparkle h-full w-full overflow-visible" viewBox="0 0 24 24">
+            <path d={sparklePath} fill="currentColor" />
+          </svg>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <header class="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-4 sm:px-8 sm:pt-6">
+    <a
+      href={homeHref}
+      class="monogram group inline-flex items-center gap-2 rounded-2xl border-2 border-cream/35 bg-night-950/50 px-3 py-1.5 font-display text-lg font-semibold tracking-wide text-cream transition-colors hover:border-cream/70"
+      aria-label={t['nav.home']}
+      data-intro="top"
+    >
+      <svg class="h-4 w-4 transition-transform duration-500 group-hover:rotate-90" viewBox="0 0 24 24" aria-hidden="true">
+        <path d={sparklePath} fill="currentColor" />
+      </svg>
+      <span>{ownerName.monogram}</span>
+    </a>
+
+    <nav aria-label={t['nav.lang']} data-intro="top">
+      <ul class="lang-pill relative flex items-center rounded-full border-2 border-lavender-200/40 bg-night-950/55 p-1 font-mono text-xs font-semibold">
+        <li>
+          <a
+            href={esHref}
+            hreflang="es"
+            lang="es"
+            aria-current={lang === 'es' ? 'page' : undefined}
+            class:list={[
+              'block rounded-full px-3 py-1.5 transition-colors',
+              lang === 'es' ? 'bg-cream text-night-900' : 'text-lavender-100 hover:text-cream',
+            ]}
+          >
+            <span aria-hidden="true">ES</span>
+            <span class="sr-only">Español</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href={enHref}
+            hreflang="en"
+            lang="en"
+            aria-current={lang === 'en' ? 'page' : undefined}
+            class:list={[
+              'block rounded-full px-3 py-1.5 transition-colors',
+              lang === 'en' ? 'bg-cream text-night-900' : 'text-lavender-100 hover:text-cream',
+            ]}
+          >
+            <span aria-hidden="true">EN</span>
+            <span class="sr-only">English</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pt-8 pb-24 sm:px-8 sm:pt-10 lg:pb-28">
+    <p class="mb-4 inline-flex items-center gap-2 font-mono text-[0.7rem] font-semibold tracking-[0.22em] text-aqua sm:text-xs" data-intro="label">
+      <span class="inline-block h-2 w-2 rotate-45 rounded-[2px] bg-aqua shadow-[0_0_12px_#8FF0F0]" aria-hidden="true"></span>
+      {t['hero.label']}
+    </p>
+
+    <h1 class="name font-display font-semibold text-cream">
+      <span class="sr-only">{ownerName.full}</span>
+      {nameLines.map((words) => (
+        <span class="name-line block" aria-hidden="true">
+          {words.map((chars, wi) => (
+            <>
+              {wi > 0 && ' '}
+              <span class="inline-block whitespace-nowrap">
+                {chars.map((c) => (
+                  <span class="char inline-block">{c}</span>
+                ))}
+              </span>
+            </>
+          ))}
+        </span>
+      ))}
+    </h1>
+
+    <div class="mt-7 grid items-start gap-8 sm:mt-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14">
+      <div class="flex flex-col gap-5">
+        <p class="max-w-md text-lg leading-relaxed text-ink/90 sm:text-xl" data-intro="tagline">
+          {t['hero.tagline']}
+        </p>
+
+        <ul class="flex flex-wrap gap-2" aria-label={t['hero.rolesLabel']}>
+          {t['hero.roles'].map((role, i) => (
+            <li
+              class:list={[
+                'chip rounded-full border-2 px-3 py-1 font-mono text-xs font-semibold tracking-wide',
+                i === 0 && 'border-aqua/50 bg-aqua/10 text-aqua',
+                i === 1 && 'border-water-200/50 bg-water-400/10 text-water-200',
+                i === 2 && 'border-lavender-200/50 bg-lavender-400/10 text-lavender-200',
+              ]}
+              data-intro="chip"
+            >
+              {role}
+            </li>
+          ))}
+        </ul>
+
+        <div data-intro="cta">
+          <a
+            href={projectsHref}
+            class="cta group inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 font-display text-lg font-semibold text-night-900"
+          >
+            {t['hero.cta']}
+            <span class="inline-block animate-bob" aria-hidden="true">↓</span>
+          </a>
+        </div>
+      </div>
+
+      <figure
+        class="quote-card relative cursor-pointer select-none rounded-[28px] border-2 border-lavender-200/30 bg-night-950/70 px-6 pt-6 pb-5 sm:px-8 sm:pt-7"
+        data-intro="quote"
+        data-quote
+      >
+        <span class="pointer-events-none absolute -top-6 left-5 font-serif text-7xl leading-none text-lavender-400" aria-hidden="true">“</span>
+        <blockquote class="font-serif text-[1.2rem] leading-[1.6] text-ink italic sm:text-[1.4rem]" lang="en">
+          <p>
+            {quote.before}{' '}
+            <span class="swap" data-swap>
+              <del class="old" data-old>
+                <span class="glitch glitch-a" aria-hidden="true">{quote.oldWord}</span>
+                <span class="glitch glitch-b" aria-hidden="true">{quote.oldWord}</span>
+                <span class="old-text" data-old-text>
+                  {oldChars.map((c) => <span class="ochar inline-block">{c}</span>)}
+                </span>
+                <span class="strike-wrap" aria-hidden="true"><span class="strike" data-strike></span></span>
+                <span class="drops" aria-hidden="true">
+                  {[8, 22, 37, 51, 66, 80, 92].map((x, i) => (
+                    <svg class="drop" style={`left:${x}%;--s:${i % 2 ? 0.75 : 1}`} viewBox="0 0 10 14" data-drop>
+                      <path d="M5 0C5 0 0 6.5 0 9a5 5 0 0 0 10 0C10 6.5 5 0 5 0Z" fill="#9EC9FF" />
+                      <ellipse cx="3.3" cy="9.2" rx="1.2" ry="1.8" fill="#E8F3FF" />
+                    </svg>
+                  ))}
+                </span>
+              </del>
+              <ins class="new" data-new>
+                {quote.newWord}
+                <svg class="new-spark" viewBox="0 0 24 24" aria-hidden="true" data-new-spark>
+                  <path d={sparklePath} fill="#F6E3A1" />
+                </svg>
+              </ins>
+            </span>{quote.after}
+          </p>
+        </blockquote>
+        <figcaption class="mt-4 flex flex-wrap items-center justify-between gap-3">
+          <span class="attribution inline-flex items-center gap-2 font-sans text-sm font-medium text-lavender-100 sm:text-base" data-attr>
+            — {t['hero.attribution']}
+            <svg class="wink h-6 w-6" viewBox="0 0 32 32" aria-hidden="true" data-wink>
+              <circle cx="16" cy="16" r="14" fill="#F6E3A1" stroke="#FBF1CF" stroke-width="2" />
+              <circle cx="11" cy="13" r="2.2" fill="#2A2470" />
+              <path d="M18 13.5q3-2.6 6 0" stroke="#2A2470" stroke-width="2.2" fill="none" stroke-linecap="round" />
+              <path d="M10 19.5q6 5.5 12 0" stroke="#2A2470" stroke-width="2.2" fill="none" stroke-linecap="round" />
+              <circle cx="8.5" cy="19" r="2" fill="#F2A7C8" opacity="0.7" />
+              <circle cx="24" cy="19" r="2" fill="#F2A7C8" opacity="0.7" />
+            </svg>
+          </span>
+          <button type="button" class="replay-hint cursor-pointer rounded-full px-2 py-1 font-mono text-[0.65rem] tracking-widest text-lavender-200 uppercase hover:text-cream" aria-label={t['hero.replay']} data-hint>
+            <svg class="mr-1 inline-block h-3 w-3 -translate-y-px" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg><span aria-hidden="true">{t['hero.replayHint']}</span>
+          </button>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <a
+    href={projectsHref}
+    class="scroll-hint absolute bottom-5 left-1/2 z-10 -translate-x-1/2"
+    aria-label={t['hero.scroll']}
+    data-intro="scroll"
+  >
+    <span class="scroll-bubble flex h-11 w-11 items-center justify-center rounded-full">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 9l6 6 6-6" fill="none" stroke="#F6E3A1" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+  </a>
+
+  <div class="curtains" aria-hidden="true" data-curtains>
+    <div class="curtain curtain-left" data-curtain="left"><span class="trim"></span></div>
+    <div class="curtain curtain-right" data-curtain="right"><span class="trim"></span></div>
+    <div class="valance" data-valance></div>
+  </div>
+</section>
+
+<style>
+  .scrim {
+    background:
+      radial-gradient(70% 60% at 30% 52%, rgb(21 22 63 / 0.82) 0%, rgb(21 22 63 / 0.55) 45%, rgb(21 22 63 / 0) 80%),
+      linear-gradient(180deg, rgb(21 22 63 / 0) 70%, rgb(21 22 63 / 0.55) 100%);
+  }
+
+  @media (max-width: 767px) {
+    .scrim {
+      background:
+        radial-gradient(110% 70% at 40% 45%, rgb(21 22 63 / 0.85) 0%, rgb(21 22 63 / 0.6) 50%, rgb(21 22 63 / 0.15) 90%),
+        linear-gradient(180deg, rgb(21 22 63 / 0) 70%, rgb(21 22 63 / 0.55) 100%);
+    }
+  }
+
+  .bubble {
+    position: relative;
+    background:
+      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.55) 0 7%, transparent 8%),
+      radial-gradient(circle at 50% 50%, rgb(143 240 240 / 0.06) 0 55%, rgb(143 240 240 / 0.22) 78%, rgb(201 251 251 / 0.35) 100%);
+    border: 2px solid rgb(203 251 251 / 0.6);
+    box-shadow: 0 0 22px rgb(143 240 240 / 0.28), inset 0 0 14px rgb(143 240 240 / 0.18);
+  }
+
+  .bubble::after {
+    content: '';
+    position: absolute;
+    inset: 16% 18% auto auto;
+    width: 26%;
+    height: 26%;
+    border-radius: 50%;
+    border-top: 3px solid rgb(255 255 255 / 0.7);
+    border-right: 3px solid rgb(255 255 255 / 0.7);
+    border-left: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    transform: rotate(-10deg);
+  }
+
+  .shard {
+    transform: rotate(var(--r));
+    filter: drop-shadow(0 0 10px rgb(201 184 255 / 0.45));
+  }
+
+  .sparkle {
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+
+  .name {
+    font-size: clamp(2.2rem, 10.6vw, 7rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0.055em 0 #5B49C9, 0 0.11em 0 rgb(19 20 64 / 0.6);
+  }
+
+  .name-line + .name-line {
+    margin-top: 0.04em;
+  }
+
+  .cta {
+    box-shadow: 0 5px 0 #C9A956, 0 10px 24px rgb(0 0 0 / 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #C9A956, 0 14px 28px rgb(0 0 0 / 0.3);
+  }
+
+  .cta:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #C9A956, 0 6px 14px rgb(0 0 0 / 0.25);
+  }
+
+  .quote-card {
+    box-shadow: 0 8px 0 rgb(91 73 201 / 0.55), 0 18px 40px rgb(8 8 30 / 0.45);
+  }
+
+  .swap {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+
+  .old {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    color: var(--color-cream-100);
+  }
+
+  .old-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  .glitch-a {
+    color: #FF5FCB;
+  }
+
+  .glitch-b {
+    color: #5FF3FF;
+  }
+
+  .strike-wrap {
+    position: absolute;
+    left: -6%;
+    right: -6%;
+    top: 52%;
+    height: 0.12em;
+    transform: rotate(-5deg);
+  }
+
+  .strike {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 999px;
+    background: #FF7FA8;
+    box-shadow: 0 0 10px rgb(255 127 168 / 0.6);
+    transform-origin: left center;
+  }
+
+  .drops {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 70%;
+    height: 0;
+  }
+
+  .drop {
+    position: absolute;
+    top: 0;
+    width: calc(0.34em * var(--s));
+    height: calc(0.48em * var(--s));
+    opacity: 0;
+  }
+
+  .new {
+    display: inline-block;
+    margin-left: 0.4em;
+    position: relative;
+    font-family: var(--font-display);
+    font-style: normal;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--color-aqua);
+    text-shadow: 0 0.06em 0 #2F6FB8, 0 0 18px rgb(143 240 240 / 0.45);
+    transform: rotate(-4deg);
+  }
+
+  .new-spark {
+    position: absolute;
+    top: -0.45em;
+    right: -0.6em;
+    width: 0.7em;
+    height: 0.7em;
+    filter: drop-shadow(0 0 6px #F6E3A1);
+  }
+
+  .wink {
+    filter: drop-shadow(0 2px 0 rgb(91 73 201 / 0.6));
+  }
+
+  .scroll-bubble {
+    background:
+      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.5) 0 8%, transparent 9%),
+      radial-gradient(circle at 50% 50%, rgb(143 240 240 / 0.08) 0 55%, rgb(143 240 240 / 0.25) 100%);
+    border: 2px solid rgb(203 251 251 / 0.6);
+    box-shadow: 0 0 18px rgb(143 240 240 / 0.3);
+    animation: bob 1.8s ease-in-out infinite;
+  }
+
+  .curtains {
+    display: none;
+  }
+
+  :global(.js) .curtains {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    animation: curtain-failsafe 0.01s linear 3.5s forwards;
+  }
+
+  .curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background:
+      repeating-linear-gradient(90deg,
+        #2B1B66 0 6px,
+        #3A2585 6px 34px,
+        #4A3299 34px 54px,
+        #3A2585 54px 74px,
+        #2B1B66 74px 82px);
+    box-shadow: inset 0 -80px 120px rgb(10 6 40 / 0.45);
+  }
+
+  .curtain-left {
+    left: 0;
+    transform-origin: left center;
+  }
+
+  .curtain-right {
+    right: 0;
+    transform-origin: right center;
+  }
+
+  .trim {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 18px;
+    background:
+      radial-gradient(circle at 50% 50%, #C9A956 0 3px, transparent 3.5px) 0 0 / 18px 22px,
+      #F6E3A1;
+    border-left: 3px solid #FBF1CF;
+    border-right: 3px solid #C9A956;
+  }
+
+  .curtain-left .trim {
+    right: 0;
+  }
+
+  .curtain-right .trim {
+    left: 0;
+  }
+
+  .valance {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 68px;
+    background:
+      radial-gradient(circle at 50% 0, #3A2585 0 34px, transparent 35px) 0 30px / 80px 40px repeat-x,
+      linear-gradient(#2B1B66, #3A2585) 0 0 / 100% 46px no-repeat;
+    border-top: 6px solid #F6E3A1;
+  }
+
+  .valance::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40px;
+    height: 6px;
+    background: #F6E3A1;
+  }
+
+  @keyframes curtain-failsafe {
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .curtains {
+      display: none;
+    }
+
+    .scroll-bubble,
+    :global(.animate-bob) {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+
+  if (hero) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const q = <T extends Element = HTMLElement>(sel: string) => Array.from(hero.querySelectorAll<T>(sel));
+    const one = <T extends Element = HTMLElement>(sel: string) => hero.querySelector<T>(sel);
+
+    const quoteCard = one('[data-quote]');
+    const swap = one('[data-swap]');
+    const oldWord = one('[data-old]');
+    const oldChars = q('.ochar');
+    const glitchA = one('.glitch-a');
+    const glitchB = one('.glitch-b');
+    const strike = one('[data-strike]');
+    const drops = q<SVGElement>('[data-drop]');
+    const newWord = one('[data-new]');
+    const newSpark = one<SVGElement>('[data-new-spark]');
+    const attr = one('[data-attr]');
+    const wink = one<SVGElement>('[data-wink]');
+    const hint = one('[data-hint]');
+
+    if (reduce) {
+      if (hint) hint.style.display = 'none';
+    } else {
+      hero.classList.add('is-animated');
+
+      const curtains = one('[data-curtains]');
+      const left = one('[data-curtain="left"]');
+      const right = one('[data-curtain="right"]');
+      const valance = one('[data-valance]');
+      const chars = q('.name .char');
+      const layers = q('.layer');
+
+      gsap.set(newWord, { position: 'absolute', left: 0, top: 0, marginLeft: 0, opacity: 0, scale: 0.2, rotation: -16 });
+      gsap.set(newSpark, { scale: 0, opacity: 0 });
+      gsap.set(strike, { scaleX: 0 });
+      gsap.set([attr, hint], { opacity: 0, y: 8 });
+
+      const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      gsap.set(q('[data-intro]'), { opacity: 0, y: 26 });
+      gsap.set(chars, { opacity: 0, yPercent: 70, rotation: () => gsap.utils.random(-14, 14) });
+      gsap.set(layers, { scale: 1.08 });
+
+      intro
+        .to(valance, { yPercent: -110, duration: 0.45, ease: 'power2.in' }, 0.1)
+        .to(left, { xPercent: -100, scaleX: 0.75, duration: 0.95, ease: 'power3.inOut' }, 0.2)
+        .to(right, { xPercent: 100, scaleX: 0.75, duration: 0.95, ease: 'power3.inOut' }, 0.2)
+        .to(layers, { scale: 1, duration: 1.5, ease: 'power2.out' }, 0.25)
+        .to(q('[data-intro="label"]'), { opacity: 1, y: 0, duration: 0.5 }, 0.55)
+        .to(chars, { opacity: 1, yPercent: 0, rotation: 0, duration: 0.6, ease: 'back.out(2)', stagger: 0.022 }, 0.6)
+        .to(q('[data-intro="top"]'), { opacity: 1, y: 0, duration: 0.5, stagger: 0.08 }, 0.8)
+        .to(q('[data-intro="tagline"]'), { opacity: 1, y: 0, duration: 0.55 }, 0.95)
+        .to(q('[data-intro="chip"]'), { opacity: 1, y: 0, duration: 0.45, ease: 'back.out(2.2)', stagger: 0.07 }, 1.05)
+        .to(q('[data-intro="cta"]'), { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }, 1.15)
+        .to(q('[data-intro="quote"]'), { opacity: 1, y: 0, duration: 0.6 }, 1.2)
+        .to(q('[data-intro="scroll"]'), { opacity: 1, y: 0, duration: 0.5 }, 1.4)
+        .set(curtains, { display: 'none' });
+
+      let gag: gsap.core.Timeline | null = null;
+
+      const buildGag = () => {
+        if (!swap || !oldWord || !newWord) return null;
+        const fontSize = parseFloat(getComputedStyle(swap).fontSize) || 16;
+        const oldEm = oldWord.offsetWidth / fontSize;
+        const newEm = newWord.offsetWidth / fontSize;
+        const jitter = [0, -3, 4, -2, 3, -4, 2, 0];
+
+        const tl = gsap.timeline({ paused: true });
+        tl.set(swap, { width: `${oldEm}em` })
+          .set(oldChars, { opacity: 1, y: 0, scaleY: 1, color: '#FBF1CF' })
+          .set(oldWord, { x: 0, skewX: 0, opacity: 1 })
+          .set([glitchA, glitchB], { opacity: 0, x: 0 })
+          .set(strike, { scaleX: 0, opacity: 1 })
+          .set(drops, { opacity: 0, y: 0, scale: 0 })
+          .set(newWord, { opacity: 0, scale: 0.2, rotation: -16 })
+          .set(newSpark, { scale: 0, opacity: 0, rotation: 0 })
+          .set([attr, hint], { opacity: 0, y: 8 })
+          .set(wink, { rotation: 0, scale: 1 })
+          .to([glitchA, glitchB], { opacity: 0.9, duration: 0.05 }, 0.05)
+          .to(glitchA, { keyframes: { x: jitter.map((v) => v * 1.2), y: [0, 1, -1, 0, 1, 0, -1, 0] }, duration: 0.5, ease: 'none' }, 0.05)
+          .to(glitchB, { keyframes: { x: jitter.map((v) => -v), y: [0, -1, 1, 0, -1, 0, 1, 0] }, duration: 0.5, ease: 'none' }, 0.05)
+          .to(oldWord, { keyframes: { x: [0, 2, -2, 1, -1, 0], skewX: [0, -8, 6, -4, 2, 0] }, duration: 0.5, ease: 'none' }, 0.05)
+          .to([glitchA, glitchB], { opacity: 0, duration: 0.08 }, 0.55)
+          .to(strike, { scaleX: 1, duration: 0.28, ease: 'power2.out' }, 0.6)
+          .to(oldChars, {
+            y: () => gsap.utils.random(14, 30),
+            scaleY: () => gsap.utils.random(1.3, 1.9),
+            color: '#6FA8FF',
+            opacity: 0,
+            duration: 0.75,
+            ease: 'power2.in',
+            stagger: { each: 0.04, from: 'random' },
+          }, 1.0)
+          .to(strike, { y: 18, opacity: 0, duration: 0.45, ease: 'power2.in' }, 1.25)
+          .to(drops, { opacity: 1, scale: (i) => (i % 2 ? 0.8 : 1), duration: 0.18, stagger: { each: 0.05, from: 'random' } }, 1.0)
+          .to(drops, { y: () => gsap.utils.random(34, 60), duration: 0.7, ease: 'power2.in', stagger: { each: 0.05, from: 'random' } }, 1.1)
+          .to(drops, { opacity: 0, duration: 0.2, stagger: { each: 0.05, from: 'random' } }, 1.55)
+          .to(swap, { width: `${newEm}em`, duration: 0.4, ease: 'power2.inOut' }, 1.6)
+          .to(newWord, { opacity: 1, scale: 1, rotation: -4, duration: 0.7, ease: 'elastic.out(1.1, 0.45)' }, 1.75)
+          .to(newSpark, { opacity: 1, scale: 1, rotation: 180, duration: 0.55, ease: 'back.out(3)' }, 1.95)
+          .to(attr, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }, 2.4)
+          .to(wink, { keyframes: { rotation: [0, -18, 12, 0], scale: [1, 1.25, 1.1, 1] }, duration: 0.6, ease: 'power1.inOut' }, 2.6)
+          .to(hint, { opacity: 1, y: 0, duration: 0.4 }, 3.0)
+          .add(() => {
+            hero.dataset.gag = 'done';
+          });
+        return tl;
+      };
+
+      const playGag = () => {
+        if (!gag) return;
+        delete hero.dataset.gag;
+        gag.restart();
+      };
+
+      const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+      fontsReady.then(() => {
+        gag = buildGag();
+        const wait = Math.max(0, intro.duration() - intro.time()) + 1.1;
+        gsap.delayedCall(wait, playGag);
+      });
+
+      if (quoteCard) {
+        quoteCard.addEventListener('click', playGag);
+      }
+
+      let resizeTimer = 0;
+      window.addEventListener('resize', () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+          if (!gag || !swap) return;
+          const progress = gag.progress();
+          gag.kill();
+          gsap.set(swap, { clearProps: 'width' });
+          gsap.set(newWord, { opacity: 0 });
+          gag = buildGag();
+          gag?.progress(progress);
+          if (progress < 1) gag?.play();
+        }, 200);
+      });
+
+      const loops: gsap.core.Animation[] = [];
+
+      const backDrift = one('[data-drift="back"]');
+      const frontDrift = one('[data-drift="front"]');
+      loops.push(
+        gsap.to(backDrift, { x: 24, y: -14, rotation: 0.8, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
+        gsap.to(frontDrift, { x: -30, y: 16, rotation: -1, scale: 1.02, duration: 11, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
+      );
+
+      q('[data-fx="bubble"]').forEach((el) => {
+        loops.push(
+          gsap.to(el, {
+            y: gsap.utils.random(-28, -12),
+            x: gsap.utils.random(-10, 10),
+            duration: gsap.utils.random(4.5, 8),
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            delay: gsap.utils.random(0, 2),
+          }),
+        );
+      });
+
+      q('[data-fx="sparkle"]').forEach((el) => {
+        gsap.set(el, { scale: 0.5, opacity: 0.4 });
+        loops.push(
+          gsap.to(el, {
+            scale: 1,
+            opacity: 1,
+            rotation: 45,
+            duration: gsap.utils.random(0.9, 1.8),
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+            delay: gsap.utils.random(0, 2.5),
+            repeatDelay: gsap.utils.random(0, 1.2),
+          }),
+        );
+      });
+
+      q('[data-fx="shard"]').forEach((el) => {
+        loops.push(
+          gsap.to(el, {
+            y: gsap.utils.random(-18, 18),
+            rotation: gsap.utils.random(-10, 10),
+            duration: gsap.utils.random(6, 10),
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          }),
+        );
+      });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          loops.forEach((a) => (entry.isIntersecting ? a.resume() : a.pause()));
+        }).observe(hero);
+      }
+
+      if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px)').matches) {
+        const movers = layers.map((el) => {
+          const depth = Number(el.dataset.depth) || 0;
+          return {
+            depth,
+            x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3.out' }),
+            y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3.out' }),
+          };
+        });
+        hero.addEventListener('pointermove', (e) => {
+          const nx = e.clientX / window.innerWidth - 0.5;
+          const ny = e.clientY / window.innerHeight - 0.5;
+          movers.forEach((m) => {
+            m.x(-nx * m.depth);
+            m.y(-ny * m.depth);
+          });
+        });
+      }
+    }
+  }
+</script>

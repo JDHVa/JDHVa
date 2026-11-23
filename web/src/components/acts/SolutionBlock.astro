@@ -1,0 +1,159 @@
+---
+import type { Lang } from '../../i18n/ui';
+import type { Act } from '../../data/content';
+import type { ActStrings } from './strings';
+
+interface Props {
+  lang: Lang;
+  groups: Act['solution'];
+  s: ActStrings;
+}
+
+const { lang, groups, s } = Astro.props;
+const layered = groups.length > 3;
+
+const split = (title: string) => {
+  const m = title.match(/^(.+?)\s·\s(.+)$/);
+  return m ? { tag: m[1], name: m[2] } : { tag: '', name: title };
+};
+---
+
+{layered ? (
+  <div class="layers flex flex-col gap-2.5">
+    {groups.map((g, gi) => {
+      const t = split(g.title[lang]);
+      return (
+        <details class="layer group rounded-3xl" open={gi === 1} data-reveal="up">
+          <summary class="flex cursor-pointer list-none items-center gap-3 px-4 py-3 sm:gap-4 sm:px-5">
+            <span class="plates relative h-9 w-10 shrink-0" aria-hidden="true">
+              {groups.map((_, pi) => (
+                <span
+                  class:list={['plate', pi === gi && 'is-on']}
+                  style={`bottom:${(groups.length - 1 - pi) * 6}px;z-index:${groups.length - pi}`}
+                ></span>
+              ))}
+            </span>
+            <h5 class="flex min-w-0 flex-1 flex-col font-display text-base leading-tight font-semibold text-cream-100 sm:text-lg">
+              {t.tag && <span class="font-mono text-[0.65rem] font-semibold tracking-[0.18em] text-[color:var(--accent)] uppercase">{t.tag}</span>}
+              <span>{t.name}</span>
+            </h5>
+            <span class="hidden font-mono text-[0.65rem] tracking-widest text-lavender-200 uppercase sm:inline">{s.items(g.items.length)}</span>
+            <span class="chev flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-lavender-200/40" aria-hidden="true">
+              <svg class="h-4 w-4" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+          </summary>
+          <ul class="layer-body flex flex-col gap-2 px-4 pb-4 sm:px-5 sm:pl-[4.75rem]">
+            {g.items.map((it) => (
+              <li class="bullet text-[0.95rem] leading-relaxed text-ink/90">{it[lang]}</li>
+            ))}
+          </ul>
+        </details>
+      );
+    })}
+  </div>
+) : (
+  <div class="grid gap-3">
+    {groups.map((g) => (
+      <div class="sol-card rounded-3xl px-5 py-4" data-reveal="up">
+        <h5 class="mb-2 flex items-center gap-2 font-display text-lg leading-tight font-semibold text-cream-100">
+          <span class="dot inline-block h-2.5 w-2.5 shrink-0 rotate-45 rounded-[2px]" aria-hidden="true"></span>
+          {g.title[lang]}
+        </h5>
+        <ul class="flex flex-col gap-2">
+          {g.items.map((it) => (
+            <li class="bullet text-[0.95rem] leading-relaxed text-ink/90">{it[lang]}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+)}
+
+<style>
+  .layer,
+  .sol-card {
+    background: rgb(19 20 64 / 0.7);
+    border: 2px solid rgb(201 184 255 / 0.22);
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+  }
+
+  .layer[open] {
+    border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    background: rgb(42 36 112 / 0.55);
+  }
+
+  .layer summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .layer summary:hover .chev {
+    color: var(--color-cream);
+  }
+
+  .chev {
+    color: var(--color-lavender-200);
+    transition: transform 0.3s ease, color 0.2s ease;
+  }
+
+  .layer[open] .chev {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  .layer[open] .layer-body {
+    animation: layer-in 0.35s ease both;
+  }
+
+  .plate {
+    position: absolute;
+    left: 50%;
+    width: 34px;
+    height: 14px;
+    margin-left: -17px;
+    border-radius: 6px;
+    background: #2A2470;
+    border: 2px solid rgb(201 184 255 / 0.45);
+    transform: skewX(-24deg) scaleY(0.8);
+  }
+
+  .plate.is-on {
+    background: var(--accent);
+    border-color: var(--accent-soft);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+
+  .bullet {
+    position: relative;
+    padding-left: 1.1rem;
+  }
+
+  .bullet::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 999px;
+    background: var(--accent);
+    opacity: 0.8;
+  }
+
+  .dot {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  @keyframes layer-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .layer[open] .layer-body {
+      animation: none;
+    }
+  }
+</style>

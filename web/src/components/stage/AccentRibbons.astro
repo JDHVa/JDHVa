@@ -1,0 +1,44 @@
+---
+import Piece from './Piece.astro';
+import Ribbon from './Ribbon.astro';
+import { accentPreset, accentThin } from './palette';
+
+interface Props {
+  tone: { accent: string; soft: string; deep: string };
+  kind: 'act' | 'divider';
+  flip?: boolean;
+}
+
+const { tone, kind, flip = false } = Astro.props;
+const main = accentPreset(tone);
+const thin = accentThin(tone);
+const mirror = flip ? 'matrix(-1 0 0 1 1440 0)' : undefined;
+---
+
+{kind === 'act' ? (
+  <>
+    <Piece class="-z-[1]" wide={{ y: -200, h: 1100 }} speed={0.1} depth={12} drift="a" stage>
+      <g transform={mirror}>
+        <Ribbon d="M-500 -40C-200 0 40 160 30 420S-160 820 -500 880" p="deepViolet" op={0.8} />
+      </g>
+    </Piece>
+    <Piece class="-z-[1]" wide={{ y: -200, h: 1100 }} speed={0.04} depth={24} drift="b" stage>
+      <g transform={mirror}>
+        <Ribbon d="M1800 -120C1560 -80 1330 60 1335 300S1450 620 1385 800S1560 960 1800 1000" p={main} />
+        <Ribbon d="M-300 480C-100 470 100 540 105 660S20 820 -60 840" p={thin} />
+        <g opacity="0.75">
+          <use class="w-glow" href="#w-spark" x="1390" y="-40" width="26" height="26" style={`color:${tone.accent}`} />
+          <use class="w-glow" href="#w-spark" x="70" y="360" width="16" height="16" style={`color:${tone.soft}`} />
+          <use href="#w-star" x="1270" y="880" width="30" height="30" style={`color:${tone.soft}`} />
+        </g>
+      </g>
+    </Piece>
+  </>
+) : (
+  <Piece class="-z-[1] max-sm:hidden" wide={{ y: -220, h: 440, at: '50%' }} speed={0.05} depth={24} drift="c" stage>
+    <g transform={mirror}>
+      <Ribbon d="M-400 -150C-150 -140 100 80 336 115S900 125 1104 110S1500 -100 1840 -140" p={thin} />
+      <Ribbon d="M-400 160C-150 150 100 -60 336 -110S900 -130 1104 -110S1500 120 1840 150" p={main} />
+    </g>
+  </Piece>
+)}

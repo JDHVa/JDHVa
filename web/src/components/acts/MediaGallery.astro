@@ -1,0 +1,140 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Lang } from '../../i18n/ui';
+import type { Act } from '../../data/content';
+import { webmSiblings, type ActStrings } from './strings';
+
+interface Props {
+  lang: Lang;
+  name: string;
+  media: Act['media'];
+  s: ActStrings;
+}
+
+const { lang, name, media, s } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/evidencias/*.{jpeg,jpg,png}', { eager: true });
+
+const frameH = { base: 230, lg: 300 };
+
+const items = media.map((m, i) => {
+  const tilt = [-2.2, 1.6, -1.2, 2][i % 4];
+  if (m.type === 'image') {
+    const meta = images[`/src/assets/${m.src}`]?.default;
+    const ratio = meta ? meta.width / meta.height : 4 / 3;
+    return { ...m, meta, ratio, tilt, index: i + 1 };
+  }
+  const base = m.src.replace(/^.*\//, '').replace(/\.mp4$/, '');
+  const webm = webmSiblings.has(base) ? m.src.replace(/\.mp4$/, '.webm') : null;
+  const ratio = m.vertical ? 9 / 16 : 16 / 9;
+  return { ...m, meta: undefined, ratio, tilt, webm, index: i + 1 };
+});
+---
+
+<div class="gallery-wrap relative -mx-4 sm:-mx-8 lg:mx-0">
+  <ul class="gallery flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pt-6 pb-8 sm:gap-7 sm:px-8 lg:px-2" tabindex="0" aria-label={s.media}>
+    {items.map((it) => (
+      <li class="shrink-0 snap-center" style={`--ratio:${it.ratio};--tilt:${it.tilt}deg`} data-reveal="frame">
+        <figure class="polaroid relative">
+          <span class="tape" aria-hidden="true"></span>
+          <div class="photo overflow-hidden rounded-[14px]" style={`--h-base:${frameH.base}px;--h-lg:${frameH.lg}px`}>
+            {it.type === 'image' && it.meta ? (
+              <Image
+                src={it.meta}
+                alt={it.caption?.[lang] ?? s.imageAlt(name, it.index)}
+                widths={[360, 560, 800, 1100]}
+                sizes={`(min-width: 1024px) ${Math.round(frameH.lg * it.ratio)}px, ${Math.round(frameH.base * it.ratio)}px`}
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover"
+              />
+            ) : it.type === 'video' ? (
+              <video
+                class="h-full w-full bg-night-950 object-cover"
+                preload="none"
+                poster={it.poster}
+                controls
+                playsinline
+                muted
+                width={it.vertical ? 576 : 1024}
+                height={it.vertical ? 1024 : 576}
+                aria-label={it.caption?.[lang] ?? s.videoLabel(name, it.index)}
+              >
+                {it.webm && <source src={it.webm} type="video/webm" />}
+                <source src={it.src} type="video/mp4" />
+              </video>
+            ) : null}
+          </div>
+          <figcaption class="flex items-center justify-between gap-3 px-1 pt-2.5 font-mono text-[0.68rem] font-semibold tracking-wider text-night-800">
+            <span>{it.caption?.[lang] ?? name}</span>
+            <span class="opacity-60">{String(it.index).padStart(2, '0')}</span>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+  <p class="pointer-events-none absolute right-4 bottom-1 font-mono text-[0.65rem] tracking-widest text-lavender-200 uppercase sm:right-8 lg:hidden" aria-hidden="true">{s.mediaHint} →</p>
+</div>
+
+<style>
+  .gallery {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--accent) 60%, transparent) transparent;
+    overscroll-behavior-x: contain;
+  }
+
+  @media (min-width: 1024px) {
+    .gallery {
+      mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 56px), transparent);
+    }
+  }
+
+  .polaroid {
+    padding: 10px 10px 8px;
+    border-radius: 20px;
+    background: #FBF6E6;
+    transform: rotate(var(--tilt));
+    box-shadow: 0 6px 0 #C9A956, 0 18px 34px rgb(8 8 30 / 0.5);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .polaroid:hover,
+  .polaroid:focus-within {
+    transform: rotate(0deg) translateY(-4px);
+  }
+
+  .photo {
+    height: var(--h-base);
+    width: calc(var(--h-base) * var(--ratio));
+    max-width: calc(100vw - 4.5rem);
+    background: #131440;
+  }
+
+  @media (min-width: 1024px) {
+    .photo {
+      height: var(--h-lg);
+      width: calc(var(--h-lg) * var(--ratio));
+    }
+  }
+
+  .tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    width: 74px;
+    height: 22px;
+    margin-left: -37px;
+    background: color-mix(in srgb, var(--accent) 55%, rgb(255 255 255 / 0.5));
+    opacity: 0.85;
+    transform: rotate(calc(var(--tilt) * -2));
+    border-radius: 3px;
+    z-index: 2;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .polaroid {
+      transition: none;
+    }
+  }
+</style>

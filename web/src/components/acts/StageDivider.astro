@@ -1,0 +1,70 @@
+---
+import AccentRibbons from '../stage/AccentRibbons.astro';
+
+interface Props {
+  next: string;
+  accent: string;
+  tone?: { accent: string; soft: string; deep: string };
+  flip?: boolean;
+}
+
+const { next, accent, tone, flip } = Astro.props;
+const sparklePath = 'M12 0C12.9 7.4 16.6 11.1 24 12C16.6 12.9 12.9 16.6 12 24C11.1 16.6 7.4 12.9 0 12C7.4 11.1 11.1 7.4 12 0Z';
+---
+
+<div class="divider relative mx-auto my-20 h-28 w-full max-w-3xl sm:my-28" aria-hidden="true" data-divider style={`--next:${accent}`}>
+  {tone && <AccentRibbons tone={tone} kind="divider" flip={flip} />}
+  <div class="window absolute inset-x-0 top-5 bottom-0 flex items-center justify-center overflow-hidden rounded-b-[28px]">
+    <span class="flex items-center gap-3 font-mono text-xs font-bold tracking-[0.3em] uppercase sm:text-sm" data-divider-label>
+      <svg class="h-4 w-4" viewBox="0 0 24 24"><path d={sparklePath} fill="currentColor" /></svg>
+      {next}
+      <svg class="h-4 w-4" viewBox="0 0 24 24"><path d={sparklePath} fill="currentColor" /></svg>
+    </span>
+    <span class="drape drape-left" data-drape="left"></span>
+    <span class="drape drape-right" data-drape="right"></span>
+  </div>
+  <span class="rod absolute inset-x-0 top-0 h-5 rounded-full"></span>
+  <span class="finial absolute top-[-3px] left-[-10px] h-6 w-6 rounded-full"></span>
+  <span class="finial absolute top-[-3px] right-[-10px] h-6 w-6 rounded-full"></span>
+</div>
+
+<style>
+  .window {
+    background: radial-gradient(80% 120% at 50% 100%, color-mix(in srgb, var(--next) 18%, transparent), transparent 70%);
+    color: var(--next);
+  }
+
+  .drape {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background: repeating-linear-gradient(90deg, #2B1B66 0 5px, #3A2585 5px 24px, #4A3299 24px 38px, #3A2585 38px 52px, #2B1B66 52px 58px);
+    border-bottom: 4px solid var(--color-cream);
+    transform: scaleX(0.3);
+  }
+
+  .drape-left {
+    left: 0;
+    transform-origin: left center;
+    border-bottom-right-radius: 40px 18px;
+  }
+
+  .drape-right {
+    right: 0;
+    transform-origin: right center;
+    border-bottom-left-radius: 40px 18px;
+  }
+
+  .rod {
+    background:
+      radial-gradient(circle at 50% 100%, #3A2585 0 12px, transparent 12.5px) 0 4px / 30px 20px repeat-x,
+      linear-gradient(#F6E3A1, #C9A956);
+    box-shadow: 0 3px 0 #2B1B66;
+  }
+
+  .finial {
+    background: radial-gradient(circle at 35% 30%, #FBF1CF 0 25%, #F6E3A1 26% 60%, #C9A956 61%);
+    box-shadow: 0 2px 0 #2B1B66;
+  }
+</style>

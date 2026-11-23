@@ -1,0 +1,190 @@
+---
+import type { Lang } from '../../i18n/ui';
+import { skills } from '../../data/content';
+import { st, projectIndex } from '../../data/sections';
+import SectionHead from './SectionHead.astro';
+import Scene from '../stage/Scene.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = st(lang).repertoire;
+const nameOf = (n: string | Record<Lang, string>) => (typeof n === 'string' ? n : n[lang]);
+const toneFor = { concept: 'concept', tool: 'tool', human: 'human' } as const;
+---
+
+<section id="repertorio" class="relative isolate overflow-hidden py-20 sm:py-28" aria-labelledby="repertorio-title" data-repertoire data-none={t.none} data-used={t.used} data-pick={t.pick}>
+  <Scene name="repertoire" />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-8">
+    <SectionHead id="repertorio-title" label={t.label} title={t.title} />
+
+    <div class="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
+      <div class="flex flex-col gap-8">
+        <p class="max-w-xl text-base text-lavender-100 sm:text-lg" data-reveal>{t.hint}</p>
+        {skills.map((g) => (
+          <div class:list={['group-block', `kind-${g.kind}`]} data-reveal>
+            <h3 class:list={[
+              'mb-3 font-display font-semibold',
+              g.kind === 'concept' && 'text-2xl text-cream sm:text-3xl',
+              g.kind === 'tool' && 'text-lg text-lavender-200 sm:text-xl',
+              g.kind === 'human' && 'text-xl text-[#FFB8D2] sm:text-2xl',
+            ]}>{g.title[lang]}</h3>
+            <ul class="flex flex-wrap gap-2 sm:gap-3">
+              {g.items.map((it) => (
+                <li>
+                  <button
+                    type="button"
+                    class:list={['skill', `skill-${toneFor[g.kind]}`]}
+                    aria-pressed="false"
+                    data-projects={it.projects.join(',')}
+                    data-skill={nameOf(it.name)}
+                  >
+                    {nameOf(it.name)}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <aside class="stage-card panel p-5 sm:p-6 lg:sticky lg:top-8" aria-labelledby="rep-panel-title" data-reveal>
+        <h3 id="rep-panel-title" class="font-mono text-[0.7rem] font-semibold tracking-[0.2em] text-aqua uppercase">{t.legend}</h3>
+        <p class="mt-3 min-h-[3.2rem] font-display text-lg leading-snug text-cream-100" aria-live="polite" data-status>{t.pick}</p>
+        <ul class="mt-4 flex flex-col gap-2">
+          {projectIndex.map((p) => (
+            <li>
+              <a href={p.href} class="proj-pill flex items-center justify-between gap-2 rounded-2xl border-2 border-lavender-200/25 px-4 py-2 text-sm font-medium text-lavender-100 sm:text-base" data-project={p.id}>
+                <span>{p.name}</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skill {
+    cursor: pointer;
+    border-radius: 999px;
+    border: 2px solid;
+    font-weight: 600;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  }
+
+  .skill:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .skill-concept {
+    padding: 0.6rem 1.15rem;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    border-color: rgb(246 227 161 / 0.6);
+    background: rgb(246 227 161 / 0.1);
+    color: var(--color-cream-100);
+  }
+
+  .skill-tool {
+    padding: 0.35rem 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    border-color: rgb(158 201 255 / 0.5);
+    background: rgb(111 168 255 / 0.1);
+    color: var(--color-water-200);
+  }
+
+  .skill-human {
+    padding: 0.55rem 1.1rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    border-color: rgb(255 184 210 / 0.6);
+    background: rgb(242 167 200 / 0.12);
+    color: #FFD3E3;
+    border-radius: 22px 22px 22px 6px;
+  }
+
+  .skill[aria-pressed='true'] {
+    transform: translateY(-3px);
+    color: var(--color-night-900);
+  }
+
+  .skill-concept[aria-pressed='true'] {
+    background: var(--color-cream);
+    box-shadow: 0 5px 0 #C9A956, 0 0 26px rgb(246 227 161 / 0.35);
+  }
+
+  .skill-tool[aria-pressed='true'] {
+    background: var(--color-water-200);
+    box-shadow: 0 4px 0 #5B92EC, 0 0 22px rgb(158 201 255 / 0.35);
+  }
+
+  .skill-human[aria-pressed='true'] {
+    background: #FFB8D2;
+    box-shadow: 0 4px 0 #C9708F, 0 0 22px rgb(255 184 210 / 0.35);
+  }
+
+  .proj-pill {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .proj-pill:hover {
+    border-color: var(--color-lavender-200);
+  }
+
+  .panel[data-active='true'] .proj-pill {
+    opacity: 0.38;
+  }
+
+  .panel[data-active='true'] .proj-pill.on {
+    opacity: 1;
+    transform: translateX(4px);
+    background: var(--color-aqua);
+    border-color: var(--color-aqua);
+    color: var(--color-night-900);
+    box-shadow: 0 4px 0 #3FB9B9;
+  }
+</style>
+
+<script>
+  import { reveal } from './reveal';
+
+  document.querySelectorAll<HTMLElement>('[data-repertoire]').forEach((root) => {
+    reveal(root);
+    const panel = root.querySelector<HTMLElement>('.panel')!;
+    const status = root.querySelector<HTMLElement>('[data-status]')!;
+    const pills = Array.from(root.querySelectorAll<HTMLElement>('[data-project]'));
+    const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('.skill'));
+    const none = root.dataset.none ?? '';
+    const used = root.dataset.used ?? '';
+    const pick = root.dataset.pick ?? '';
+
+    const clear = () => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      pills.forEach((p) => p.classList.remove('on'));
+      panel.dataset.active = 'false';
+      status.textContent = pick;
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (btn.getAttribute('aria-pressed') === 'true') {
+          clear();
+          return;
+        }
+        buttons.forEach((b) => b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'));
+        const ids = (btn.dataset.projects ?? '').split(',').filter(Boolean);
+        panel.dataset.active = 'true';
+        pills.forEach((p) => p.classList.toggle('on', ids.includes(p.dataset.project ?? '')));
+        const names = pills.filter((p) => p.classList.contains('on')).map((p) => p.textContent?.replace('→', '').trim());
+        status.textContent = `${btn.dataset.skill} · ${ids.length ? `${used}: ${names.join(', ')}` : none}`;
+        if (ids.length === 0) panel.dataset.active = 'false';
+      });
+    });
+  });
+</script>

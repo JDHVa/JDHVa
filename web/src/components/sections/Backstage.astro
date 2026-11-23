@@ -1,0 +1,160 @@
+---
+import type { Lang } from '../../i18n/ui';
+import { about } from '../../data/content';
+import { st, levelScore, sparklePath } from '../../data/sections';
+import SectionHead from './SectionHead.astro';
+import Scene from '../stage/Scene.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = st(lang).backstage;
+
+const langs = about.languages.map((l) => ({
+  name: l.name[lang],
+  level: l.level[lang],
+  score: levelScore[l.level.es] ?? 1,
+}));
+
+const streak = about.duolingo[lang];
+const m = streak.match(/^(\d+\+?)\s+(.*)$/);
+const streakNum = m ? m[1] : null;
+const streakText = m ? m[2] : streak;
+
+const stickers = [
+  'bg-cream text-night-900 border-cream-700 -rotate-3',
+  'bg-lavender-200 text-night-900 border-lavender-500 rotate-2',
+  'bg-aqua text-night-900 border-[#3FB9B9] -rotate-1',
+  'bg-[#FFB8D2] text-night-900 border-[#C9708F] rotate-3',
+];
+---
+
+<section id="backstage" class="relative isolate overflow-hidden py-20 sm:py-28" aria-labelledby="backstage-title" data-backstage>
+  <Scene name="backstage" />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-8">
+    <SectionHead id="backstage-title" label={t.label} title={t.title} />
+
+    <div class="grid gap-8 lg:grid-cols-2 lg:gap-10">
+      <div class="stage-card p-6 sm:p-8" data-reveal>
+        <h3 class="mb-5 font-display text-2xl font-semibold text-cream sm:text-3xl">{t.languages}</h3>
+        <ul class="flex flex-col gap-5">
+          {langs.map((l) => (
+            <li>
+              <div class="mb-2 flex items-baseline justify-between gap-3">
+                <span class="font-display text-lg font-semibold text-cream-100 sm:text-xl">{l.name}</span>
+                <span class="font-mono text-xs font-semibold tracking-wider text-aqua uppercase">{l.level}</span>
+              </div>
+              <div class="flex gap-1.5" aria-hidden="true">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <span class:list={['seg h-3 flex-1 rounded-full', i < l.score ? 'on' : 'off']} style={`--i:${i}`}></span>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="flex flex-col gap-8">
+        <div class="streak stage-card flex items-center gap-5 p-6 sm:p-8" data-reveal>
+          <span class="flame relative flex h-20 w-20 shrink-0 items-center justify-center sm:h-24 sm:w-24" aria-hidden="true">
+            <svg class="h-full w-full overflow-visible" viewBox="0 0 64 80">
+              <path d="M32 2C34 18 52 26 52 50a20 20 0 0 1-40 0C12 38 20 32 22 22c4 6 6 8 8 8C32 20 28 12 32 2Z" fill="#FF8A3D" stroke="#FFD27A" stroke-width="3" stroke-linejoin="round" />
+              <path d="M32 34C33 44 42 48 42 58a10 10 0 0 1-20 0C22 52 28 48 28 42c2 3 3 3 4 3-1-4 0-7 0-11Z" fill="#FFE08A" />
+            </svg>
+          </span>
+          <div>
+            <p class="font-mono text-[0.7rem] font-semibold tracking-[0.2em] text-aqua uppercase">{t.streak}</p>
+            {streakNum && <p class="font-display text-5xl font-semibold text-cream sm:text-6xl">{streakNum}</p>}
+            <p class="mt-1 text-base text-lavender-100 sm:text-lg">{streakText}</p>
+          </div>
+        </div>
+
+        <div data-reveal>
+          <h3 class="mb-4 font-display text-2xl font-semibold text-cream sm:text-3xl">{t.interests}</h3>
+          <ul class="flex flex-wrap gap-3 sm:gap-4">
+            {about.interests.map((it, i) => (
+              <li class:list={['sticker rounded-2xl border-2 px-4 py-2 font-display text-base font-semibold sm:text-lg', stickers[i % stickers.length]]}>{it[lang]}</li>
+            ))}
+          </ul>
+          <iframe
+            class="mt-5 block w-full rounded-2xl border-0"
+            src="https://open.spotify.com/embed/album/1xJHno7SmdVtZAtXbdbDZp?theme=0"
+            width="100%"
+            height="152"
+            title={lang === 'es' ? 'GUTS de Olivia Rodrigo en Spotify' : 'GUTS by Olivia Rodrigo on Spotify'}
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+
+        <p class="aside flex items-start gap-3 rounded-2xl border-2 border-dashed border-lavender-400/60 bg-lavender-500/15 px-5 py-4 text-base text-lavender-100 sm:text-lg" data-reveal>
+          <svg class="mt-1 h-5 w-5 shrink-0 text-lavender-200" viewBox="0 0 24 24" aria-hidden="true"><path d={sparklePath} fill="currentColor" /></svg>
+          <span class="italic">{about.purpleNote[lang]}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .seg.on {
+    background: linear-gradient(180deg, #8FF0F0, #6FA8FF);
+    box-shadow: 0 0 10px rgb(143 240 240 / 0.4);
+  }
+
+  .seg.off {
+    background: rgb(201 184 255 / 0.18);
+  }
+
+  .sticker {
+    box-shadow: 0 4px 0 rgb(0 0 0 / 0.3);
+    transition: transform 0.2s ease;
+  }
+
+  .sticker:hover {
+    transform: rotate(0deg) scale(1.06);
+  }
+
+  .streak {
+    border-color: rgb(255 138 61 / 0.55);
+    box-shadow: 0 8px 0 rgb(201 112 40 / 0.6), 0 18px 40px rgb(8 8 30 / 0.45);
+  }
+
+  .flame {
+    filter: drop-shadow(0 0 16px rgb(255 138 61 / 0.55));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .flame {
+      animation: flicker 1.4s ease-in-out infinite alternate;
+      transform-origin: 50% 90%;
+    }
+  }
+
+  @keyframes flicker {
+    from { transform: scale(1) rotate(-2deg); }
+    to { transform: scale(1.08, 1.12) rotate(2deg); }
+  }
+</style>
+
+<script>
+  import { gsap, reveal, reduceMotion, ScrollTrigger } from './reveal';
+
+  document.querySelectorAll<HTMLElement>('[data-backstage]').forEach((root) => {
+    reveal(root);
+    if (reduceMotion()) return;
+    root.querySelectorAll<HTMLElement>('.seg.on').forEach((el) => {
+      gsap.set(el, { scaleX: 0, transformOrigin: 'left center' });
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 92%',
+        once: true,
+        onEnter: () => {
+          gsap.to(el, { scaleX: 1, duration: 0.5, delay: Number(el.style.getPropertyValue('--i')) * 0.1, ease: 'power2.out' });
+        },
+      });
+    });
+  });
+</script>

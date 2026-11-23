@@ -1,0 +1,127 @@
+---
+import { scatter } from './palette';
+
+interface Props {
+  seed: number;
+  count: number;
+  colors?: string[];
+  edge?: number;
+  center?: number;
+  speed?: number;
+  depth?: number;
+}
+
+const { seed, count, colors, edge, center, speed = -0.05, depth = 44 } = Astro.props;
+const items = scatter({ seed, count, colors, edge, center });
+---
+
+<div class="w-field absolute inset-0" data-speed={speed}>
+  <div class="w-par absolute inset-0">
+    <div class="w-mouse absolute inset-0" data-depth={depth}>
+      {items.map((p) => (
+        <div
+          class:list={['w-p absolute', !p.m && 'max-sm:hidden']}
+          style={`left:${p.x}%;top:${p.y}%;width:${p.s}px;height:${p.s}px;color:${p.c};--dl:-${p.dl}s;--du:${p.du}s;--r:${p.r}deg`}
+        >
+          <div class:list={['w-a h-full w-full', `w-a-${p.kind}`]}>
+            {p.kind === 'bubble' && <span class="w-bubble block h-full w-full rounded-full"></span>}
+            {p.kind === 'sparkle' && (
+              <svg class="w-sparkle h-full w-full overflow-visible" viewBox="0 0 24 24"><use href="#w-spark" /></svg>
+            )}
+            {p.kind === 'shard' && (
+              <svg class="w-shard h-full w-full overflow-visible" viewBox="0 0 60 72">
+                <path d={p.d} fill="rgba(201,184,255,0.32)" stroke="#E4DAFF" stroke-width="2" stroke-linejoin="round" />
+                <path d={p.d} fill="rgba(255,255,255,0.22)" transform="scale(0.45) translate(18 18)" />
+              </svg>
+            )}
+            {p.kind === 'star' && (
+              <svg class="w-star h-full w-full overflow-visible" viewBox="-21 -15 42 42"><use href="#w-star" /></svg>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .w-bubble {
+    position: relative;
+    background:
+      radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.55) 0 7%, transparent 8%),
+      radial-gradient(circle at 50% 50%, rgb(143 240 240 / 0.06) 0 55%, rgb(143 240 240 / 0.22) 78%, rgb(201 251 251 / 0.35) 100%);
+    border: 2px solid rgb(203 251 251 / 0.6);
+    box-shadow: 0 0 22px rgb(143 240 240 / 0.28), inset 0 0 14px rgb(143 240 240 / 0.18);
+  }
+
+  .w-bubble::after {
+    content: '';
+    position: absolute;
+    inset: 16% 18% auto auto;
+    width: 26%;
+    height: 26%;
+    border-radius: 50%;
+    border-top: 3px solid rgb(255 255 255 / 0.7);
+    border-right: 3px solid rgb(255 255 255 / 0.7);
+    border-left: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    transform: rotate(-10deg);
+  }
+
+  .w-shard {
+    transform: rotate(var(--r));
+    filter: drop-shadow(0 0 10px rgb(201 184 255 / 0.45));
+  }
+
+  .w-sparkle {
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+
+  .w-star {
+    color: #E4DAFF;
+    opacity: 0.85;
+    transform: rotate(var(--r));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .w-a-bubble {
+      animation: w-float var(--du) ease-in-out var(--dl) infinite alternate;
+    }
+
+    .w-a-shard {
+      animation: w-sway var(--du) ease-in-out var(--dl) infinite alternate;
+    }
+
+    .w-a-sparkle {
+      animation: w-twinkle var(--du) ease-in-out var(--dl) infinite alternate;
+    }
+
+    .w-a-star {
+      animation: w-glint calc(var(--du) * 0.6) ease-in-out var(--dl) infinite alternate;
+    }
+
+    :global(.js) :global([data-stage]:not(.is-live)) .w-a {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes w-float {
+    from { translate: 0 0; }
+    to { translate: 8px -24px; }
+  }
+
+  @keyframes w-sway {
+    from { translate: 0 -14px; rotate: -8deg; }
+    to { translate: 0 14px; rotate: 8deg; }
+  }
+
+  @keyframes w-twinkle {
+    from { scale: 0.5; opacity: 0.4; rotate: 0deg; }
+    to { scale: 1; opacity: 1; rotate: 45deg; }
+  }
+
+  @keyframes w-glint {
+    from { scale: 0.8; opacity: 0.55; }
+    to { scale: 1.05; opacity: 1; }
+  }
+</style>

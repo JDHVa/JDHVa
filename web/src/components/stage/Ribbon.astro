@@ -1,0 +1,40 @@
+---
+import { presets, type Preset } from './palette';
+
+interface Props {
+  d: string;
+  p: string | Preset;
+  k?: number;
+  ns?: boolean;
+  axis?: 'x' | 'y';
+  op?: number;
+}
+
+const { d, p, k = 1, ns = false, axis = 'y', op } = Astro.props;
+const preset = typeof p === 'string' ? presets[p] : p;
+const shift = (o?: number) => (o ? (axis === 'x' ? `translate(${o * k} 0)` : `translate(0 ${o * k})`) : undefined);
+---
+
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" opacity={op}>
+  {preset.map((s) =>
+    ns ? (
+      <path
+        d={d}
+        stroke={s.c}
+        vector-effect="non-scaling-stroke"
+        transform={shift(s.o)}
+        opacity={s.op}
+        style={`stroke-width:calc(var(--k) * ${s.w}px)${s.dash ? `;stroke-dasharray:${s.dash.map((v) => `calc(var(--k) * ${v}px)`).join(' ')}` : ''}`}
+      />
+    ) : (
+      <path
+        d={d}
+        stroke={s.c}
+        stroke-width={s.w * k}
+        stroke-dasharray={s.dash ? s.dash.map((v) => v * k).join(' ') : undefined}
+        transform={shift(s.o)}
+        opacity={s.op}
+      />
+    ),
+  )}
+</g>

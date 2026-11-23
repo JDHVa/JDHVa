@@ -1,0 +1,140 @@
+---
+import type { Lang } from '../../i18n/ui';
+import type { L } from '../../data/content';
+import type { ActStrings } from './strings';
+
+interface Props {
+  lang: Lang;
+  title: L;
+  points: { horizon: number; model: number; baseline: number }[];
+  s: ActStrings;
+}
+
+const { lang, title, points, s } = Astro.props;
+
+const W = 560;
+const H = 300;
+const pad = { l: 46, r: 150, t: 24, b: 46 };
+const maxX = Math.max(...points.map((p) => p.horizon));
+const yMin = 10;
+const yMax = Math.ceil(Math.max(...points.map((p) => p.model)) / 5) * 5;
+const x = (v: number) => pad.l + (v / maxX) * (W - pad.l - pad.r);
+const y = (v: number) => pad.t + (1 - (v - yMin) / (yMax - yMin)) * (H - pad.t - pad.b);
+const ticks: number[] = [];
+for (let v = yMin; v <= yMax; v += 5) ticks.push(v);
+const line = (key: 'model' | 'baseline') => points.map((p, i) => `${i ? 'L' : 'M'}${x(p.horizon).toFixed(1)} ${y(p[key]).toFixed(1)}`).join('');
+const last = points[points.length - 1];
+const uid = `psnr-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class="psnr chart-card rounded-3xl p-4 sm:p-5" data-reveal="up" data-chart>
+  <figcaption class="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+    <span class="font-display text-lg font-semibold text-cream-100">{title[lang]}</span>
+    <span class="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[0.7rem] text-ink/85">
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3 w-6" viewBox="0 0 24 12" aria-hidden="true"><path d="M1 6H23" stroke="#5FD6DE" stroke-width="2.5" /><circle cx="12" cy="6" r="4" fill="#5FD6DE" /></svg>{s.chartModel}</span>
+      <span class="inline-flex items-center gap-1.5"><svg class="h-3 w-6" viewBox="0 0 24 12" aria-hidden="true"><path d="M1 6H23" stroke="#8574EE" stroke-width="2.5" stroke-dasharray="4 3" /><rect x="8" y="2" width="8" height="8" rx="1.5" fill="#8574EE" /></svg>{s.chartBaseline}</span>
+    </span>
+  </figcaption>
+
+  <svg class="block h-auto w-full overflow-visible" viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby={`${uid}-desc`}>
+    <desc id={`${uid}-desc`}>
+      {points.map((p) => `${p.horizon} s: ${s.chartModel} ${p.model} dB, ${s.chartBaseline} ${p.baseline} dB.`).join(' ')}
+    </desc>
+    <defs>
+      <clipPath id={`${uid}-clip`}>
+        <rect x={pad.l - 10} y="0" width={W - pad.l - pad.r + 20} height={H} data-chart-clip />
+      </clipPath>
+    </defs>
+    <g class="axis" font-size="12">
+      {ticks.map((t) => (
+        <g>
+          <line x1={pad.l} x2={W - pad.r} y1={y(t)} y2={y(t)} stroke="#C9B8FF" stroke-opacity="0.16" stroke-width="1" />
+          <text x={pad.l - 10} y={y(t) + 4} text-anchor="end" fill="#C9B8FF">{t}</text>
+        </g>
+      ))}
+      {points.map((p) => (
+        <text x={x(p.horizon)} y={H - pad.b + 22} text-anchor="middle" fill="#C9B8FF" class="x-tick">{p.horizon} s</text>
+      ))}
+      <line x1={pad.l} x2={W - pad.r} y1={H - pad.b} y2={H - pad.b} stroke="#C9B8FF" stroke-opacity="0.45" stroke-width="1.5" />
+      <text x={(pad.l + W - pad.r) / 2} y={H - 4} text-anchor="middle" fill="#E4DAFF" opacity="0.7" class="name-lbl">{s.chartX}</text>
+      <text x="0" y="12" fill="#E4DAFF" opacity="0.7" class="name-lbl">dB</text>
+    </g>
+
+    <g clip-path={`url(#${uid}-clip)`}>
+      <path d={line('baseline')} fill="none" stroke="#8574EE" stroke-width="2.5" stroke-dasharray="7 5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d={line('model')} fill="none" stroke="#5FD6DE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    {points.map((p) => (
+      <g data-chart-pt>
+        <title>{`${p.horizon} s · ${s.chartBaseline}: ${p.baseline} dB`}</title>
+        <rect x={x(p.horizon) - 5} y={y(p.baseline) - 5} width="10" height="10" rx="2" fill="#8574EE" stroke="#131440" stroke-width="2" />
+      </g>
+    ))}
+    {points.map((p) => (
+      <g data-chart-pt>
+        <title>{`${p.horizon} s · ${s.chartModel}: ${p.model} dB`}</title>
+        <circle cx={x(p.horizon)} cy={y(p.model)} r="6" fill="#5FD6DE" stroke="#131440" stroke-width="2" />
+        <circle cx={x(p.horizon)} cy={y(p.model)} r="16" fill="transparent" />
+      </g>
+    ))}
+    {points.slice(0, -1).map((p) => (
+      <text x={x(p.horizon)} y={y(p.model) - 14} text-anchor="middle" font-size="12" fill="#E9ECFF" class="axis" data-chart-pt>{p.model}</text>
+    ))}
+
+    <g class="axis" font-size="12" data-chart-pt>
+      <text x={x(last.horizon) + 14} y={y(last.model) - 2} fill="#E9ECFF" font-weight="700">{last.model} dB</text>
+      <text x={x(last.horizon) + 14} y={y(last.model) + 14} fill="#C9B8FF" class="name-lbl">{s.chartModel}</text>
+      <text x={x(last.horizon) + 14} y={y(last.baseline) + 2} fill="#E9ECFF" font-weight="700">{last.baseline} dB</text>
+      <text x={x(last.horizon) + 14} y={y(last.baseline) + 18} fill="#C9B8FF" class="name-lbl">{s.chartBaseline}</text>
+    </g>
+  </svg>
+
+  <details class="mt-3">
+    <summary class="cursor-pointer font-mono text-[0.7rem] tracking-widest text-lavender-200 uppercase hover:text-cream">{s.chartTable}</summary>
+    <table class="mt-2 w-full text-left font-mono text-xs text-ink/90">
+      <thead>
+        <tr class="text-lavender-200">
+          <th class="py-1 font-semibold">{s.chartHorizon}</th>
+          <th class="py-1 font-semibold">{s.chartModel}</th>
+          <th class="py-1 font-semibold">{s.chartBaseline}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {points.map((p) => (
+          <tr class="border-t border-lavender-200/15">
+            <td class="py-1">{p.horizon} s</td>
+            <td class="py-1">{p.model} dB</td>
+            <td class="py-1">{p.baseline} dB</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </details>
+</figure>
+
+<style>
+  .chart-card {
+    background: rgb(19 20 64 / 0.75);
+    border: 2px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    box-shadow: 0 6px 0 color-mix(in srgb, var(--accent-deep) 45%, #131440);
+  }
+
+  .axis {
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 639px) {
+    .psnr svg text {
+      font-size: 20px;
+    }
+
+    .psnr .name-lbl {
+      display: none;
+    }
+
+    .psnr svg .x-tick {
+      font-size: 16px;
+    }
+  }
+</style>

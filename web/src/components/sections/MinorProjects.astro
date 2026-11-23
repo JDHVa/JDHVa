@@ -1,0 +1,91 @@
+---
+import type { Lang } from '../../i18n/ui';
+import { minorProjects } from '../../data/content';
+import { st, githubReposUrl, sparklePath } from '../../data/sections';
+import SectionHead from './SectionHead.astro';
+import Scene from '../stage/Scene.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = st(lang).minor;
+const tones = ['text-lavender-200 border-lavender-200/50 bg-lavender-400/10', 'text-water-200 border-water-200/50 bg-water-400/10', 'text-aqua border-aqua/50 bg-aqua/10'];
+---
+
+<section id="entreacto" class="relative isolate overflow-hidden py-20 sm:py-28" aria-labelledby="entreacto-title" data-minor>
+  <Scene name="minor" />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-8">
+    <SectionHead id="entreacto-title" label={t.label} title={t.title} />
+
+    <ul class="grid gap-8 md:grid-cols-2">
+      {minorProjects.map((p) => (
+        <li id={`minor-${p.id}`} class="stage-card flex scroll-mt-8 flex-col overflow-hidden" data-reveal>
+          {p.media && (
+            <div class="relative aspect-video w-full overflow-hidden border-b-2 border-lavender-200/30 bg-night-900">
+              <video
+                class="h-full w-full object-cover"
+                controls
+                playsinline
+                preload="none"
+                poster={p.media.poster}
+                aria-label={t.video}
+              >
+                <source src={p.media.src.replace(/\.mp4$/, '.webm')} type="video/webm" />
+                <source src={p.media.src} type="video/mp4" />
+              </video>
+            </div>
+          )}
+          <div class="flex flex-1 flex-col gap-4 p-6 sm:p-8">
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="font-display text-2xl font-semibold text-cream sm:text-3xl">{p.name}</h3>
+              {p.context && (
+                <span class="rounded-full border-2 border-cream/40 px-2.5 py-0.5 font-mono text-[0.65rem] font-semibold tracking-widest text-cream uppercase">
+                  {p.context[lang]}
+                </span>
+              )}
+            </div>
+            <p class="text-base leading-relaxed text-ink/90 sm:text-lg">{p.description[lang]}</p>
+            <ul class="flex flex-wrap gap-2" aria-hidden="true">
+              {p.tags.map((tag, i) => (
+                <li class:list={['rounded-full border-2 px-3 py-1 font-mono text-xs font-semibold tracking-wide', tones[i % 3]]}>{tag}</li>
+              ))}
+            </ul>
+            <a
+              href={p.repo}
+              target="_blank"
+              rel="noopener"
+              class="repo-link group mt-auto inline-flex w-fit items-center gap-2 pt-2 font-display text-lg font-semibold text-aqua hover:text-aqua-100"
+            >
+              <svg class="h-4 w-4 transition-transform duration-500 group-hover:rotate-90" viewBox="0 0 24 24" aria-hidden="true">
+                <path d={sparklePath} fill="currentColor" />
+              </svg>
+              {t.repo}
+              <span class="sr-only"> {p.name}</span>
+              <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">↗</span>
+            </a>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-12 flex justify-center" data-reveal>
+      <a
+        href={githubReposUrl}
+        target="_blank"
+        rel="noopener"
+        class="pill-btn group inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 font-display text-lg font-semibold text-night-900"
+      >
+        {t.all}
+        <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { reveal } from './reveal';
+
+  document.querySelectorAll<HTMLElement>('[data-minor]').forEach((root) => reveal(root));
+</script>

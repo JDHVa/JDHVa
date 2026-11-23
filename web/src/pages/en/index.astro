@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Prologue from '../../components/sections/Prologue.astro';
+import Acts from '../../components/acts/Acts.astro';
+import MinorProjects from '../../components/sections/MinorProjects.astro';
+import Journey from '../../components/sections/Journey.astro';
+import Repertoire from '../../components/sections/Repertoire.astro';
+import Ovations from '../../components/sections/Ovations.astro';
+import Backstage from '../../components/sections/Backstage.astro';
+import Finale from '../../components/sections/Finale.astro';
+import World from '../../components/stage/World.astro';
+import Bridge from '../../components/stage/Bridge.astro';
+---
+
+<BaseLayout lang="en">
+  <main>
+    <Hero lang="en" />
+    <World>
+      <Prologue lang="en" />
+      <Bridge name="prologue-acts" />
+      <Acts lang="en" />
+      <Bridge name="acts-minor" />
+      <MinorProjects lang="en" />
+      <Bridge name="minor-journey" />
+      <Journey lang="en" />
+      <Bridge name="journey-repertoire" />
+      <Repertoire lang="en" />
+      <Bridge name="repertoire-ovations" />
+      <Ovations lang="en" />
+      <Bridge name="ovations-backstage" />
+      <Backstage lang="en" />
+      <Bridge name="backstage-finale" />
+      <Finale lang="en" />
+    </World>
+  </main>
+</BaseLayout>

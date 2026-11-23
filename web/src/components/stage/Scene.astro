@@ -1,0 +1,123 @@
+---
+import Piece from './Piece.astro';
+import Ribbon from './Ribbon.astro';
+import Particles from './Particles.astro';
+import { spiral } from './palette';
+
+interface Props {
+  name: 'prologue' | 'acts' | 'minor' | 'journey' | 'repertoire' | 'ovations' | 'backstage' | 'finale';
+}
+
+const { name } = Astro.props;
+
+const fields: Record<Props['name'], { seed: number; count: number; colors?: string[]; center?: number }> = {
+  prologue: { seed: 101, count: 20 },
+  acts: { seed: 202, count: 120, center: 0.2 },
+  minor: { seed: 303, count: 18 },
+  journey: { seed: 404, count: 34, center: 0.18 },
+  repertoire: { seed: 505, count: 22, colors: ['#C9B8FF', '#FFFFFF', '#8FF0F0', '#F6E3A1'] },
+  ovations: { seed: 606, count: 32, colors: ['#F6E3A1', '#F6E3A1', '#FFFFFF', '#C9B8FF'] },
+  backstage: { seed: 707, count: 16, colors: ['#8FF0F0', '#9EC9FF', '#FFFFFF'] },
+  finale: { seed: 808, count: 16 },
+};
+
+const curl = 'M1250 640C1180 560 1240 465 1322 488C1404 510 1402 612 1340 622C1300 628 1284 590 1306 572';
+const loop = 'M1640 60C1400 120 1310 270 1160 270S900 190 830 310S990 530 1130 470';
+
+const swirl = spiral(1150, 120, 200, 34, 1.7, Math.PI * 0.9);
+const swirlInner = spiral(1150, 120, 150, 20, 1.35, Math.PI * 1.6);
+const constellation = [0, 5, 9, 14, 18, 23, 27].map((i) => swirl.pts[i]);
+---
+
+<div class="w-stage pointer-events-none absolute inset-0 -z-10" aria-hidden="true" data-stage>
+  {name === 'prologue' && (
+    <Piece wide={{ y: -560, h: 600, at: '100%' }} speed={0.08} depth={24} drift="c">
+      <Ribbon d="M1840 -520C1620 -500 1380 -420 1350 -300S1460 -120 1400 -40S1180 40 1120 30" p="thin" />
+      <g transform="translate(-1190 -1060)"><Ribbon d={curl} p="curl" /></g>
+    </Piece>
+  )}
+
+  {name === 'minor' && (
+    <Piece wide={{ y: 120, h: 900 }} speed={0.08} depth={24} drift="a">
+      <Ribbon d="M-300 300C-60 320 120 420 100 560S-60 760 -300 820" p="aqua" />
+      <Ribbon d="M1800 420C1560 420 1350 500 1360 640S1560 860 1800 880" p="lilac" k={0.8} />
+    </Piece>
+  )}
+
+  {name === 'journey' && (
+    <>
+      <Piece wide={{ y: 0, h: 2500 }} speed={0.12} depth={12} drift="a">
+        <Ribbon d="M-500 700C-200 760 80 900 60 1200S-120 1700 60 2000S-100 2400 -500 2500" p="deepViolet" />
+        <Ribbon d="M1940 300C1640 340 1380 600 1420 900S1560 1400 1420 1700S1500 2300 1940 2400" p="deepBlue" op={0.9} />
+      </Piece>
+      <Piece wide={{ y: 0, h: 2500 }} speed={0.05} depth={24} drift="b">
+        <Ribbon d="M-200 270C100 260 250 390 235 620S170 1020 250 1320S320 1820 230 2120S60 2420 -200 2500" p="aqua" />
+        <Ribbon d="M1700 320C1420 360 1190 520 1225 820S1385 1220 1300 1520S1150 1920 1250 2200S1500 2450 1700 2450" p="lavender" />
+        <g transform="translate(-1215 900)"><Ribbon d={curl} p="curl" /></g>
+        <g transform="translate(1060 1180) scale(0.45)"><Ribbon d={loop} p="lavender" k={1.4} /></g>
+        <Ribbon d="M-300 1650C-80 1640 90 1700 140 1800" p="cream" />
+      </Piece>
+    </>
+  )}
+
+  {name === 'repertoire' && (
+    <>
+      <Piece wide={{ y: -100, h: 700 }} speed={0.06} depth={24} drift="c">
+        <Ribbon d={swirl.d} p="curl" />
+        <Ribbon d={swirlInner.d} p="aqua" op={0.9} />
+        <path
+          d={`M${constellation.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join('L')}`}
+          fill="none"
+          stroke="#E4DAFF"
+          stroke-width="2"
+          stroke-dasharray="3 9"
+          stroke-linecap="round"
+          opacity="0.7"
+        />
+        {constellation.map(([x, y], i) => (
+          <use href="#w-star" x={x - 12} y={y - 9} width="24" height="24" style={`color:${i % 3 === 0 ? '#F6E3A1' : '#E4DAFF'}`} />
+        ))}
+        <Ribbon d="M-300 520C-80 500 80 560 90 640S10 760 -300 780" p="thin" />
+      </Piece>
+      <Piece wide={{ y: 500, h: 900 }} speed={0.12} depth={12} drift="a">
+        <Ribbon d="M1900 0C1600 40 1380 260 1420 480S1600 800 1900 880" p="deepViolet" />
+      </Piece>
+    </>
+  )}
+
+  {name === 'ovations' && (
+    <Piece wide={{ y: 200, h: 1600 }} speed={0.07} depth={24} drift="b">
+      <Ribbon d="M-300 100C-40 120 120 260 90 480S-80 780 60 1000S120 1300 -300 1400" p="lavender" />
+      <Ribbon d="M1800 260C1560 280 1360 400 1370 620S1480 960 1380 1180S1500 1500 1800 1520" p="cream" k={1.3} />
+      <g transform="translate(80 200)"><Ribbon d={curl} p="curl" /></g>
+    </Piece>
+  )}
+
+  {name === 'backstage' && (
+    <>
+      <Piece wide={{ y: 0, h: 1100 }} speed={0.12} depth={12} drift="a">
+        <Ribbon d="M-400 900C0 860 300 640 700 600S1300 380 1840 160" p="deepViolet" op={0.85} />
+      </Piece>
+      <Piece wide={{ y: 0, h: 1100 }} speed={0.05} depth={24} drift="c">
+        <Ribbon d="M1800 140C1560 160 1380 300 1390 500S1520 820 1800 860" p="aqua" />
+      </Piece>
+    </>
+  )}
+
+  {name === 'finale' && (
+    <>
+      <Piece wide={{ y: -620, h: 720, at: '100%' }} speed={0.04} depth={12} drift="a">
+        <Ribbon d="M-400 -560C-60 -520 360 -120 720 60" p="deepViolet" />
+        <Ribbon d="M1840 -580C1500 -540 1080 -120 720 60" p="deepBlue" />
+      </Piece>
+      <Piece wide={{ y: -620, h: 720, at: '100%' }} speed={0.02} depth={24} drift="b">
+        <Ribbon d="M-400 -420C-150 -400 120 -230 250 -140" p="lavender" />
+        <Ribbon d="M1840 -440C1600 -420 1330 -250 1190 -150" p="blue" />
+        <Ribbon d="M-400 -220C-200 -210 40 -110 170 -50" p="aqua" />
+        <Ribbon d="M1840 -230C1650 -220 1420 -130 1290 -70" p="cream" />
+      </Piece>
+    </>
+  )}
+
+  <Particles {...fields[name]} speed={name === 'acts' ? -0.02 : -0.05} />
+</div>

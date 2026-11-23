@@ -1,0 +1,303 @@
+---
+import type { Lang } from '../../i18n/ui';
+import { acts } from '../../data/content';
+import Act from './Act.astro';
+import StageDivider from './StageDivider.astro';
+import { accents, actStrings } from './strings';
+import Scene from '../stage/Scene.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = actStrings[lang];
+const sparklePath = 'M12 0C12.9 7.4 16.6 11.1 24 12C16.6 12.9 12.9 16.6 12 24C11.1 16.6 7.4 12.9 0 12C7.4 11.1 11.1 7.4 12 0Z';
+---
+
+<section id="proyectos" class="acts relative isolate overflow-x-clip text-ink" aria-labelledby="proyectos-titulo" data-acts>
+  <div class="acts-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+  <Scene name="acts" />
+
+  <div class="mx-auto w-full max-w-6xl px-4 pt-24 pb-28 sm:px-8 sm:pt-32 sm:pb-36">
+    <header class="intro relative mb-20 grid gap-10 sm:mb-28 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-end">
+      <div>
+        <p class="mb-4 inline-flex items-center gap-2 font-mono text-[0.7rem] font-semibold tracking-[0.22em] text-aqua sm:text-xs" data-reveal="intro">
+          <span class="inline-block h-2 w-2 rotate-45 rounded-[2px] bg-aqua shadow-[0_0_12px_#8FF0F0]" aria-hidden="true"></span>
+          {s.label}
+        </p>
+        <h2 id="proyectos-titulo" class="section-title font-display font-semibold text-cream" data-reveal="intro">{s.title}</h2>
+        <p class="mt-5 max-w-lg text-lg leading-relaxed text-ink/85" data-reveal="intro">{s.intro}</p>
+      </div>
+
+      <nav class="playbill relative rounded-[28px] px-5 pt-5 pb-4 sm:px-6" aria-label={s.playbill} data-reveal="intro">
+        <p class="mb-3 flex items-center justify-between font-mono text-[0.68rem] font-bold tracking-[0.25em] text-night-800 uppercase">
+          {s.playbill}
+          <svg class="h-4 w-4 text-cream-700" viewBox="0 0 24 24" aria-hidden="true"><path d={sparklePath} fill="currentColor" /></svg>
+        </p>
+        <ol class="flex flex-col">
+          {acts.map((a) => (
+            <li class="border-t-2 border-dashed border-night-800/15 first:border-t-0">
+              <a href={`#acto-${a.id}`} class="playbill-link group flex items-baseline gap-3 py-2">
+                <span class="w-16 shrink-0 font-mono text-[0.68rem] font-bold tracking-widest text-night-700 uppercase">{a.act[lang]}</span>
+                <span class="flex-1 font-display text-lg leading-tight font-semibold text-night-900 transition-colors group-hover:text-lavender-500">{a.name}</span>
+                <span class="h-2.5 w-2.5 shrink-0 self-center rounded-full" style={`background:${accents[a.id]?.deep}`} aria-hidden="true"></span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </header>
+
+    {acts.map((a, i) => (
+      <>
+        {i > 0 && <StageDivider next={a.act[lang]} accent={accents[a.id]?.accent ?? '#8FF0F0'} tone={accents[a.id]} flip={i % 2 === 1} />}
+        <Act lang={lang} act={a} flip={i % 2 === 1} />
+      </>
+    ))}
+  </div>
+</section>
+
+<style>
+  .acts-bg {
+    background:
+      radial-gradient(60% 40% at 85% 4%, rgb(110 91 216 / 0.22), transparent 70%),
+      radial-gradient(50% 30% at 5% 30%, rgb(111 168 255 / 0.12), transparent 70%),
+      radial-gradient(60% 30% at 95% 58%, rgb(143 240 240 / 0.08), transparent 70%),
+      radial-gradient(60% 30% at 0% 85%, rgb(155 140 255 / 0.12), transparent 70%);
+  }
+
+  .section-title {
+    font-size: clamp(3rem, 11vw, 7.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0.055em 0 #5B49C9, 0 0.11em 0 rgb(19 20 64 / 0.6);
+  }
+
+  .playbill {
+    background: #FBF6E6;
+    box-shadow: 0 7px 0 #C9A956, 0 18px 40px rgb(8 8 30 / 0.45);
+    transform: rotate(1.5deg);
+  }
+
+  .playbill::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 2px solid rgb(42 36 112 / 0.15);
+    border-radius: 22px;
+    pointer-events: none;
+  }
+
+  .playbill-link:focus-visible {
+    outline-color: var(--color-lavender-500);
+    border-radius: 10px;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+
+  const root = document.querySelector<HTMLElement>('[data-acts]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (root && !reduce) {
+    gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+    const all = <T extends Element = HTMLElement>(sel: string, scope: ParentNode = root) => Array.from(scope.querySelectorAll<T>(sel));
+
+    const reveals: Record<string, { from: gsap.TweenVars; stagger: number }> = {
+      intro: { from: { opacity: 0, y: 30 }, stagger: 0.1 },
+      header: { from: { opacity: 0, y: 40 }, stagger: 0.1 },
+      motif: { from: { opacity: 0, scale: 0.9, rotation: -2 }, stagger: 0.1 },
+      up: { from: { opacity: 0, y: 26 }, stagger: 0.08 },
+      pop: { from: { opacity: 0, y: 24, scale: 0.94 }, stagger: 0.08 },
+      chip: { from: { opacity: 0, y: 10 }, stagger: 0.025 },
+      frame: { from: { opacity: 0, y: 50, rotation: 6 }, stagger: 0.1 },
+      trophy: { from: { opacity: 0, scale: 0.5, y: 16 }, stagger: 0.12 },
+    };
+
+    Object.entries(reveals).forEach(([key, cfg]) => {
+      const els = all(`[data-reveal="${key}"]`);
+      if (!els.length) return;
+      gsap.set(els, cfg.from);
+      ScrollTrigger.batch(els, {
+        start: 'top 88%',
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            ...Object.fromEntries(Object.keys(cfg.from).map((k) => [k, k === 'opacity' || k === 'scale' ? 1 : 0])),
+            duration: key === 'trophy' ? 0.8 : 0.7,
+            ease: key === 'trophy' || key === 'pop' ? 'back.out(1.8)' : 'power3.out',
+            stagger: cfg.stagger,
+            delay: key === 'trophy' ? 0.35 : 0,
+            clearProps: 'transform',
+          }),
+      });
+    });
+
+    all('[data-count]').forEach((el) => {
+      const target = Number(el.dataset.count);
+      const decimals = Number(el.dataset.decimals) || 0;
+      const state = { v: 0 };
+      const render = () => {
+        el.textContent = state.v.toFixed(decimals);
+      };
+      render();
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 90%',
+        once: true,
+        onEnter: () => gsap.to(state, { v: target, duration: 1.4, ease: 'power2.out', onUpdate: render, delay: 0.15 }),
+      });
+    });
+
+    const watch = (el: Element, loops: gsap.core.Animation[]) => {
+      loops.forEach((l) => l.pause());
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top bottom',
+        end: 'bottom top',
+        onToggle: (self) => loops.forEach((l) => (self.isActive ? l.resume() : l.pause())),
+      });
+    };
+
+    const onEnterOnce = (el: Element, tl: gsap.core.Timeline) => {
+      tl.pause();
+      ScrollTrigger.create({ trigger: el, start: 'top 75%', once: true, onEnter: () => tl.play() });
+    };
+
+    const lumen = root.querySelector('[data-motif="lumen"]');
+    if (lumen) {
+      const bubbles = all<SVGGElement>('[data-l-bubble]', lumen);
+      const lines = all<SVGLineElement>('[data-l-line]', lumen);
+      const core = lumen.querySelector('[data-l-core]');
+      bubbles.forEach((b) => gsap.set(b, { x: Number(b.dataset.dx), y: Number(b.dataset.dy), opacity: 0.85 }));
+      lines.forEach((l) => gsap.set(l, { scale: 0, opacity: 0, svgOrigin: `${l.getAttribute('x1')} ${l.getAttribute('y1')}` }));
+      gsap.set(core, { scale: 0, opacity: 0, svgOrigin: '200 150' });
+      const tl = gsap.timeline();
+      tl.to(bubbles, { x: 0, y: 0, opacity: 1, duration: 1.5, ease: 'power2.inOut', stagger: 0.08 })
+        .to(lines, { scale: 1, opacity: 1, duration: 0.55, ease: 'power2.out', stagger: 0.06 }, 1.1)
+        .to(core, { scale: 1, opacity: 1, duration: 0.7, ease: 'back.out(2.4)' }, 1.5);
+      onEnterOnce(lumen, tl);
+      const loops: gsap.core.Animation[] = all('[data-l-float]', lumen).map((f, i) =>
+        gsap.to(f, { y: i % 2 ? 5 : -5, x: i % 3 ? 3 : -3, duration: 2.4 + i * 0.3, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
+      );
+      all('[data-l-sparks] path', lumen).forEach((p, i) => {
+        loops.push(gsap.fromTo(p, { opacity: 0.35 }, { opacity: 1, duration: 1.2 + i * 0.3, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+      });
+      watch(lumen, loops);
+    }
+
+    const terra = root.querySelector('[data-motif="terraorbis"]');
+    if (terra) {
+      const nodes = all<SVGGElement>('[data-t-node]', terra);
+      const ring = terra.querySelector('[data-t-ring]');
+      const tag = terra.querySelector('[data-t-tag]');
+      const eAll = nodes.map((n) => n.querySelector('[data-t-e]'));
+      const iAll = nodes.map((n) => n.querySelector('[data-t-i]'));
+      const maxD = Math.max(...nodes.map((n) => Number(n.dataset.dist)).filter(Number.isFinite));
+      const ringCircle = ring?.querySelector('circle');
+      const cx = ringCircle?.getAttribute('cx') ?? '0';
+      const cy = ringCircle?.getAttribute('cy') ?? '0';
+      const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.6 });
+      tl.set(eAll, { opacity: 0 })
+        .set(iAll, { opacity: 0 })
+        .set(ring, { opacity: 0, scale: 0.3, svgOrigin: `${cx} ${cy}` })
+        .set(tag, { opacity: 0, y: 6 });
+      const at = (d: number) => 0.4 + d * 0.55;
+      for (let d = 0; d <= Math.min(maxD, 3); d++) {
+        const group = nodes.filter((n) => Number(n.dataset.dist) === d);
+        const es = group.map((n) => n.querySelector('[data-t-e]'));
+        const is = group.map((n) => n.querySelector('[data-t-i]'));
+        if (d > 0) tl.to(es, { opacity: 1, duration: 0.3, stagger: 0.05 }, at(d));
+        if (d < 2) tl.to(is, { opacity: 1, duration: 0.3, stagger: 0.05 }, at(d) + 0.5);
+        tl.fromTo(group, { scale: 1 }, { scale: 1.12, duration: 0.18, yoyo: true, repeat: 1, transformOrigin: '50% 50%', stagger: 0.05 }, at(d));
+      }
+      tl.to(ring, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(2.2)' }, at(1) + 0.7)
+        .to(tag, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, at(1) + 0.9)
+        .to({}, { duration: 1.6 });
+      const loops: gsap.core.Animation[] = [tl];
+      loops.push(gsap.to(ring, { rotation: 360, svgOrigin: `${cx} ${cy}`, duration: 14, ease: 'none', repeat: -1 }));
+      all('[data-t-leaf]', terra).forEach((leaf, i) => {
+        loops.push(gsap.to(leaf, { rotation: i % 2 ? 10 : -10, y: i % 2 ? 4 : -4, transformOrigin: '0% 50%', duration: 2.4 + i * 0.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+      });
+      watch(terra, loops);
+    }
+
+    const centinel = root.querySelector('[data-motif="centinel"]');
+    if (centinel) {
+      const loops: gsap.core.Animation[] = [];
+      all('[data-c-bar]', centinel).forEach((bar) => {
+        loops.push(
+          gsap.fromTo(
+            bar,
+            { scaleY: gsap.utils.random(0.25, 0.5) },
+            { scaleY: gsap.utils.random(0.9, 1.15), transformOrigin: '50% 50%', duration: gsap.utils.random(0.25, 0.55), ease: 'sine.inOut', yoyo: true, repeat: -1 },
+          ),
+        );
+      });
+      const lamps = ['continue', 'verify', 'hang'];
+      const says = ['human', 'verify', 'ai'];
+      const cycle = gsap.timeline({ repeat: -1 });
+      lamps.forEach((k, i) => {
+        const t = i * 1.8;
+        lamps.forEach((o) => cycle.to(centinel.querySelector(`[data-c-lamp="${o}"]`), { opacity: o === k ? 1 : 0.12, duration: 0.25 }, t));
+        says.forEach((o, j) => cycle.to(centinel.querySelector(`[data-c-say="${o}"]`), { opacity: j === i ? 1 : 0, duration: 0.25 }, t));
+        cycle.fromTo(centinel.querySelector(`[data-c-lamp="${k}"]`), { scale: 0.85 }, { scale: 1, transformOrigin: '50% 50%', duration: 0.5, ease: 'back.out(3)' }, t);
+      });
+      cycle.to({}, { duration: 0.01 }, lamps.length * 1.8);
+      loops.push(cycle);
+      watch(centinel, loops);
+    }
+
+    const track = root.querySelector('[data-motif="trackmania"]');
+    if (track) {
+      const car = track.querySelector('[data-k-car]');
+      const path = track.querySelector<SVGPathElement>('#tm-path');
+      const loops: gsap.core.Animation[] = [];
+      if (car && path) {
+        gsap.set(car, { attr: { transform: '' } });
+        loops.push(
+          gsap.to(car, {
+            motionPath: { path, autoRotate: true },
+            duration: 4.2,
+            ease: 'power1.inOut',
+            repeat: -1,
+            repeatDelay: 0.9,
+          }),
+        );
+      }
+      watch(track, loops);
+    }
+
+    all('[data-chart]').forEach((chart) => {
+      const clip = chart.querySelector('[data-chart-clip]');
+      const pts = all('[data-chart-pt]', chart);
+      gsap.set(clip, { scaleX: 0, transformOrigin: '0% 50%' });
+      gsap.set(pts, { opacity: 0 });
+      const tl = gsap.timeline();
+      tl.to(clip, { scaleX: 1, duration: 1.4, ease: 'power2.inOut' }).to(pts, { opacity: 1, duration: 0.35, stagger: 0.07 }, 0.6);
+      onEnterOnce(chart, tl);
+    });
+
+    all('[data-duel]').forEach((duel) => {
+      const bars = all('[data-duel-bar]', duel);
+      gsap.set(bars, { scaleX: 0 });
+      const tl = gsap.timeline();
+      tl.to(bars, { scaleX: 1, duration: 1.6, ease: 'power1.inOut', stagger: 0.12 });
+      onEnterOnce(duel, tl);
+    });
+
+    all('[data-divider]').forEach((div) => {
+      const drapes = all('[data-drape]', div);
+      const label = div.querySelector('[data-divider-label]');
+      gsap.fromTo(drapes, { scaleX: 1 }, { scaleX: 0.3, ease: 'none', scrollTrigger: { trigger: div, start: 'top 85%', end: 'top 45%', scrub: 0.6 } });
+      gsap.fromTo(label, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, ease: 'none', scrollTrigger: { trigger: div, start: 'top 75%', end: 'top 50%', scrub: 0.6 } });
+    });
+
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
+</script>

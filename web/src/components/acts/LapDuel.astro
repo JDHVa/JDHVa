@@ -1,0 +1,101 @@
+---
+import type { ActStrings } from './strings';
+
+interface Props {
+  duel: { ai: number; human: number; aiLabel: string; humanLabel: string };
+  s: ActStrings;
+}
+
+const { duel, s } = Astro.props;
+const diff = Math.abs(duel.human - duel.ai).toFixed(2);
+const aiWins = duel.ai < duel.human;
+---
+
+<div class="duel relative flex flex-col overflow-hidden rounded-3xl p-5 pb-0 sm:p-6 sm:pb-0" data-reveal="up" data-duel>
+  <p class="mb-4 flex items-center gap-2 font-mono text-[0.7rem] font-semibold tracking-[0.2em] text-[color:var(--accent)] uppercase">
+    <span class="inline-block h-2 w-2 rotate-45 rounded-[2px] bg-[color:var(--accent)]" aria-hidden="true"></span>
+    {s.duelTitle} · {s.duelLap}
+  </p>
+  <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-5">
+    <div class:list={['lap flex flex-col items-center rounded-2xl px-3 py-4 text-center', aiWins && 'is-win']} data-duel-side="ai">
+      <span class="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-aqua/15" aria-hidden="true">
+        <svg class="h-6 w-6" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="11" rx="4" fill="none" stroke="#8FF0F0" stroke-width="2" /><circle cx="9.5" cy="12.5" r="1.6" fill="#8FF0F0" /><circle cx="14.5" cy="12.5" r="1.6" fill="#8FF0F0" /><path d="M12 7V4M10 4h4" stroke="#8FF0F0" stroke-width="2" stroke-linecap="round" /></svg>
+      </span>
+      <span class="font-mono text-xs tracking-widest text-lavender-200 uppercase">{s.duelAi}</span>
+      <span class="lap-time font-display font-semibold text-cream-100">{duel.aiLabel}</span>
+      {aiWins && <span class="mt-2 rounded-full bg-aqua px-2.5 py-0.5 font-mono text-[0.65rem] font-bold text-night-950">{s.duelDiff(diff)}</span>}
+    </div>
+    <span class="vs flex h-12 w-12 items-center justify-center rounded-full font-display text-lg font-bold text-night-950" aria-hidden="true">VS</span>
+    <div class:list={['lap flex flex-col items-center rounded-2xl px-3 py-4 text-center', !aiWins && 'is-win']} data-duel-side="me">
+      <span class="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-lavender-400/15" aria-hidden="true">
+        <svg class="h-6 w-6" viewBox="0 0 24 24"><circle cx="12" cy="9" r="4" fill="none" stroke="#C9B8FF" stroke-width="2" /><path d="M5 20c1.4-4 4-5.5 7-5.5s5.6 1.5 7 5.5" fill="none" stroke="#C9B8FF" stroke-width="2" stroke-linecap="round" /></svg>
+      </span>
+      <span class="font-mono text-xs tracking-widest text-lavender-200 uppercase">{s.duelMe}</span>
+      <span class="lap-time font-display font-semibold text-ink/80">{duel.humanLabel}</span>
+    </div>
+  </div>
+  <div class="track-bars mt-6 mb-6 flex flex-col gap-2 lg:mt-auto lg:pt-6" aria-hidden="true">
+    <div class="flex items-center gap-3">
+      <span class="w-8 font-mono text-[0.65rem] text-aqua">{s.duelAi}</span>
+      <span class="bar-rail relative h-3 flex-1 overflow-hidden rounded-full"><span class="bar bar-ai absolute inset-y-0 left-0 rounded-full" style={`width:${(duel.ai / Math.max(duel.ai, duel.human)) * 100}%`} data-duel-bar></span></span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="w-8 font-mono text-[0.65rem] text-lavender-200">{s.duelMe}</span>
+      <span class="bar-rail relative h-3 flex-1 overflow-hidden rounded-full"><span class="bar bar-me absolute inset-y-0 left-0 rounded-full" style={`width:${(duel.human / Math.max(duel.ai, duel.human)) * 100}%`} data-duel-bar></span></span>
+    </div>
+  </div>
+  <span class="checker -mx-5 block h-5 sm:-mx-6" aria-hidden="true"></span>
+</div>
+
+<style>
+  .duel {
+    background:
+      repeating-linear-gradient(45deg, rgb(255 255 255 / 0.025) 0 14px, transparent 14px 28px),
+      linear-gradient(150deg, #2A2470, #131440);
+    border: 2px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: 0 6px 0 color-mix(in srgb, var(--accent-deep) 45%, #131440), 0 18px 34px rgb(8 8 30 / 0.4);
+  }
+
+  .checker {
+    background: conic-gradient(#E9ECFF 25%, #131440 0 50%, #E9ECFF 0 75%, #131440 0) 0 0 / 20px 20px;
+    opacity: 0.85;
+  }
+
+  .lap {
+    background: rgb(19 20 64 / 0.7);
+    border: 2px solid rgb(201 184 255 / 0.2);
+  }
+
+  .lap.is-win {
+    border-color: rgb(143 240 240 / 0.6);
+    box-shadow: 0 0 24px rgb(143 240 240 / 0.18);
+  }
+
+  .lap-time {
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vs {
+    background: var(--color-cream);
+    box-shadow: 0 4px 0 var(--color-cream-700);
+    transform: rotate(-8deg);
+  }
+
+  .bar-rail {
+    background: rgb(201 184 255 / 0.12);
+  }
+
+  .bar {
+    transform-origin: left center;
+  }
+
+  .bar-ai {
+    background: linear-gradient(90deg, #5FD6DE, #8FF0F0);
+  }
+
+  .bar-me {
+    background: linear-gradient(90deg, #8574EE, #C9B8FF);
+  }
+</style>

@@ -1,0 +1,132 @@
+---
+import Piece from './Piece.astro';
+import Ribbon from './Ribbon.astro';
+
+interface Props {
+  name: 'prologue-acts' | 'acts-minor' | 'minor-journey' | 'journey-repertoire' | 'repertoire-ovations' | 'ovations-backstage' | 'backstage-finale';
+}
+
+const { name } = Astro.props;
+const wide = { y: -400, h: 800 };
+const curl = 'M1250 640C1180 560 1240 465 1322 488C1404 510 1402 612 1340 622C1300 628 1284 590 1306 572';
+
+type Mark = [number, number, number, string];
+const sparks: Record<Props['name'], Mark[]> = {
+  'prologue-acts': [[1330, -210, 22, '#F6E3A1'], [96, 170, 16, '#8FF0F0'], [1010, 60, 12, '#FFFFFF']],
+  'acts-minor': [[160, -190, 18, '#C9B8FF'], [1290, 150, 24, '#F6E3A1'], [560, -60, 12, '#FFFFFF']],
+  'minor-journey': [[1320, -170, 20, '#8FF0F0'], [520, 70, 12, '#F6E3A1'], [60, -140, 16, '#FFFFFF']],
+  'journey-repertoire': [[1340, 180, 18, '#C9B8FF'], [130, -200, 22, '#F6E3A1'], [760, -70, 12, '#8FF0F0']],
+  'repertoire-ovations': [[440, 64, 14, '#F6E3A1'], [960, -56, 16, '#FFFFFF'], [1340, -200, 24, '#F6E3A1'], [90, 200, 18, '#C9B8FF']],
+  'ovations-backstage': [[1300, 190, 18, '#8FF0F0'], [140, -210, 16, '#C9B8FF']],
+  'backstage-finale': [[720, -70, 22, '#F6E3A1'], [180, 190, 14, '#FFFFFF'], [1260, -190, 18, '#8FF0F0']],
+};
+
+const stars: Record<Props['name'], [number, number, number][]> = {
+  'prologue-acts': [[230, -230, 0.8]],
+  'acts-minor': [[1350, -230, 0.9]],
+  'minor-journey': [],
+  'journey-repertoire': [[420, -64, 0.6], [980, 70, 0.7], [1330, -150, 0.9], [640, 58, 0.5]],
+  'repertoire-ovations': [[700, 70, 0.6]],
+  'ovations-backstage': [[1100, -60, 0.6]],
+  'backstage-finale': [],
+};
+---
+
+<div class="w-bridge relative -z-[1] h-0" aria-hidden="true">
+  {name === 'prologue-acts' && (
+    <>
+      <Piece wide={wide} speed={0.16} depth={12} drift="a" stage>
+        <Ribbon d="M-400 300C-160 280 40 70 300 40S700 90 980 60S1380 -20 1840 -260" p="deepViolet" op={0.9} />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="b" stage>
+        <Ribbon d="M-400 260C-100 240 60 30 260 20S600 -50 800 -30S1100 50 1300 20S1500 -250 1840 -320" p="aqua" />
+        <Ribbon d="M-400 -330C-150 -300 0 -40 200 -10S520 30 720 0S1000 -40 1200 0S1420 220 1840 300" p="blue" />
+        <Ribbon d="M-300 -200C-60 -160 60 50 260 45S520 -10 640 -30" p="cream" />
+        <g fill="#FFFFFF" opacity="0.65"><ellipse cx="900" cy="-26" rx="10" ry="6" transform="rotate(-8 900 -26)" /></g>
+      </Piece>
+    </>
+  )}
+
+  {name === 'acts-minor' && (
+    <>
+      <Piece wide={wide} speed={0.14} depth={12} drift="c" stage>
+        <Ribbon d="M-400 -300C-120 -280 80 -40 340 -30S760 30 1040 10S1500 -120 1840 -330" p="steel" op={0.9} />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="b" stage>
+        <Ribbon d="M-400 300C-120 280 40 -20 260 -20S640 40 860 10S1200 -60 1340 -120S1600 -380 1840 -360" p="lavender" />
+        <Ribbon d="M-400 -60C-100 -80 80 40 330 30S760 -40 980 -20S1260 60 1500 200S1700 380 1840 400" p="cream" />
+        <g transform="translate(30 -500)"><Ribbon d={curl} p="curl" /></g>
+      </Piece>
+    </>
+  )}
+
+  {name === 'minor-journey' && (
+    <>
+      <Piece wide={wide} speed={0.15} depth={12} drift="a" stage>
+        <Ribbon d="M-400 330C-140 300 60 40 320 20S760 -40 1060 -10S1460 200 1840 260" p="deepBlue" op={0.85} />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="c" stage>
+        <Ribbon d="M-400 120C-160 100 0 -30 280 -30S700 40 940 30S1250 -40 1460 40S1700 300 1840 330" p="thin" />
+        <Ribbon d="M-400 -280C-140 -260 20 10 240 0S600 -50 820 -20S1180 50 1400 0S1640 -300 1840 -330" p="aqua" />
+        <g transform="translate(-1215 -430)"><Ribbon d={curl} p="curl" /></g>
+      </Piece>
+    </>
+  )}
+
+  {name === 'journey-repertoire' && (
+    <>
+      <Piece wide={wide} speed={0.14} depth={12} drift="a" stage>
+        <Ribbon d="M-400 -300C-100 -280 100 0 360 0S800 -20 1080 0S1400 260 1840 300" p="deepViolet" />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="b" stage>
+        <Ribbon d="M-400 220C-100 200 60 -10 300 -15S720 40 960 25S1300 -60 1500 -200S1700 -380 1840 -400" p="lavender" />
+        <path d="M420 -64L640 58L980 70L1330 -150" fill="none" stroke="#C9B8FF" stroke-width="2" stroke-dasharray="4 10" stroke-linecap="round" opacity="0.6" />
+      </Piece>
+    </>
+  )}
+
+  {name === 'repertoire-ovations' && (
+    <>
+      <Piece wide={wide} speed={0.14} depth={12} drift="c" stage>
+        <Ribbon d="M-400 300C-120 280 60 30 300 20S760 -30 1000 -10S1440 220 1840 280" p="deepBlue" op={0.85} />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="b" stage>
+        <Ribbon d="M-400 -300C-150 -280 20 -40 180 -30C330 -20 380 50 540 50C700 50 740 -30 900 -30C1060 -30 1100 50 1260 40C1420 30 1600 -300 1840 -320" p="lavender" />
+        <Ribbon d="M-400 -150C-150 -140 40 60 200 50C360 40 400 -40 560 -40C720 -40 760 50 920 50C1080 50 1120 -30 1280 -30C1440 -30 1620 200 1840 240" p="cream" />
+      </Piece>
+    </>
+  )}
+
+  {name === 'ovations-backstage' && (
+    <>
+      <Piece wide={wide} speed={0.14} depth={12} drift="a" stage>
+        <Ribbon d="M-400 280C-100 260 120 10 400 0S900 -20 1200 0S1600 -300 1840 -320" p="steel" />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="c" stage>
+        <Ribbon d="M-400 -200C-160 -180 0 30 240 30S660 -30 880 -20S1200 40 1380 10S1640 260 1840 300" p="aqua" />
+        <Ribbon d="M-400 60C-200 50 -40 -20 120 -20S260 30 330 40" p="thin" />
+      </Piece>
+    </>
+  )}
+
+  {name === 'backstage-finale' && (
+    <>
+      <Piece wide={wide} speed={0.14} depth={12} drift="a" stage>
+        <Ribbon d="M-400 -320C-100 -300 120 -20 400 -10S900 30 1120 10S1500 -200 1840 -260" p="deepViolet" op={0.9} />
+      </Piece>
+      <Piece wide={wide} speed={0.06} depth={24} drift="b" stage>
+        <Ribbon d="M-400 -320C-160 -300 60 -40 300 -10S600 40 690 40" p="blue" />
+        <Ribbon d="M1840 -300C1600 -290 1380 -40 1140 -10S840 40 750 40" p="lavender" />
+      </Piece>
+    </>
+  )}
+
+  <Piece wide={wide} speed={-0.04} depth={44} stage>
+    {stars[name].map(([x, y, k]) => (
+      <use href="#w-star" x={x - 21 * k} y={y - 15 * k} width={42 * k} height={42 * k} style="color:#E4DAFF" opacity="0.85" />
+    ))}
+    {sparks[name].map(([x, y, s, c]) => (
+      <use class="w-glow" href="#w-spark" x={x - s / 2} y={y - s / 2} width={s} height={s} style={`color:${c}`} />
+    ))}
+  </Piece>
+</div>

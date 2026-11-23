@@ -1,0 +1,31 @@
+---
+interface Props {
+  class?: string;
+  style?: string;
+  speed?: number;
+  depth?: number;
+  drift?: 'a' | 'b' | 'c';
+  viewBox?: string;
+  fit?: string;
+  stage?: boolean;
+  wide?: { y: number; h: number; at?: string };
+}
+
+const { class: cls, speed = 0.1, depth = 16, drift, fit = 'xMidYMid meet', stage = false, wide } = Astro.props;
+const viewBox = wide ? `0 ${wide.y} 1440 ${wide.h}` : Astro.props.viewBox;
+const style = wide
+  ? `left:calc(50% - var(--s) * 720px);width:calc(var(--s) * 1440px);top:calc(${wide.at ?? '0px'} + var(--s) * ${wide.y}px);height:calc(var(--s) * ${wide.h}px)`
+  : Astro.props.style;
+---
+
+<div class:list={['w-piece pointer-events-none absolute', cls]} style={style} data-speed={speed} data-stage={stage ? '' : undefined} aria-hidden="true">
+  <div class="w-par h-full w-full">
+    <div class="w-mouse h-full w-full" data-depth={depth}>
+      <div class:list={['w-drift h-full w-full', drift && `w-drift-${drift}`]}>
+        <svg class="block h-full w-full overflow-visible" viewBox={viewBox} preserveAspectRatio={fit}>
+          <slot />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>

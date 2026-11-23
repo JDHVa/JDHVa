@@ -1,0 +1,411 @@
+---
+import Ribbon from './Ribbon.astro';
+import { sparklePath, starPath, vwave } from './palette';
+
+const H = 19200;
+
+const seg = (x: number, amp: number, step: number, seed: number, spans: [number, number][], side: number) =>
+  spans.map(([y0, y1], i) => vwave({ x, amp, step, y0, y1, seed: seed + i * 7, enter: side, exit: side }));
+
+const leftBack = [
+  { p: 'steel', d: vwave({ x: 230, amp: 110, step: 2300, y0: -400, y1: H + 400, seed: 37, wander: 40 }) },
+  { p: 'deepViolet', d: vwave({ x: 400, amp: 140, step: 1800, y0: -400, y1: H + 400, seed: 23, wander: 60 }) },
+  { p: 'deepBlue', d: vwave({ x: 560, amp: 80, step: 1400, y0: -400, y1: H + 400, seed: 11, wander: 30 }) },
+];
+
+const rightBack = [
+  { p: 'deepViolet', d: vwave({ x: 600, amp: 110, step: 2500, y0: -400, y1: H + 400, seed: 61, wander: 50 }) },
+  { p: 'deepBlue', d: vwave({ x: 420, amp: 130, step: 2000, y0: -400, y1: H + 400, seed: 53, wander: 40 }) },
+  { p: 'steel', d: vwave({ x: 250, amp: 90, step: 1500, y0: -400, y1: H + 400, seed: 41, wander: 30 }) },
+];
+
+const leftFront = [
+  ...seg(620, 50, 800, 301, [[3000, 5200], [10200, 12600], [16000, 17600]], 380).map((d) => ({ p: 'cream', d })),
+  { p: 'blue', d: vwave({ x: 520, amp: 70, step: 1500, y0: -300, y1: H + 300, seed: 71, wander: 30 }) },
+  ...seg(600, 60, 1100, 401, [[1500, 4800], [8200, 11800], [15000, 18600]], 250).map((d) => ({ p: 'lavender', d })),
+  ...seg(470, 110, 900, 501, [[300, 2600], [5600, 8300], [12200, 14800], [17000, 19400]], 250).map((d) => ({ p: 'aqua', d })),
+];
+
+const rightFront = [
+  ...seg(120, 60, 1000, 601, [[6000, 9000], [14200, 16800]], 420).map((d) => ({ p: 'thin', d })),
+  { p: 'lavender', d: vwave({ x: 270, amp: 70, step: 1300, y0: -300, y1: H + 300, seed: 83, wander: 35 }) },
+  ...seg(200, 70, 1500, 701, [[2600, 6400], [9800, 13400], [15800, 19400]], 560).map((d) => ({ p: 'blue', d })),
+  ...seg(330, 100, 900, 801, [[4800, 7200], [11800, 14400], [17800, 19400]], 560).map((d) => ({ p: 'aqua', d })),
+  ...seg(180, 50, 800, 901, [[1000, 3000], [7400, 9600], [13600, 15600]], 450).map((d) => ({ p: 'cream', d })),
+];
+
+const rb3 = 'M-260 1520C60 1460 441 1307 560 1120C700 900 980 860 1100 700S1320 420 1560 470';
+const rf1 = 'M-140 770C160 640 380 870 660 770S1020 520 1220 500S1480 600 1620 520';
+const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370 700 1520 770';
+---
+
+<div class="world-wrap relative isolate overflow-clip" data-world>
+  <div class="world pointer-events-none absolute inset-0 -z-20" aria-hidden="true">
+    <svg class="absolute h-0 w-0" focusable="false">
+      <defs>
+        <symbol id="w-spark" viewBox="0 0 24 24"><path d={sparklePath} fill="currentColor" /></symbol>
+        <symbol id="w-star" viewBox="-21 -15 42 42"><path d={starPath} fill="currentColor" /></symbol>
+      </defs>
+    </svg>
+
+    <div class="world-sky absolute inset-0"></div>
+
+    <div class="w-band absolute inset-x-0 top-0 h-full" data-band data-speed="0.07">
+      <div class="w-mouse h-full w-full" data-depth="10">
+        <div class="w-drift w-drift-a h-full w-full">
+          <svg class="band band-l" viewBox={`0 0 800 ${H}`} preserveAspectRatio="none">
+            {leftBack.map((r) => <Ribbon d={r.d} p={r.p} ns axis="x" />)}
+          </svg>
+          <svg class="band band-r" viewBox={`0 0 800 ${H}`} preserveAspectRatio="none">
+            {rightBack.map((r) => <Ribbon d={r.d} p={r.p} ns axis="x" />)}
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-seam absolute" data-seam>
+      <div class="w-seam-layer absolute inset-0" data-seam-depth="10">
+        <div class="h-full w-full" data-seam-drift="back">
+          <svg class="h-full w-full overflow-visible" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+            <Ribbon d={rb3} p="steel" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-band absolute inset-x-0 top-0 h-full" data-band data-speed="0.03">
+      <div class="w-mouse h-full w-full" data-depth="24">
+        <div class="w-drift w-drift-b h-full w-full">
+          <svg class="band band-l band-front" viewBox={`0 0 800 ${H}`} preserveAspectRatio="none">
+            {leftFront.map((r) => <Ribbon d={r.d} p={r.p} ns axis="x" />)}
+          </svg>
+          <svg class="band band-r band-front" viewBox={`0 0 800 ${H}`} preserveAspectRatio="none">
+            {rightFront.map((r) => <Ribbon d={r.d} p={r.p} ns axis="x" />)}
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-seam absolute" data-seam>
+      <div class="w-seam-layer absolute inset-0" data-seam-depth="24">
+        <div class="h-full w-full" data-seam-drift="front">
+          <svg class="h-full w-full overflow-visible" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+            <Ribbon d={rf5} p="lilac" />
+            <Ribbon d={rf1} p="blue" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="world-seam-shade absolute inset-x-0 top-0"></div>
+  </div>
+
+  <slot />
+</div>
+
+<style is:global>
+  :root {
+    --s: 1;
+  }
+
+  @media (max-width: 1023px) {
+    :root {
+      --s: 0.7;
+    }
+  }
+
+  @media (max-width: 640px) {
+    :root {
+      --s: 0.45;
+    }
+  }
+
+  .w-glow {
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+
+  .world-sky {
+    background:
+      radial-gradient(40% 6% at 88% 9%, rgb(110 91 216 / 0.2), transparent 70%),
+      radial-gradient(45% 5% at 6% 24%, rgb(111 168 255 / 0.14), transparent 70%),
+      radial-gradient(50% 5% at 92% 41%, rgb(143 240 240 / 0.08), transparent 70%),
+      radial-gradient(55% 6% at 10% 60%, rgb(155 140 255 / 0.16), transparent 70%),
+      radial-gradient(50% 5% at 86% 76%, rgb(111 168 255 / 0.12), transparent 70%),
+      radial-gradient(60% 6% at 50% 97%, rgb(110 91 216 / 0.22), transparent 70%),
+      linear-gradient(180deg, #17183F 0%, #1B1D4F 5%, #1D1F56 30%, #221F5E 52%, #251F62 62%, #1E2160 74%, #18215A 86%, #141848 100%);
+  }
+
+  .world-seam-shade {
+    height: 300px;
+    background: linear-gradient(180deg, rgb(21 22 63 / 0.55) 0%, rgb(21 22 63 / 0.3) 35%, rgb(21 22 63 / 0) 100%);
+  }
+
+  .w-seam {
+    left: -7%;
+    width: 114%;
+    top: calc(var(--hero-h, 100svh) * -1.07);
+    height: calc(var(--hero-h, 100svh) * 1.14);
+  }
+
+  .w-band {
+    will-change: transform;
+  }
+
+  .band {
+    --k: 1;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 800px;
+    overflow: visible;
+  }
+
+  .band-l {
+    left: max(calc(50% - 1216px), -520px);
+  }
+
+  .band-r {
+    left: min(calc(50% + 416px), calc(100% - 280px));
+  }
+
+  @media (max-width: 1023px) {
+    .band {
+      --k: 0.7;
+      width: 560px;
+    }
+
+    .band-l {
+      left: -380px;
+    }
+
+    .band-r {
+      left: calc(100% - 180px);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .band {
+      --k: 0.5;
+      width: 400px;
+    }
+
+    .band-l {
+      left: -290px;
+    }
+
+    .band-r {
+      left: calc(100% - 110px);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .w-drift-a {
+      animation: w-drift-a 14s ease-in-out infinite alternate;
+    }
+
+    .w-drift-b {
+      animation: w-drift-b 11s ease-in-out infinite alternate;
+    }
+
+    .w-drift-c {
+      animation: w-drift-c 17s ease-in-out infinite alternate;
+    }
+
+    .js [data-stage]:not(.is-live) .w-drift {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes w-drift-a {
+    from { translate: 0 0; rotate: 0deg; }
+    to { translate: 24px -14px; rotate: 0.8deg; }
+  }
+
+  @keyframes w-drift-b {
+    from { translate: 0 0; rotate: 0deg; scale: 1; }
+    to { translate: -30px 16px; rotate: -1deg; scale: 1.02; }
+  }
+
+  @keyframes w-drift-c {
+    from { translate: 0 0; rotate: 0deg; }
+    to { translate: 16px 12px; rotate: -0.6deg; }
+  }
+
+  .w-band .w-drift-a,
+  .w-band .w-drift-b {
+    animation-name: w-drift-band;
+  }
+
+  @keyframes w-drift-band {
+    from { translate: 0 0; }
+    to { translate: 18px 10px; }
+  }
+
+  .w-scrim {
+    position: relative;
+  }
+
+  .w-scrim::before {
+    content: '';
+    position: absolute;
+    inset: -40px -70px;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(21 22 63 / 0.78), rgb(21 22 63 / 0.5) 55%, rgb(21 22 63 / 0));
+  }
+
+  .w-scrim-l::before {
+    right: auto;
+    width: min(820px, calc(100% + 140px));
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const world = document.querySelector<HTMLElement>('[data-world]');
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+
+  if (world) {
+    const setHero = () => {
+      if (hero) world.style.setProperty('--hero-h', `${hero.offsetHeight}px`);
+    };
+    setHero();
+    window.addEventListener('resize', setHero, { passive: true });
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stages = Array.from(document.querySelectorAll<HTMLElement>('[data-stage]'));
+    const live = new Set<HTMLElement>();
+    const mice = new Map<HTMLElement, HTMLElement[]>();
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            const el = e.target as HTMLElement;
+            el.classList.toggle('is-live', e.isIntersecting);
+            if (e.isIntersecting) live.add(el);
+            else live.delete(el);
+          });
+        },
+        { rootMargin: '20% 0px' },
+      );
+      stages.forEach((s) => io.observe(s));
+    } else {
+      stages.forEach((s) => {
+        s.classList.add('is-live');
+        live.add(s);
+      });
+    }
+
+    if (!reduce) {
+      world.querySelectorAll<HTMLElement>('[data-band]').forEach((band) => {
+        const f = Number(band.dataset.speed) || 0;
+        gsap.to(band, {
+          y: () => f * Math.max(0, world.offsetHeight - window.innerHeight),
+          ease: 'none',
+          scrollTrigger: { trigger: world, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true },
+        });
+      });
+
+      world.querySelectorAll<HTMLElement>('[data-speed]:not([data-band])').forEach((el) => {
+        const f = Number(el.dataset.speed) || 0;
+        const par = el.querySelector<HTMLElement>('.w-par');
+        if (!par || !f) return;
+        const span = () => (f * (el.offsetHeight + window.innerHeight)) / 2;
+        gsap.fromTo(
+          par,
+          { y: () => -span() },
+          {
+            y: () => span(),
+            ease: 'none',
+            scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
+          },
+        );
+      });
+
+      const seamLayers = Array.from(world.querySelectorAll<HTMLElement>('[data-seam-depth]'));
+      const seamLoops: gsap.core.Animation[] = [];
+      const back = world.querySelector('[data-seam-drift="back"]');
+      const front = world.querySelector('[data-seam-drift="front"]');
+      seamLoops.push(
+        gsap.to(back, { x: 24, y: -14, rotation: 0.8, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
+        gsap.to(front, { x: -30, y: 16, rotation: -1, scale: 1.02, duration: 11, ease: 'sine.inOut', yoyo: true, repeat: -1 }),
+      );
+      gsap.fromTo(seamLayers, { scale: 1.08 }, { scale: 1, duration: 1.5, ease: 'power2.out', delay: 0.25 });
+
+      if (hero && 'IntersectionObserver' in window) {
+        new IntersectionObserver(([entry]) => {
+          seamLoops.forEach((a) => (entry.isIntersecting ? a.resume() : a.pause()));
+        }).observe(hero);
+      }
+
+      if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 1024px)').matches) {
+        type Mover = { d: number; x: (v: number) => void; y: (v: number) => void };
+        const movers = new WeakMap<HTMLElement, Mover>();
+        const mover = (el: HTMLElement): Mover => {
+          let m = movers.get(el);
+          if (!m) {
+            m = {
+              d: Number(el.dataset.depth ?? el.dataset.seamDepth) || 0,
+              x: gsap.quickTo(el, 'x', { duration: 1.2, ease: 'power3.out' }),
+              y: gsap.quickTo(el, 'y', { duration: 1.2, ease: 'power3.out' }),
+            };
+            movers.set(el, m);
+          }
+          return m;
+        };
+
+        const bandMice = Array.from(world.querySelectorAll<HTMLElement>('[data-band] .w-mouse'));
+        const miceOf = (s: HTMLElement) => {
+          let list = mice.get(s);
+          if (!list) {
+            list = s.matches('.w-mouse') ? [s] : Array.from(s.querySelectorAll<HTMLElement>('.w-mouse'));
+            mice.set(s, list);
+          }
+          return list;
+        };
+
+        let nx = 0;
+        let ny = 0;
+        let queued = false;
+        const apply = () => {
+          queued = false;
+          const move = (el: HTMLElement) => {
+            const m = mover(el);
+            m.x(-nx * m.d);
+            m.y(-ny * m.d);
+          };
+          bandMice.forEach(move);
+          live.forEach((s) => miceOf(s).forEach(move));
+        };
+
+        window.addEventListener(
+          'pointermove',
+          (e) => {
+            nx = e.clientX / window.innerWidth - 0.5;
+            ny = e.clientY / window.innerHeight - 0.5;
+            if (!queued) {
+              queued = true;
+              requestAnimationFrame(apply);
+            }
+          },
+          { passive: true },
+        );
+
+        hero?.addEventListener('pointermove', (e) => {
+          const hx = e.clientX / window.innerWidth - 0.5;
+          const hy = e.clientY / window.innerHeight - 0.5;
+          seamLayers.forEach((el) => {
+            const m = mover(el);
+            m.x(-hx * m.d);
+            m.y(-hy * m.d);
+          });
+        });
+      }
+    }
+  }
+</script>

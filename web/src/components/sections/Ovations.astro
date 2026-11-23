@@ -1,0 +1,284 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Lang } from '../../i18n/ui';
+import { achievements } from '../../data/content';
+import { st } from '../../data/sections';
+import SectionHead from './SectionHead.astro';
+import Scene from '../stage/Scene.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = st(lang).ovations;
+
+const top = import.meta.glob<ImageMetadata>('/src/assets/logros/*.{jpeg,jpg,png}', { eager: true, import: 'default' });
+const sec = import.meta.glob<ImageMetadata>('/src/assets/logros/secundaria/*.{jpeg,jpg,png}', { eager: true, import: 'default' });
+const prep = import.meta.glob<ImageMetadata>('/src/assets/logros/prepa/*.{jpeg,jpg,png}', { eager: true, import: 'default' });
+
+const find = (p: string) => top[`/src/assets/${p}`];
+const sabado = top['/src/assets/logros/sabadodeciencia-p1.jpg'];
+
+const fits: Record<string, string> = {
+  'logros/haven-jesus.png': 'object-contain',
+  'logros/clubesdeciencia.jpeg': 'object-cover object-top',
+  'logros/ironlion.jpeg': 'object-cover object-[50%_25%]',
+  'logros/finalista-fisica.jpeg': 'object-cover',
+  'logros/hackmty3.jpeg': 'object-cover',
+};
+
+const medal = 'M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8 6.2 19.9l1.1-6.5L2.6 8.8l6.5-.9L12 2Z';
+
+const featured = achievements
+  .filter((a) => a.featured)
+  .map((a) => {
+    let img = a.image ? find(a.image) : undefined;
+    const fit = a.image ? fits[a.image] ?? 'object-cover' : 'object-contain';
+    if (!img && /Sábado/.test(a.title.es)) img = sabado;
+    return { a, img, fit };
+  });
+
+const rest = achievements.filter((a) => !a.featured);
+
+const names: [RegExp, string][] = [
+  [/oratoria/, 'Oratoria'],
+  [/excelencia/, 'Excelencia'],
+  [/hubble/, 'Hubble'],
+  [/tecmilenio/, 'Tecmilenio'],
+];
+
+const build = async (glob: Record<string, ImageMetadata>) => {
+  const entries = Object.entries(glob).sort(([a], [b]) => a.localeCompare(b));
+  let n = 0;
+  return Promise.all(
+    entries.map(async ([path, src]) => {
+      const base = path.split('/').pop()!.toLowerCase();
+      const known = names.find(([re]) => re.test(base));
+      const alt = known ? known[1] : `${t.certificate} ${++n}`;
+      const full = await getImage({ src, width: 1600 });
+      return { src, alt, full: full.src };
+    }),
+  );
+};
+
+const groups = [
+  { title: t.secondary, items: await build(sec) },
+  { title: t.prep, items: await build(prep) },
+];
+---
+
+<section id="logros" class="relative isolate overflow-hidden py-20 sm:py-28" aria-labelledby="logros-title" data-ovations data-close={t.close}>
+  <Scene name="ovations" />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-8">
+    <SectionHead id="logros-title" label={t.label} title={t.title} />
+
+    <ul class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
+      {featured.map(({ a, img, fit }, i) => (
+        <li class:list={['stage-card award flex flex-col overflow-hidden', i === 0 && 'lg:col-span-2', !img && 'sm:col-span-2 lg:col-span-2']} data-reveal>
+          {img ? (
+            <div class:list={['relative w-full overflow-hidden border-b-2 border-lavender-200/30', fit === 'object-contain' ? 'bg-lavender-100 p-3' : 'bg-night-800', i === 0 ? 'aspect-[16/10] lg:aspect-[16/8]' : 'aspect-[4/3]']}>
+              <Image
+                src={img}
+                alt=""
+                widths={[480, 800, 1200]}
+                sizes={i === 0 ? '(min-width: 1024px) 760px, 100vw' : '(min-width: 1024px) 380px, 100vw'}
+                class:list={['h-full w-full', fit]}
+                loading="lazy"
+              />
+            </div>
+          ) : (
+            <div class="medal-bg relative flex h-full min-h-40 items-center gap-5 p-6 sm:p-8">
+              <span class="medal flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-cream text-night-900 sm:h-24 sm:w-24" aria-hidden="true">
+                <svg class="h-10 w-10 sm:h-12 sm:w-12" viewBox="0 0 24 24"><path d={medal} fill="currentColor" /></svg>
+              </span>
+              <div class="flex flex-col gap-1">
+                <h3 class="font-display text-2xl font-semibold text-cream sm:text-3xl">{a.title[lang]}</h3>
+                {a.detail && <p class="font-mono text-xs font-semibold tracking-[0.14em] text-aqua uppercase">{a.detail[lang]}</p>}
+              </div>
+            </div>
+          )}
+          {img && (
+            <div class="flex flex-col justify-center gap-1 p-5 sm:p-6">
+              <h3 class:list={['font-display font-semibold text-cream', i === 0 ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl']}>{a.title[lang]}</h3>
+              {a.detail && <p class="font-mono text-xs font-semibold tracking-[0.14em] text-aqua uppercase">{a.detail[lang]}</p>}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-12 sm:mt-16" data-reveal>
+      <h3 class="mb-4 font-mono text-xs font-semibold tracking-[0.2em] text-aqua uppercase">{t.also}</h3>
+      <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {rest.map((a) => (
+          <li class="flex items-center gap-4 rounded-2xl border-2 border-lavender-200/30 bg-night-950/70 px-4 py-3">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-lavender-400/20 text-lavender-200" aria-hidden="true">
+              <svg class="h-5 w-5" viewBox="0 0 24 24"><path d={medal} fill="currentColor" /></svg>
+            </span>
+            <div>
+              <p class="font-display text-base font-semibold text-cream-100 sm:text-lg">{a.title[lang]}</p>
+              {a.detail && <p class="font-mono text-[0.65rem] font-semibold tracking-[0.12em] text-aqua uppercase">{a.detail[lang]}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <details class="more mt-12 sm:mt-16" data-reveal>
+      <summary class="pill-btn inline-flex cursor-pointer list-none items-center gap-2 rounded-full bg-cream px-6 py-3 font-display text-lg font-semibold text-night-900">
+        {t.more}
+        <span class="chev inline-block" aria-hidden="true">↓</span>
+      </summary>
+      <div class="mt-8 flex flex-col gap-10">
+        {groups.map((g) => (
+          <div>
+            <h3 class="mb-4 font-display text-xl font-semibold text-lavender-200 sm:text-2xl">{g.title}</h3>
+            <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+              {g.items.map((it) => (
+                <li>
+                  <button type="button" class="thumb block w-full overflow-hidden rounded-2xl border-2 border-lavender-200/30 bg-night-950" data-full={it.full} data-alt={it.alt} aria-label={`${t.open}: ${it.alt}`}>
+                    <Image src={it.src} alt={it.alt} widths={[240, 400]} sizes="(min-width: 1024px) 280px, 45vw" class="aspect-[16/8] w-full object-cover" loading="lazy" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </details>
+  </div>
+
+  <dialog class="lightbox" aria-label={t.certificate} data-dialog>
+    <form method="dialog" class="flex flex-col gap-3">
+      <img class="lb-img" alt="" data-lb-img />
+      <div class="flex items-center justify-between gap-3">
+        <button type="button" class="lb-btn" data-prev aria-label={t.prev}>←</button>
+        <p class="font-mono text-xs font-semibold tracking-widest text-lavender-100 uppercase" data-lb-cap></p>
+        <button type="button" class="lb-btn" data-next aria-label={t.next}>→</button>
+      </div>
+      <button class="lb-close" aria-label={t.close}>×</button>
+    </form>
+  </dialog>
+</section>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .medal-bg {
+    background: linear-gradient(135deg, rgb(58 37 133 / 0.7), rgb(19 20 64 / 0.4));
+  }
+
+  .medal {
+    box-shadow: 0 5px 0 #C9A956, 0 0 30px rgb(246 227 161 / 0.35);
+  }
+
+  .more[open] .chev {
+    transform: rotate(180deg);
+  }
+
+  .chev {
+    transition: transform 0.3s ease;
+  }
+
+  .thumb {
+    cursor: zoom-in;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .thumb:hover {
+    transform: translateY(-3px) rotate(-1deg);
+    border-color: var(--color-aqua);
+  }
+
+  .lightbox {
+    margin: auto;
+    width: min(96vw, 64rem);
+    max-height: 94svh;
+    padding: 1rem;
+    border: 2px solid rgb(201 184 255 / 0.5);
+    border-radius: 28px;
+    background: var(--color-night-950);
+    color: var(--color-ink);
+    box-shadow: 0 10px 0 rgb(91 73 201 / 0.6), 0 30px 80px rgb(0 0 0 / 0.6);
+  }
+
+  .lightbox::backdrop {
+    background: rgb(8 8 30 / 0.82);
+  }
+
+  .lb-img {
+    width: 100%;
+    max-height: calc(94svh - 8rem);
+    object-fit: contain;
+    border-radius: 16px;
+  }
+
+  .lb-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    border: 2px solid rgb(201 184 255 / 0.5);
+    font-size: 1.25rem;
+    color: var(--color-cream);
+    cursor: pointer;
+  }
+
+  .lb-btn:hover {
+    background: rgb(201 184 255 / 0.18);
+  }
+
+  .lb-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: var(--color-cream);
+    color: var(--color-night-900);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  import { reveal } from './reveal';
+
+  document.querySelectorAll<HTMLElement>('[data-ovations]').forEach((root) => {
+    reveal(root);
+    const dialog = root.querySelector<HTMLDialogElement>('[data-dialog]')!;
+    const img = dialog.querySelector<HTMLImageElement>('[data-lb-img]')!;
+    const cap = dialog.querySelector<HTMLElement>('[data-lb-cap]')!;
+    const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('.thumb'));
+    let index = 0;
+
+    const show = (i: number) => {
+      index = (i + thumbs.length) % thumbs.length;
+      const b = thumbs[index];
+      img.src = b.dataset.full ?? '';
+      img.alt = b.dataset.alt ?? '';
+      cap.textContent = b.dataset.alt ?? '';
+    };
+
+    thumbs.forEach((b, i) =>
+      b.addEventListener('click', () => {
+        show(i);
+        dialog.showModal();
+      }),
+    );
+    dialog.querySelector('[data-prev]')?.addEventListener('click', () => show(index - 1));
+    dialog.querySelector('[data-next]')?.addEventListener('click', () => show(index + 1));
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'ArrowRight') show(index + 1);
+    });
+  });
+</script>

@@ -1,0 +1,197 @@
+---
+import type { Lang } from '../../i18n/ui';
+import { email, socials } from '../../data/content';
+import { st, sparklePath } from '../../data/sections';
+import SectionHead from './SectionHead.astro';
+import Scene from '../stage/Scene.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = st(lang).finale;
+
+const icons: Record<string, string> = {
+  GitHub: 'M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.1-1.46-1.1-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z',
+  LinkedIn: 'M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75ZM9.5 9.75h3.8v1.54h.05c.53-1 1.82-2.04 3.75-2.04 4 0 4.75 2.63 4.75 6.05V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.69V21h-4V9.75Z',
+  'Hugging Face': 'M12 3.5c-4.7 0-8.5 3.8-8.5 8.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S16.7 3.5 12 3.5Zm-3 6.2a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Zm6 0a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 18c-2.1 0-3.7-1.3-4.2-3h8.4c-.5 1.7-2.1 3-4.2 3Z',
+  Instagram: 'M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 2A2.5 2.5 0 0 0 5 7.5v9A2.5 2.5 0 0 0 7.5 19h9a2.5 2.5 0 0 0 2.5-2.5v-9A2.5 2.5 0 0 0 16.5 5h-9ZM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5-3.2a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z',
+};
+---
+
+<section id="contacto" class="finale relative isolate overflow-hidden pt-24 pb-10 sm:pt-32" aria-labelledby="contacto-title" data-finale data-copied={t.copied} data-copy={t.copy}>
+  <Scene name="finale" />
+
+  <div class="curtains pointer-events-none absolute inset-0 -z-[5]" aria-hidden="true">
+    <div class="valance"></div>
+    <div class="curtain curtain-l" data-curtain="l"><span class="trim"></span></div>
+    <div class="curtain curtain-r" data-curtain="r"><span class="trim"></span></div>
+  </div>
+
+  <div class="mx-auto w-full max-w-4xl px-6 sm:px-10">
+    <SectionHead id="contacto-title" label={t.label} title={t.title} align="center" />
+
+    <p class="mx-auto -mt-4 mb-10 max-w-xl text-center text-lg text-lavender-100 sm:text-xl" data-reveal>{t.lead}</p>
+
+    <div class="flex flex-col items-center gap-5" data-reveal>
+      <a
+        href={`mailto:${email}`}
+        class="mail break-all text-center font-display text-2xl font-semibold text-cream underline decoration-lavender-400 decoration-4 underline-offset-8 hover:decoration-aqua sm:text-4xl lg:text-5xl"
+        aria-label={`${t.write}: ${email}`}
+      >{email}</a>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <a href={`mailto:${email}`} class="pill-btn inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 font-display text-lg font-semibold text-night-900">
+          {t.write}
+        </a>
+        <button type="button" class="copy-btn inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-aqua/60 bg-aqua/10 px-5 py-2.5 font-display text-lg font-semibold text-aqua hover:bg-aqua/20" data-copy-btn data-email={email}>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2.2" /><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" /></svg>
+          <span data-copy-label>{t.copy}</span>
+        </button>
+        <span class="inline-flex items-center gap-2 rounded-full border-2 border-dashed border-lavender-200/40 px-4 py-2 font-mono text-xs font-semibold tracking-widest text-lavender-200/70 uppercase" aria-disabled="true">{t.cv}</span>
+      </div>
+      <p class="sr-only" role="status" data-copy-status></p>
+    </div>
+
+    <ul class="mt-12 flex flex-wrap items-center justify-center gap-4" aria-label={t.socials} data-reveal>
+      {socials.map((s) => (
+        <li>
+          <a href={s.href} target="_blank" rel="noopener" class="social group flex items-center gap-2 rounded-full border-2 border-lavender-200/40 bg-night-900/70 px-4 py-2.5 font-medium text-lavender-100 hover:border-cream hover:text-cream">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><path d={icons[s.name]} fill="currentColor" /></svg>
+            {s.name}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <footer class="mt-20 flex flex-col items-center gap-3 border-t-2 border-lavender-200/15 pt-6 text-center text-sm text-lavender-200/80">
+      <p>{t.footer}</p>
+      <button type="button" class="egg relative cursor-pointer font-mono text-[0.65rem] tracking-[0.3em] text-lavender-200/45 uppercase hover:text-cream" data-egg>
+        <svg class="mr-1 inline-block h-2.5 w-2.5" viewBox="0 0 24 24" aria-hidden="true"><path d={sparklePath} fill="currentColor" /></svg>{t.egg}
+      </button>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .curtain {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    background:
+      repeating-linear-gradient(90deg, rgb(0 0 0 / 0.22) 0 8px, transparent 8px 22px),
+      linear-gradient(180deg, var(--color-curtain-700), var(--color-curtain-800) 50%, var(--color-curtain-900));
+    opacity: 0.85;
+  }
+
+  .curtain-l {
+    left: 0;
+    transform-origin: left center;
+    border-radius: 0 0 90px 0;
+  }
+
+  .curtain-r {
+    right: 0;
+    transform-origin: right center;
+    border-radius: 0 0 0 90px;
+  }
+
+  .trim {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 10px;
+    background: var(--color-cream-700);
+  }
+
+  .valance {
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 46px;
+    background:
+      radial-gradient(circle at 20px 0, var(--color-curtain-700) 0 28px, transparent 29px) 0 0 / 40px 46px repeat-x,
+      var(--color-curtain-900);
+    border-bottom: 4px solid var(--color-cream-700);
+    opacity: 0.9;
+  }
+
+  .looking {
+    border-color: rgb(246 227 161 / 0.6);
+    box-shadow: 0 8px 0 #C9A956, 0 18px 40px rgb(8 8 30 / 0.45), 0 0 50px rgb(246 227 161 / 0.1);
+  }
+
+  .mail {
+    text-shadow: 0 0.06em 0 #5B49C9;
+  }
+
+  @media (max-width: 639px) {
+    .curtain {
+      width: 7%;
+    }
+  }
+</style>
+
+<script>
+  import { gsap, reveal, reduceMotion, ScrollTrigger } from './reveal';
+
+  document.querySelectorAll<HTMLElement>('[data-finale]').forEach((root) => {
+    reveal(root);
+
+    if (!reduceMotion()) {
+      gsap.fromTo(
+        root.querySelector('[data-curtain="l"]'),
+        { scaleX: 0.35 },
+        { scaleX: 1, ease: 'none', scrollTrigger: { trigger: root, start: 'top 80%', end: 'top 20%', scrub: 0.6 } },
+      );
+      gsap.fromTo(
+        root.querySelector('[data-curtain="r"]'),
+        { scaleX: 0.35 },
+        { scaleX: 1, ease: 'none', scrollTrigger: { trigger: root, start: 'top 80%', end: 'top 20%', scrub: 0.6 } },
+      );
+    }
+
+    const btn = root.querySelector<HTMLButtonElement>('[data-copy-btn]')!;
+    const label = root.querySelector<HTMLElement>('[data-copy-label]')!;
+    const status = root.querySelector<HTMLElement>('[data-copy-status]')!;
+    let timer = 0;
+    btn.addEventListener('click', async () => {
+      const value = btn.dataset.email ?? '';
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = value;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      }
+      label.textContent = root.dataset.copied ?? '';
+      status.textContent = root.dataset.copied ?? '';
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        label.textContent = root.dataset.copy ?? '';
+      }, 1800);
+    });
+
+    const egg = root.querySelector<HTMLButtonElement>('[data-egg]')!;
+    const colors = ['#F6E3A1', '#8FF0F0', '#C9B8FF', '#FFFFFF'];
+    egg.addEventListener('click', () => {
+      if (reduceMotion()) return;
+      for (let i = 0; i < 10; i++) {
+        const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        s.setAttribute('viewBox', '0 0 24 24');
+        s.setAttribute('aria-hidden', 'true');
+        s.style.cssText = `position:absolute;left:50%;top:50%;width:${10 + Math.random() * 12}px;height:${10 + Math.random() * 12}px;color:${colors[i % 4]};pointer-events:none`;
+        s.innerHTML = '<path d="M12 0C12.9 7.4 16.6 11.1 24 12C16.6 12.9 12.9 16.6 12 24C11.1 16.6 7.4 12.9 0 12C7.4 11.1 11.1 7.4 12 0Z" fill="currentColor"/>';
+        egg.appendChild(s);
+        gsap.fromTo(
+          s,
+          { x: 0, y: 0, scale: 0, opacity: 1 },
+          { x: gsap.utils.random(-70, 70), y: gsap.utils.random(-80, -10), scale: 1, rotate: gsap.utils.random(-90, 90), opacity: 0, duration: 1.1, ease: 'power2.out', onComplete: () => s.remove() },
+        );
+      }
+    });
+    ScrollTrigger.refresh();
+  });
+</script>

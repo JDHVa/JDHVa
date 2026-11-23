@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-950: #131440;
+  --color-night-900: #1B1D4F;
+  --color-night-800: #2A2470;
+  --color-night-700: #3A3192;
+  --color-water-400: #6FA8FF;
+  --color-water-200: #9EC9FF;
+  --color-water-100: #CFE4FF;
+  --color-lavender-500: #6E5BD8;
+  --color-lavender-400: #9B8CFF;
+  --color-lavender-200: #C9B8FF;
+  --color-lavender-100: #E4DAFF;
+  --color-aqua: #8FF0F0;
+  --color-aqua-100: #CBFBFB;
+  --color-cream: #F6E3A1;
+  --color-cream-100: #FBF1CF;
+  --color-cream-700: #C9A956;
+  --color-curtain-900: #2B1B66;
+  --color-curtain-800: #3A2585;
+  --color-curtain-700: #4A3299;
+  --color-ink: #E9ECFF;
+  --color-leaf: #8EE6A8;
+  --color-leaf-700: #3E9E6A;
+  --color-coral: #FF7FA8;
+  --color-signal-red: #FF5C6C;
+  --color-human: #A98BFF;
+
+  --font-display: "Fredoka Variable", ui-rounded, "Segoe UI", system-ui, sans-serif;
+  --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+  --font-serif: "Fraunces Variable", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-quote: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+
+  --animate-bob: bob 1.8s ease-in-out infinite;
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--color-night-900);
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-night-900);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-lavender-400);
+    color: var(--color-night-950);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-aqua);
+    outline-offset: 3px;
+  }
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1.6 -0.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+}

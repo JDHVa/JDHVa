@@ -1,0 +1,62 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  title: string;
+  align?: 'left' | 'center';
+}
+
+const { id, label, title, align = 'left' } = Astro.props;
+---
+
+<header class:list={['w-scrim mb-10 sm:mb-14', align === 'center' ? 'text-center' : 'w-scrim-l']}>
+  <p
+    class:list={[
+      'mb-3 inline-flex items-center gap-2 font-mono text-[0.7rem] font-semibold tracking-[0.22em] text-aqua sm:text-xs',
+    ]}
+    data-reveal
+  >
+    <span class="inline-block h-2 w-2 rotate-45 rounded-[2px] bg-aqua shadow-[0_0_12px_#8FF0F0]" aria-hidden="true"></span>
+    {label}
+  </p>
+  <h2 id={id} class="sec-title font-display text-4xl font-semibold text-cream sm:text-5xl lg:text-6xl" data-reveal>
+    {title}
+  </h2>
+</header>
+
+<style is:global>
+  .sec-title {
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0.055em 0 #5B49C9, 0 0.11em 0 rgb(19 20 64 / 0.6);
+  }
+
+  .stage-card {
+    border: 2px solid rgb(201 184 255 / 0.3);
+    background: rgb(19 20 64 / 0.7);
+    border-radius: 28px;
+    box-shadow: 0 8px 0 rgb(91 73 201 / 0.55), 0 18px 40px rgb(8 8 30 / 0.45);
+  }
+
+  .pill-btn {
+    box-shadow: 0 5px 0 #C9A956, 0 10px 24px rgb(0 0 0 / 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pill-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #C9A956, 0 14px 28px rgb(0 0 0 / 0.3);
+  }
+
+  .pill-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 #C9A956, 0 6px 14px rgb(0 0 0 / 0.25);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+  }
+</style>

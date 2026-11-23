@@ -1,0 +1,378 @@
+---
+import { Image } from 'astro:assets';
+import type { Lang } from '../../i18n/ui';
+import type { Act } from '../../data/content';
+import lumenLogo from '../../assets/evidencias/lumen-logo-light.png';
+import ActMotif from './ActMotif.astro';
+import SolutionBlock from './SolutionBlock.astro';
+import MetricGrid from './MetricGrid.astro';
+import MediaGallery from './MediaGallery.astro';
+import PsnrChart from './PsnrChart.astro';
+import LapDuel from './LapDuel.astro';
+import { accents, actStrings, psnrSeries, lapDuel } from './strings';
+import AccentRibbons from '../stage/AccentRibbons.astro';
+
+interface Props {
+  lang: Lang;
+  act: Act;
+  flip?: boolean;
+}
+
+const { lang, act, flip = false } = Astro.props;
+const s = actStrings[lang];
+const a = accents[act.id] ?? accents.trackmania;
+const headingId = `acto-${act.id}-titulo`;
+const actLabel = act.act[lang];
+const numeral = actLabel.split(' ').slice(-1)[0];
+const actWord = actLabel.split(' ').slice(0, -1).join(' ');
+
+const psnr = psnrSeries(act);
+const duel = act.media.length === 0 ? lapDuel(act) : null;
+const cardGroups = act.metrics.filter((g) => !(psnr && g.title === psnr.title));
+const trophy = act.metrics.flatMap((g) => g.items).find((m) => /^Top \d+$/.test(m.value));
+
+const contextText = act.context?.[lang].replace(/\s*\p{Extended_Pictographic}\uFE0F?/gu, '').trim();
+const externalLinks = (act.links ?? []).filter((l) => /^https?:/.test(l.href));
+const internalLinks = (act.links ?? []).filter((l) => !/^https?:/.test(l.href));
+const repoPrimary = externalLinks.length === 0;
+
+const localHref = (href: string) => (href.startsWith('/') && lang !== 'es' ? `/${lang}${href}` : href);
+---
+
+<article
+  id={`acto-${act.id}`}
+  class="act relative scroll-mt-8"
+  style={`--accent:${a.accent};--accent-soft:${a.soft};--accent-deep:${a.deep}`}
+  aria-labelledby={headingId}
+  data-act={act.id}
+>
+  <AccentRibbons tone={a} kind="act" flip={flip} />
+  <header class:list={['act-header relative grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-14', act.repo && 'has-link']}>
+    <div class="flex flex-col gap-4" data-reveal="header">
+      <p class="act-label flex items-end gap-3 leading-none" aria-hidden="true">
+        <span class="font-mono text-xs font-semibold tracking-[0.3em] text-[color:var(--accent)] uppercase sm:text-sm">{actWord}</span>
+        <span class="numeral font-display font-bold">{numeral}</span>
+      </p>
+
+      <div class="flex items-center gap-4">
+        {act.id === 'lumen' && (
+          <span class="logo-badge relative shrink-0 overflow-hidden rounded-[22px]">
+            <Image src={lumenLogo} alt="" widths={[96, 160, 240]} sizes="80px" class="h-full w-full object-contain p-2" loading="lazy" />
+          </span>
+        )}
+        <h3 id={headingId} class="act-name font-display font-semibold text-cream">
+          <span class="sr-only">{actLabel}: </span>
+          {act.repo ? (
+            <a href={act.repo} target="_blank" rel="noopener noreferrer" class="act-link">
+              {act.name}
+              <span class="link-arrow" aria-hidden="true">↗</span>
+              <span class="sr-only">, {s.openRepo} {s.newTab}</span>
+            </a>
+          ) : (
+            act.name
+          )}
+        </h3>
+      </div>
+
+      <p class="max-w-xl font-serif text-xl leading-snug text-ink/90 italic sm:text-2xl">{act.tagline[lang]}</p>
+
+      <ul class="flex flex-wrap items-center gap-2">
+        <li class="chip-role rounded-full border-2 px-3 py-1 font-mono text-xs font-semibold tracking-wide">
+          <span class="sr-only">{s.role}: </span>{act.role[lang]}
+        </li>
+        {contextText && (
+          <li class="rounded-full border-2 border-lavender-200/40 bg-lavender-400/10 px-3 py-1 font-mono text-xs font-semibold tracking-wide text-lavender-100">
+            {contextText}
+          </li>
+        )}
+      </ul>
+
+      {act.awards && act.awards.length > 0 && (
+        <ul class="flex flex-wrap gap-3">
+          {act.awards.map((aw, ai) => (
+            <li class="award relative inline-flex items-center gap-2.5 rounded-2xl py-2 pr-4 pl-2" style={`--tilt:${ai % 2 ? 1.5 : -2}deg`} data-reveal="trophy">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-night-950/20" aria-hidden="true">
+                <svg class="h-8 w-8" viewBox="0 0 32 32">
+                  <path d="M9 27C4 23 3 15 6 9M23 27C28 23 29 15 26 9" fill="none" stroke="#3E9E6A" stroke-width="2" stroke-linecap="round" />
+                  <path d="M6 12c-2-1-3-3-2-5 2 0 3 2 2 5ZM5.2 17c-2.2-.4-3.6-2.2-3-4.3 2 .2 3.3 2 3 4.3ZM6.2 22c-2.2.2-4-1.2-4-3.4 2-.3 3.6 1.2 4 3.4ZM26 12c2-1 3-3 2-5-2 0-3 2-2 5ZM26.8 17c2.2-.4 3.6-2.2 3-4.3-2 .2-3.3 2-3 4.3ZM25.8 22c2.2.2 4-1.2 4-3.4-2-.3-3.6 1.2-4 3.4Z" fill="#3E9E6A" />
+                  <path d="M12.5 4h7l-1.5 6h-4z" fill="#FF7FA8" stroke="#2A2470" stroke-width="1.6" stroke-linejoin="round" />
+                  <circle cx="16" cy="17" r="6.5" fill="#F6E3A1" stroke="#2A2470" stroke-width="2" />
+                  <path d="M16 13.6l1 2.1 2.3.3-1.7 1.6.4 2.3-2-1.1-2 1.1.4-2.3-1.7-1.6 2.3-.3z" fill="#C9A956" />
+                </svg>
+              </span>
+              <span class="max-w-[15rem] font-display text-[0.95rem] leading-tight font-semibold text-night-950">{aw[lang]}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {trophy && (
+        <div class="trophy relative inline-flex w-fit items-center gap-3 rounded-2xl py-2 pr-5 pl-2" data-reveal="trophy">
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-night-950/25" aria-hidden="true">
+            <svg class="h-8 w-8" viewBox="0 0 32 32">
+              <path d="M9 5h14v6a7 7 0 0 1-14 0z" fill="#FBF1CF" stroke="#2A2470" stroke-width="2.2" stroke-linejoin="round" />
+              <path d="M9 7H5v2a5 5 0 0 0 5 5M23 7h4v2a5 5 0 0 1-5 5" fill="none" stroke="#2A2470" stroke-width="2.2" stroke-linecap="round" />
+              <path d="M16 18v4M11 27h10M13 22h6v5h-6z" fill="#C9A956" stroke="#2A2470" stroke-width="2.2" stroke-linejoin="round" />
+              <path d="M13.5 8.5l1.2 2.4 2.6.3-1.9 1.8.5 2.6-2.4-1.3" fill="#C9A956" />
+            </svg>
+          </span>
+          <span class="flex flex-col leading-tight">
+            <span class="font-display text-2xl font-bold text-night-950">{trophy.value}</span>
+            <span class="font-mono text-[0.7rem] font-bold tracking-widest text-night-800 uppercase">{trophy.label[lang]}</span>
+          </span>
+        </div>
+      )}
+    </div>
+
+    <div class="relative" data-reveal="motif">
+      <ActMotif id={act.id} s={s} />
+    </div>
+  </header>
+
+  <div class="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-12">
+    <section class="lg:col-span-5" aria-labelledby={`${headingId}-p`}>
+      <h4 id={`${headingId}-p`} class="sub-h mb-4">{s.problem}</h4>
+      <div class="flex flex-col gap-3.5">
+        {act.problem.map((p, i) => (
+          <p class:list={['leading-relaxed', i === 0 ? 'text-lg text-ink sm:text-xl' : 'text-base text-ink/85']} data-reveal="up">{p[lang]}</p>
+        ))}
+      </div>
+    </section>
+    <section class="lg:col-span-7" aria-labelledby={`${headingId}-s`}>
+      <h4 id={`${headingId}-s`} class="sub-h mb-4">{s.solution}</h4>
+      <SolutionBlock lang={lang} groups={act.solution} s={s} />
+    </section>
+  </div>
+
+  <div class="mt-12 flex flex-col gap-10 lg:mt-14">
+    {cardGroups.map((g, gi) => (
+      <section aria-labelledby={`${headingId}-m${gi}`}>
+        <h4 id={`${headingId}-m${gi}`} class="sub-h mb-4">{g.title[lang]}</h4>
+        <MetricGrid lang={lang} items={g.items} />
+        {g.disclaimer && (
+          <aside class="disclaimer mt-5 flex gap-3 rounded-2xl px-4 py-3.5 sm:px-5" data-reveal="up">
+            <svg class="mt-0.5 h-5 w-5 shrink-0" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="#C9B8FF" stroke-width="2" /><path d="M12 11v6M12 7.2v.1" stroke="#C9B8FF" stroke-width="2.4" stroke-linecap="round" /></svg>
+            <p class="text-sm leading-relaxed text-lavender-100">
+              <strong class="mr-1.5 font-mono text-[0.7rem] font-bold tracking-[0.2em] text-lavender-200 uppercase">{s.note}</strong>
+              {g.disclaimer[lang]}
+            </p>
+          </aside>
+        )}
+      </section>
+    ))}
+
+    {(psnr || duel) && (
+      <div class:list={['grid gap-6', psnr && duel && 'lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]']}>
+        {duel && <LapDuel duel={duel} s={s} />}
+        {psnr && <PsnrChart lang={lang} title={psnr.title} points={psnr.points} s={s} />}
+      </div>
+    )}
+  </div>
+
+  <div class="mt-10">
+    <h4 class="sr-only">{s.stack}</h4>
+    <ul class="flex flex-wrap gap-2">
+      {act.stack.map((tech) => (
+        <li class="stack-chip rounded-full px-3 py-1 font-mono text-xs font-medium text-ink/90" data-reveal="chip">{tech}</li>
+      ))}
+    </ul>
+  </div>
+
+  {act.media.length > 0 && (
+    <section class="mt-10" aria-labelledby={`${headingId}-media`}>
+      <h4 id={`${headingId}-media`} class="sub-h mb-1">{s.media}</h4>
+      <MediaGallery lang={lang} name={act.name} media={act.media} s={s} />
+    </section>
+  )}
+
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    {externalLinks.map((l) => (
+      <a href={l.href} target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-display text-base font-semibold text-night-900">
+        {l.label[lang]}
+        <span aria-hidden="true">↗</span>
+        <span class="sr-only">{s.newTab}</span>
+      </a>
+    ))}
+    {act.repo && (
+      <a href={act.repo} target="_blank" rel="noopener noreferrer" class:list={['inline-flex items-center gap-2 rounded-full px-5 font-display text-base font-semibold', repoPrimary ? 'btn-primary py-2.5 text-night-900' : 'btn-ghost py-2']}>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" /></svg>
+        {s.github}
+        <span class="sr-only">{s.newTab}</span>
+      </a>
+    )}
+    {act.repoPrivate && (
+      <span class="inline-flex cursor-not-allowed items-center gap-2 rounded-full border-2 border-dashed border-lavender-200/40 px-4 py-2 font-mono text-xs font-semibold tracking-wide text-lavender-200" aria-disabled="true">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+        {s.privateRepo}
+      </span>
+    )}
+    {internalLinks.map((l) => (
+      <a href={localHref(l.href)} class="btn-ghost inline-flex items-center gap-2 rounded-full px-5 py-2 font-display text-base font-semibold">
+        {l.label[lang]}
+        <span aria-hidden="true">→</span>
+      </a>
+    ))}
+  </div>
+</article>
+
+<style>
+  .numeral {
+    font-size: clamp(3.6rem, 9vw, 6.5rem);
+    color: var(--accent);
+    text-shadow: 0 0.06em 0 var(--accent-deep), 0 0.12em 0 rgb(19 20 64 / 0.6);
+    line-height: 0.8;
+  }
+
+  .act-name {
+    font-size: clamp(2.2rem, 6.4vw, 4.4rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-shadow: 0 0.06em 0 color-mix(in srgb, var(--accent-deep) 85%, #131440), 0 0.12em 0 rgb(19 20 64 / 0.6);
+  }
+
+  .act-link {
+    transition: color 0.2s ease;
+  }
+
+  .act-link::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    z-index: 3;
+    border-radius: 36px;
+  }
+
+  .act-link:focus-visible {
+    outline: none;
+  }
+
+  .act-link:focus-visible::after {
+    outline: 3px solid var(--color-aqua);
+    outline-offset: 2px;
+  }
+
+  .link-arrow {
+    display: inline-block;
+    margin-left: 0.15em;
+    font-size: 0.5em;
+    vertical-align: 0.6em;
+    color: var(--accent);
+    transition: transform 0.25s ease;
+  }
+
+  .act-header.has-link {
+    cursor: pointer;
+  }
+
+  .act-header.has-link:hover .act-link {
+    color: var(--accent-soft);
+  }
+
+  .act-header.has-link:hover .link-arrow {
+    transform: translate(3px, -3px);
+  }
+
+  .logo-badge {
+    width: clamp(56px, 9vw, 80px);
+    aspect-ratio: 1;
+    background: rgb(27 29 79 / 0.7);
+    border: 3px solid var(--accent);
+    box-shadow: 0 5px 0 var(--accent-deep);
+    transform: rotate(-6deg);
+  }
+
+  .chip-role {
+    border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent-soft);
+  }
+
+  .trophy {
+    background: linear-gradient(135deg, #FBF1CF, #F6E3A1 55%, #E9CD78);
+    box-shadow: 0 5px 0 #C9A956, 0 12px 26px rgb(8 8 30 / 0.4);
+    transform: rotate(-2deg);
+  }
+
+  .award {
+    background: linear-gradient(135deg, #E6F8EC, #CFF5DA 55%, #A9E7BD);
+    box-shadow: 0 5px 0 #3E9E6A, 0 12px 26px rgb(8 8 30 / 0.4);
+    transform: rotate(var(--tilt));
+  }
+
+  .sub-h {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .sub-h::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  .sub-h::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    max-width: 10rem;
+    border-radius: 2px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 50%, transparent), transparent);
+  }
+
+  .disclaimer {
+    background: repeating-linear-gradient(-45deg, rgb(201 184 255 / 0.06) 0 10px, transparent 10px 20px), rgb(19 20 64 / 0.6);
+    border: 2px dashed rgb(201 184 255 / 0.45);
+  }
+
+  .stack-chip {
+    background: rgb(19 20 64 / 0.6);
+    border: 1.5px solid color-mix(in srgb, var(--accent) 30%, rgb(201 184 255 / 0.2));
+  }
+
+  .btn-primary {
+    background: var(--color-cream);
+    box-shadow: 0 5px 0 var(--color-cream-700), 0 10px 24px rgb(0 0 0 / 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 var(--color-cream-700), 0 14px 28px rgb(0 0 0 / 0.3);
+  }
+
+  .btn-primary:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 var(--color-cream-700), 0 6px 14px rgb(0 0 0 / 0.25);
+  }
+
+  .btn-ghost {
+    color: var(--accent-soft);
+    border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn-ghost:hover {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary,
+    .btn-ghost,
+    .link-arrow {
+      transition: none;
+    }
+  }
+</style>
