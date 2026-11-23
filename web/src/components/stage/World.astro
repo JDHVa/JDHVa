@@ -55,7 +55,7 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
 
     <div class="world-sky absolute inset-0"></div>
 
-    <div class="w-band absolute inset-x-0 top-0 h-full" data-band data-speed="0.07">
+    <div class="w-band w-lane absolute inset-x-0 top-0 h-full" data-band data-speed="0.07">
       <div class="w-mouse h-full w-full" data-depth="10">
         <div class="h-full w-full">
           <svg class="band band-l" viewBox={`0 0 800 ${H}`} preserveAspectRatio="none">
@@ -68,7 +68,7 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
       </div>
     </div>
 
-    <div class="w-seam absolute" data-seam>
+    <div class="w-seam-mask absolute inset-x-0"><div class="w-seam absolute" data-seam>
       <div class="w-seam-layer absolute inset-0" data-seam-depth="10">
         <div class="h-full w-full" data-seam-drift="back">
           <svg class="h-full w-full overflow-visible" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
@@ -76,9 +76,9 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
           </svg>
         </div>
       </div>
-    </div>
+    </div></div>
 
-    <div class="w-band absolute inset-x-0 top-0 h-full" data-band data-speed="0.03">
+    <div class="w-band w-lane absolute inset-x-0 top-0 h-full" data-band data-speed="0.03">
       <div class="w-mouse h-full w-full" data-depth="24">
         <div class="h-full w-full">
           <svg class="band band-l band-front" viewBox={`0 0 800 ${H}`} preserveAspectRatio="none">
@@ -91,7 +91,7 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
       </div>
     </div>
 
-    <div class="w-seam absolute" data-seam>
+    <div class="w-seam-mask absolute inset-x-0"><div class="w-seam absolute" data-seam>
       <div class="w-seam-layer absolute inset-0" data-seam-depth="24">
         <div class="h-full w-full" data-seam-drift="front">
           <svg class="h-full w-full overflow-visible" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
@@ -100,7 +100,7 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
           </svg>
         </div>
       </div>
-    </div>
+    </div></div>
 
     <div class="world-seam-shade absolute inset-x-0 top-0"></div>
   </div>
@@ -111,17 +111,36 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
 <style is:global>
   :root {
     --s: 1;
+    --lane-w: 545px;
+    --lane-r: 120px;
+    --lane-a: 0.3;
+    --lane-mask: linear-gradient(90deg, #000 0, #000 calc(50% - var(--lane-w) - var(--lane-r)), rgb(0 0 0 / var(--lane-a)) calc(50% - var(--lane-w)), rgb(0 0 0 / var(--lane-a)) calc(50% + var(--lane-w)), #000 calc(50% + var(--lane-w) + var(--lane-r)), #000 100%);
+  }
+
+  .w-lane {
+    -webkit-mask-image: var(--lane-mask);
+    mask-image: var(--lane-mask);
+  }
+
+  .w-lane-gap {
+    -webkit-mask-image: var(--lane-mask), linear-gradient(180deg, transparent calc(50% - 150px), #000 calc(50% - 95px), #000 calc(50% + 90px), transparent calc(50% + 145px));
+    mask-image: var(--lane-mask), linear-gradient(180deg, transparent calc(50% - 150px), #000 calc(50% - 95px), #000 calc(50% + 90px), transparent calc(50% + 145px));
   }
 
   @media (max-width: 1023px) {
     :root {
       --s: 0.7;
+      --lane-w: calc(50% - 56px);
+      --lane-r: 40px;
     }
   }
 
   @media (max-width: 640px) {
     :root {
       --s: 0.45;
+      --lane-w: calc(50% - 20px);
+      --lane-r: 16px;
+      --lane-a: 0.42;
     }
   }
 
@@ -145,10 +164,18 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
     background: linear-gradient(180deg, rgb(21 22 63 / 0.55) 0%, rgb(21 22 63 / 0.3) 35%, rgb(21 22 63 / 0) 100%);
   }
 
+  .w-seam-mask {
+    --seam: calc(var(--hero-h, 100svh) * 1.07);
+    top: calc(var(--seam) * -1);
+    height: calc(var(--seam) + 1200px);
+    -webkit-mask-image: var(--lane-mask), linear-gradient(180deg, #000 0, #000 calc(var(--seam) + 150px), transparent calc(var(--seam) + 360px));
+    mask-image: var(--lane-mask), linear-gradient(180deg, #000 0, #000 calc(var(--seam) + 150px), transparent calc(var(--seam) + 360px));
+  }
+
   .w-seam {
     left: -7%;
     width: 114%;
-    top: calc(var(--hero-h, 100svh) * -1.07);
+    top: 0;
     height: calc(var(--hero-h, 100svh) * 1.14);
   }
 
@@ -230,6 +257,17 @@ const rf5 = 'M820 1060C840 1075 868 1050 880 1020C950 870 1100 830 1180 770S1370
   @keyframes w-drift-c {
     from { translate: 0 0; rotate: 0deg; }
     to { translate: 16px 12px; rotate: -0.6deg; }
+  }
+
+  .world-wrap {
+    text-shadow: 0 0 2px rgb(19 20 64 / 0.85), 0 0 10px rgb(19 20 64 / 0.6), 0 0 22px rgb(19 20 64 / 0.4);
+  }
+
+  .world-wrap [class*='text-night-'],
+  .world-wrap [class*='text-night-'] *,
+  .world-wrap .pill-btn,
+  .world-wrap .btn-primary {
+    text-shadow: none;
   }
 
   .w-scrim {

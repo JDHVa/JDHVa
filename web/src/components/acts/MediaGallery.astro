@@ -68,13 +68,13 @@ const items = media.map((m, i) => {
           </div>
           <figcaption class="flex items-center justify-between gap-3 px-1 pt-2.5 font-mono text-[0.68rem] font-semibold tracking-wider text-night-800">
             <span>{it.caption?.[lang] ?? name}</span>
-            <span class="opacity-60">{String(it.index).padStart(2, '0')}</span>
+            <span class="opacity-80">{String(it.index).padStart(2, '0')}</span>
           </figcaption>
         </figure>
       </li>
     ))}
   </ul>
-  <p class="pointer-events-none absolute right-4 bottom-1 font-mono text-[0.65rem] tracking-widest text-lavender-200 uppercase sm:right-8 lg:hidden" aria-hidden="true">{s.mediaHint} →</p>
+  <p class="pointer-events-none absolute right-4 bottom-1 rounded-full bg-night-950/85 px-2 py-0.5 font-mono text-[0.65rem] tracking-widest text-lavender-200 uppercase sm:right-8 lg:hidden" aria-hidden="true">{s.mediaHint} →</p>
 </div>
 
 <style>

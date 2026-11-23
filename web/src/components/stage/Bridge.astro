@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { name } = Astro.props;
-const wide = { y: -400, h: 800 };
+const wide = { y: -400, h: 800, at: '50%' };
 const curl = 'M1250 640C1180 560 1240 465 1322 488C1404 510 1402 612 1340 622C1300 628 1284 590 1306 572';
 
 type Mark = [number, number, number, string];
@@ -33,6 +33,7 @@ const stars: Record<Props['name'], [number, number, number][]> = {
 ---
 
 <div class="w-bridge relative -z-[1] h-0" aria-hidden="true">
+  <div class="w-lane-gap pointer-events-none absolute inset-x-0" style="top:calc(var(--s) * -720px);height:calc(var(--s) * 1440px)">
   {name === 'prologue-acts' && (
     <>
       <Piece wide={wide} speed={0.16} depth={12} drift="a" stage>
@@ -163,4 +164,5 @@ const stars: Record<Props['name'], [number, number, number][]> = {
     </>
   )}
 
+  </div>
 </div>

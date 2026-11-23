@@ -148,7 +148,7 @@ export function scatter(o: { seed: number; count: number; colors?: string[]; edg
       c: colors[Math.floor(rand() * colors.length)],
       r: Math.round(-30 + rand() * 60),
       d: shardPaths[Math.floor(rand() * shardPaths.length)],
-      m: !inCenter && rand() < 0.45,
+      m: !inCenter && ((q: number) => (kind === 'sparkle' || kind === 'star' ? q < 0.6 : x < 3.5 || x > 96.5))(rand()),
       dl: Math.round(rand() * 40) / 10,
       du: Math.round((kind === 'sparkle' ? 1.6 + rand() * 1.8 : 5 + rand() * 4) * 10) / 10,
     });

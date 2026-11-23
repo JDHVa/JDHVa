@@ -68,9 +68,10 @@ const bars = Array.from({ length: 17 }, (_, i) => {
 const trackPath = 'M34 236C92 240 104 150 160 128S236 150 252 196S330 246 352 190S338 84 290 70S190 58 150 64';
 ---
 
-<div class="motif-stage relative aspect-[4/3] w-full" data-motif={id} role="img" aria-label={s.motif[id as keyof typeof s.motif]}>
+<div class="motif-stage relative aspect-[4/3] w-full" data-motif={id} data-stage role="img" aria-label={s.motif[id as keyof typeof s.motif]}>
   <span class="stage-spot" aria-hidden="true"></span>
-  <svg class="relative h-full w-full overflow-visible" viewBox="0 0 400 300" aria-hidden="true">
+  <span class="stage-glow" aria-hidden="true"></span>
+  <svg class="motif-svg relative h-full w-full overflow-visible" viewBox="0 0 400 300" aria-hidden="true">
     <defs>
       <radialGradient id={`bub-${id}`} cx="50%" cy="50%" r="50%">
         <stop offset="0%" stop-color="#8FF0F0" stop-opacity="0.04" />
@@ -294,6 +295,56 @@ const trackPath = 'M34 236C92 240 104 150 160 128S236 150 252 196S330 246 352 19
     background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 14%, transparent), transparent 80%);
     clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
     pointer-events: none;
+  }
+
+  .stage-glow {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: 64%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    translate: -50% -50%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1024px) {
+    .motif-stage {
+      border-radius: 40px;
+      border-width: 3px;
+    }
+
+    .motif-svg {
+      transform: scale(1.07);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .stage-spot {
+      transform-origin: 50% 0;
+      animation: spot-sway 7s ease-in-out infinite alternate;
+    }
+
+    .stage-glow {
+      animation: glow-breathe 4.5s ease-in-out infinite alternate;
+    }
+
+    :global(.js) .motif-stage:not(:global(.is-live)) .stage-spot,
+    :global(.js) .motif-stage:not(:global(.is-live)) .stage-glow {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes spot-sway {
+    from { rotate: -7deg; }
+    to { rotate: 7deg; }
+  }
+
+  @keyframes glow-breathe {
+    from { opacity: 0.35; scale: 0.9; }
+    to { opacity: 0.85; scale: 1.08; }
   }
 
   .motif-mono {

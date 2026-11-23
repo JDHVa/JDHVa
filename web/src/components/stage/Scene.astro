@@ -29,7 +29,7 @@ const swirlInner = spiral(880, 175, 125, 18, 1.35, Math.PI * 1.6);
 const constellation = [0, 5, 9, 14, 18, 23, 27].map((i) => swirl.pts[i]);
 ---
 
-<div class="w-stage pointer-events-none absolute inset-0 -z-10" aria-hidden="true" data-stage>
+<div class="w-stage w-lane pointer-events-none absolute inset-0 -z-10" aria-hidden="true" data-stage>
   {name === 'prologue' && (
     <Piece wide={{ y: -560, h: 600, at: '100%' }} speed={0.08} depth={24} drift="c">
       <Ribbon d="M1840 -520C1620 -500 1380 -420 1350 -300S1460 -120 1400 -40S1180 40 1120 30" p="thin" />

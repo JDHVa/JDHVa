@@ -47,7 +47,7 @@ const localHref = (href: string) => (href.startsWith('/') && lang !== 'es' ? `/$
   data-act={act.id}
 >
   <AccentRibbons tone={a} kind="act" flip={flip} />
-  <header class:list={['act-header relative grid items-center gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-14', act.repo && 'has-link']}>
+  <header class:list={['act-header relative grid items-center gap-8 lg:gap-12', act.repo && 'has-link', flip && 'is-flip']}>
     <div class="flex flex-col gap-4" data-reveal="header">
       <p class="act-label flex items-end gap-3 leading-none" aria-hidden="true">
         <span class="font-mono text-xs font-semibold tracking-[0.3em] text-[color:var(--accent)] uppercase sm:text-sm">{actWord}</span>
@@ -124,7 +124,7 @@ const localHref = (href: string) => (href.startsWith('/') && lang !== 'es' ? `/$
       )}
     </div>
 
-    <div class="relative" data-reveal="motif">
+    <div class="motif-col relative" data-reveal="motif">
       <ActMotif id={act.id} s={s} />
     </div>
   </header>
@@ -216,6 +216,31 @@ const localHref = (href: string) => (href.startsWith('/') && lang !== 'es' ? `/$
 </article>
 
 <style>
+  @media (min-width: 1024px) {
+    .act-header {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    }
+
+    .act-header.is-flip {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    }
+
+    .act-header.is-flip .motif-col {
+      order: -1;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .motif-col {
+      margin-right: calc(-1 * clamp(0px, (100vw - 1216px) / 2, 200px));
+    }
+
+    .act-header.is-flip .motif-col {
+      margin-right: 0;
+      margin-left: calc(-1 * clamp(0px, (100vw - 1216px) / 2, 200px));
+    }
+  }
+
   .numeral {
     font-size: clamp(3.6rem, 9vw, 6.5rem);
     color: var(--accent);

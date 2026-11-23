@@ -15,14 +15,15 @@ const thin = accentThin(tone);
 const mirror = flip ? 'matrix(-1 0 0 1 1440 0)' : undefined;
 ---
 
+<div class:list={['w-accent w-lane pointer-events-none absolute -z-[1]', kind === 'divider' && 'max-sm:hidden']} aria-hidden="true" style={kind === 'act' ? 'top:calc(var(--s) * -600px);height:calc(var(--s) * 1900px)' : 'top:calc(50% - var(--s) * 500px);height:calc(var(--s) * 1000px)'}>
 {kind === 'act' ? (
   <>
-    <Piece class="-z-[1]" wide={{ y: -200, h: 1100 }} speed={0.1} depth={12} drift="a" stage>
+    <Piece wide={{ y: -200, h: 1100, at: 'calc(var(--s) * 600px)' }} speed={0.1} depth={12} drift="a" stage>
       <g transform={mirror}>
         <Ribbon d="M-500 -40C-200 0 40 160 30 420S-160 820 -500 880" p="deepViolet" op={0.8} />
       </g>
     </Piece>
-    <Piece class="-z-[1]" wide={{ y: -200, h: 1100 }} speed={0.04} depth={24} drift="b" stage>
+    <Piece wide={{ y: -200, h: 1100, at: 'calc(var(--s) * 600px)' }} speed={0.04} depth={24} drift="b" stage>
       <g transform={mirror}>
         <Ribbon d="M1800 -120C1560 -80 1330 60 1335 300S1450 620 1385 800S1560 960 1800 1000" p={main} />
         <Ribbon d="M-300 480C-100 470 100 540 105 660S20 820 -60 840" p={thin} />
@@ -35,7 +36,7 @@ const mirror = flip ? 'matrix(-1 0 0 1 1440 0)' : undefined;
     </Piece>
   </>
 ) : (
-  <Piece class="-z-[1] max-sm:hidden" wide={{ y: -220, h: 440, at: '50%' }} speed={0.02} depth={24} drift="c" stage>
+  <Piece wide={{ y: -220, h: 440, at: '50%' }} speed={0.02} depth={24} drift="c" stage>
     <g transform={mirror}>
       <Ribbon d="M-400 -170C-200 -160 20 60 170 86S280 96 300 92" p={thin} />
       <Ribbon d="M1840 -200C1600 -190 1400 -40 1260 -50S1140 -60 1126 -56" p={thin} />
@@ -43,3 +44,11 @@ const mirror = flip ? 'matrix(-1 0 0 1 1440 0)' : undefined;
     </g>
   </Piece>
 )}
+</div>
+
+<style>
+  .w-accent {
+    left: calc(50% - 50vw);
+    width: 100vw;
+  }
+</style>
