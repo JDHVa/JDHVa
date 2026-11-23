@@ -311,7 +311,7 @@ export const acts: Act[] = [
         items: [
           { es: 'Colapso de política tras el CP2: se destrabó con el banco de estados y más entropía del actor.', en: 'Policy collapse after CP2: fixed with the start bank and higher actor entropy.' },
           { es: 'Atasco de ~3 h en la curva de los 1 840 m a 340–370 km/h: se ajustó la frontera del banco.', en: '~3 h plateau at the 1,840 m corner at 340–370 km/h: fixed by widening the bank frontier.' },
-          { es: 'Estancamiento en ~28.7 s: nueva corrida con mayor penalización por paso para empujar velocidad.', en: 'Plateau at ~28.7 s: new run with a higher per-step penalty to push for speed.' },
+          { es: 'Estancamiento en ~28.7 s: nueva corrida con mayor penalización por paso para empujar velocidad. Resultado: bajó a 26.41 s.', en: 'Plateau at ~28.7 s: new run with a higher per-step penalty to push for speed. Result: down to 26.41 s.' },
         ],
       },
     ],
@@ -319,9 +319,9 @@ export const acts: Act[] = [
       {
         title: { es: 'Resultados (A01, semilla 0)', en: 'Results (A01, seed 0)' },
         items: [
-          { value: '28.65 s', label: { es: 'mejor vuelta de la IA', en: 'best AI lap' }, note: { es: 'mi mejor vuelta humana: 28.75 s', en: 'my best human lap: 28.75 s' } },
+          { value: '26.41 s', label: { es: 'mejor vuelta de la IA', en: 'best AI lap' }, note: { es: 'mi mejor vuelta humana: 28.75 s', en: 'my best human lap: 28.75 s' } },
           { value: '99/100', label: { es: 'últimas vueltas terminadas', en: 'of the last laps finished' } },
-          { value: '~14 h', label: { es: 'de juego simulado (~1 M pasos)', en: 'of simulated play (~1M steps)' } },
+          { value: '42 h', label: { es: 'de entrenamiento', en: 'of training' } },
           { value: '3.9 GB', label: { es: 'VRAM máxima', en: 'peak VRAM' } },
         ],
       },
@@ -615,7 +615,7 @@ export const skills: SkillGroup[] = [
 export const stats: { value: string; label: L }[] = [
   { value: '150+', label: { es: 'personas impactadas con Lumen', en: 'people reached with Lumen' } },
   { value: 'Top 3', label: { es: 'HackMTY 2026', en: 'HackMTY 2026' } },
-  { value: '28.65 s', label: { es: 'mi IA me ganó en TrackMania', en: 'my AI beat me at TrackMania' } },
+  { value: '26.41 s', label: { es: 'mi IA me ganó en TrackMania', en: 'my AI beat me at TrackMania' } },
   { value: '99.2 %', label: { es: 'detectando voces de IA', en: 'detecting AI voices' } },
 ];
 
