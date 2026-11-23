@@ -426,8 +426,8 @@ export const experience: Role[] = [
     org: 'Iron Lion 4977 · FRC',
     image: 'evidencias/ironlion.jpeg',
     description: {
-      es: 'Entré como apoyo y por mi nivel de programación los coaches me nombraron lead programmer. Hoy dirijo la programación del robot del equipo de FIRST Robotics Competition.',
-      en: 'I joined as support and, because of my programming skills, the coaches named me lead programmer. I now lead the robot programming for our FIRST Robotics Competition team.',
+      es: 'Esta temporada soy lead programmer: dirijo la programación del robot del equipo de FIRST Robotics Competition.',
+      en: 'This season I am the lead programmer, leading the robot programming for our FIRST Robotics Competition team.',
     },
   },
   {
