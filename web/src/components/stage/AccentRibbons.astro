@@ -35,10 +35,11 @@ const mirror = flip ? 'matrix(-1 0 0 1 1440 0)' : undefined;
     </Piece>
   </>
 ) : (
-  <Piece class="-z-[1] max-sm:hidden" wide={{ y: -220, h: 440, at: '50%' }} speed={0.05} depth={24} drift="c" stage>
+  <Piece class="-z-[1] max-sm:hidden" wide={{ y: -220, h: 440, at: '50%' }} speed={0.02} depth={24} drift="c" stage>
     <g transform={mirror}>
-      <Ribbon d="M-400 -150C-150 -140 100 80 336 115S900 125 1104 110S1500 -100 1840 -140" p={thin} />
-      <Ribbon d="M-400 160C-150 150 100 -60 336 -110S900 -130 1104 -110S1500 120 1840 150" p={main} />
+      <Ribbon d="M-400 -170C-200 -160 20 60 170 86S280 96 300 92" p={thin} />
+      <Ribbon d="M1840 -200C1600 -190 1400 -40 1260 -50S1140 -60 1126 -56" p={thin} />
+      <Ribbon d="M-400 230C-160 220 40 40 180 -20S290 -56 304 -56" p={main} />
     </g>
   </Piece>
 )}

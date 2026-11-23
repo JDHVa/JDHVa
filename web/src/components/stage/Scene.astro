@@ -24,8 +24,8 @@ const fields: Record<Props['name'], { seed: number; count: number; colors?: stri
 const curl = 'M1250 640C1180 560 1240 465 1322 488C1404 510 1402 612 1340 622C1300 628 1284 590 1306 572';
 const loop = 'M1640 60C1400 120 1310 270 1160 270S900 190 830 310S990 530 1130 470';
 
-const swirl = spiral(1150, 120, 200, 34, 1.7, Math.PI * 0.9);
-const swirlInner = spiral(1150, 120, 150, 20, 1.35, Math.PI * 1.6);
+const swirl = spiral(880, 175, 170, 30, 1.7, Math.PI * 0.9);
+const swirlInner = spiral(880, 175, 125, 18, 1.35, Math.PI * 1.6);
 const constellation = [0, 5, 9, 14, 18, 23, 27].map((i) => swirl.pts[i]);
 ---
 
@@ -62,7 +62,7 @@ const constellation = [0, 5, 9, 14, 18, 23, 27].map((i) => swirl.pts[i]);
 
   {name === 'repertoire' && (
     <>
-      <Piece wide={{ y: -100, h: 700 }} speed={0.06} depth={24} drift="c">
+      <Piece class="max-sm:hidden" wide={{ y: -100, h: 700 }} speed={0.06} depth={24} drift="c">
         <Ribbon d={swirl.d} p="curl" />
         <Ribbon d={swirlInner.d} p="aqua" op={0.9} />
         <path
@@ -107,8 +107,8 @@ const constellation = [0, 5, 9, 14, 18, 23, 27].map((i) => swirl.pts[i]);
   {name === 'finale' && (
     <>
       <Piece wide={{ y: -620, h: 720, at: '100%' }} speed={0.04} depth={12} drift="a">
-        <Ribbon d="M-400 -560C-60 -520 360 -120 720 60" p="deepViolet" />
-        <Ribbon d="M1840 -580C1500 -540 1080 -120 720 60" p="deepBlue" />
+        <Ribbon d="M-400 -560C-60 -520 380 -40 720 280" p="deepViolet" />
+        <Ribbon d="M1840 -580C1500 -540 1060 -40 720 280" p="deepBlue" />
       </Piece>
       <Piece wide={{ y: -620, h: 720, at: '100%' }} speed={0.02} depth={24} drift="b">
         <Ribbon d="M-400 -420C-150 -400 120 -230 250 -140" p="lavender" />

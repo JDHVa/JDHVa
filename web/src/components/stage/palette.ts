@@ -125,12 +125,12 @@ export function scatter(o: { seed: number; count: number; colors?: string[]; edg
   const rand = rng(o.seed);
   const out: Particle[] = [];
   const colors = o.colors ?? sparkleColors;
-  const edge = o.edge ?? 13;
+  const edge = o.edge ?? 10;
   const centerShare = o.center ?? 0.28;
   for (let i = 0; i < o.count; i++) {
     const roll = rand();
-    const kind: Particle['kind'] = roll < 0.3 ? 'bubble' : roll < 0.72 ? 'sparkle' : roll < 0.9 ? 'shard' : 'star';
     const inCenter = rand() < centerShare;
+    const kind: Particle['kind'] = inCenter ? (roll < 0.8 ? 'sparkle' : 'star') : roll < 0.3 ? 'bubble' : roll < 0.72 ? 'sparkle' : roll < 0.9 ? 'shard' : 'star';
     const left = rand() < 0.5;
     const x = inCenter ? 18 + rand() * 64 : left ? rand() * edge : 100 - edge + rand() * edge;
     const y = (i + rand()) / o.count * 100;
@@ -180,3 +180,7 @@ export function spiral(cx: number, cy: number, r0: number, r1v: number, turns: n
   }
   return { d: smooth(pts), pts };
 }
+
+let ribbonCount = 0;
+
+export const nextRibbonId = () => `wr${(ribbonCount++).toString(36)}`;

@@ -1,5 +1,5 @@
 ---
-import { presets, type Preset } from './palette';
+import { presets, nextRibbonId, type Preset } from './palette';
 
 interface Props {
   d: string;
@@ -12,23 +12,26 @@ interface Props {
 
 const { d, p, k = 1, ns = false, axis = 'y', op } = Astro.props;
 const preset = typeof p === 'string' ? presets[p] : p;
+const id = nextRibbonId();
 const shift = (o?: number) => (o ? (axis === 'x' ? `translate(${o * k} 0)` : `translate(0 ${o * k})`) : undefined);
 ---
 
 <g fill="none" stroke-linecap="round" stroke-linejoin="round" opacity={op}>
+  <defs>
+    <path id={id} d={d} vector-effect={ns ? 'non-scaling-stroke' : undefined} />
+  </defs>
   {preset.map((s) =>
     ns ? (
-      <path
-        d={d}
+      <use
+        href={`#${id}`}
         stroke={s.c}
-        vector-effect="non-scaling-stroke"
         transform={shift(s.o)}
         opacity={s.op}
         style={`stroke-width:calc(var(--k) * ${s.w}px)${s.dash ? `;stroke-dasharray:${s.dash.map((v) => `calc(var(--k) * ${v}px)`).join(' ')}` : ''}`}
       />
     ) : (
-      <path
-        d={d}
+      <use
+        href={`#${id}`}
         stroke={s.c}
         stroke-width={s.w * k}
         stroke-dasharray={s.dash ? s.dash.map((v) => v * k).join(' ') : undefined}
