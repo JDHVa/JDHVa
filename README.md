@@ -36,7 +36,7 @@ Science enthusiast and builder of projects in my free time. I work across **AI, 
 | I | **[Lumen](https://github.com/JDHVa/Lumen)** · [live](https://proyecto-lumen.vercel.app) | Student-to-student tutoring network and platform. 23 zhenshis (tutors), 150+ people reached, 3 independent clubs. |
 | II | **TerraOrbis 2.0** · *private repo* | Autonomous agricultural rover: YOLOv8 on Hailo-8, DINOv2 anomalies, a spatial SEIR + GraphSAGE "world model" of the field and Monte Carlo risk forecasting. Podium at UANL Inter-High School Contest 2026. |
 | III | **[Centinel](https://github.com/JDHVa/altur-hackmty)** | Human vs. AI caller detection for bank phone calls. Frozen XLS-R + WavLM + conversational rhythm features. **Top 3 at HackMTY 2026**, 99.2% accuracy on the test set. |
-| IV | **World Model × TrackMania** | DreamerV3 agent that learns by dreaming the game. After 42 hours of training its best lap (26.41 s) beats my own (28.75 s). |
+| IV | **[World Model × TrackMania](https://github.com/JDHVa/wm-tmnf)** | DreamerV3 agent that learns by dreaming the game. After 42 hours of training its best lap (26.41 s) beats my own (28.75 s). |
 | | **[WC-ML Dixon-Coles](https://github.com/JDHVa/WC-ML-DixonColes)** | 2026 World Cup predictions with the Dixon-Coles model. |
 | | **[PI-Gem](https://github.com/JDHVa/PI-Gem)** | Gaming assistant that reads your emotions and talks with you (HackDays Tec prototype). |
 

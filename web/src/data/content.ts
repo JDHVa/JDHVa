@@ -286,6 +286,7 @@ export const acts: Act[] = [
     },
     role: { es: 'Creador e investigador independiente', en: 'Creator & independent researcher' },
     context: { es: 'Investigación · TrackMania Nations Forever · pista A01', en: 'Research · TrackMania Nations Forever · track A01' },
+    repo: 'https://github.com/JDHVa/wm-tmnf',
     problem: [
       {
         es: 'Un agente con world model primero aprende cómo funciona el juego, luego practica dentro de su propio "sueño" y al final maneja en el juego real.',
