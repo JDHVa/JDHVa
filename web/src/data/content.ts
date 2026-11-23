@@ -2,7 +2,7 @@ import type { Lang } from '../i18n/ui';
 
 export type L = Record<Lang, string>;
 
-export type ProjectId = 'lumen' | 'terraorbis' | 'centinel' | 'trackmania' | 'wc-ml' | 'pi-gem';
+export type ProjectId = 'lumen' | 'terraorbis' | 'centinel' | 'trackmania' | 'wc-ml' | 'pi-gem' | 'somnolence';
 
 export interface Metric {
   value: string;
@@ -351,6 +351,17 @@ export interface MinorProject {
 
 export const minorProjects: MinorProject[] = [
   {
+    id: 'somnolence',
+    name: 'Somnolence Conscience',
+    description: {
+      es: 'Detector de somnolencia al volante en tiempo real con solo una cámara. Calcula EAR, PERCLOS, bostezos (MAR), cabeceo (head pose) y parpadeo, los combina en un score de fatiga (Normal → Cansado → Somnoliento → Alerta) y dispara una alarma. Incluye un stand interactivo bilingüe con vistas de landmarks, convoluciones, red neuronal, monitor y simulación, y una versión web que corre completa en el navegador.',
+      en: 'Real-time drowsy-driving detector using only a camera. It computes EAR, PERCLOS, yawns (MAR), head nodding (head pose) and blink rate, fuses them into a fatigue score (Normal → Tired → Drowsy → Alert) and sounds an alarm. Includes a bilingual interactive booth with landmark, convolution, neural network, monitor and simulation views, plus a web version that runs fully in the browser.',
+    },
+    context: { es: 'Global Transportation & Innovation Summit · Cintermex · en representación de la UANL', en: 'Global Transportation & Innovation Summit · Cintermex · representing UANL' },
+    tags: ['Python', 'OpenCV', 'MediaPipe', 'Flask', 'JavaScript', 'WASM'],
+    repo: 'https://github.com/JDHVa/somnolence-conciencie',
+  },
+  {
     id: 'wc-ml',
     name: 'WC-ML Dixon-Coles',
     description: {
@@ -459,8 +470,8 @@ export const experience: Role[] = [
     org: 'Global Transportation & Innovation Summit',
     image: 'evidencias/global-innovation.jpeg',
     description: {
-      es: 'Presenté un proyecto para evitar que los conductores se queden dormidos al volante.',
-      en: 'Presented a project to keep drivers from falling asleep at the wheel.',
+      es: 'Presenté en Cintermex un detector de somnolencia al volante con visión por computadora y un stand interactivo.',
+      en: 'Presented a computer-vision drowsy-driving detector with an interactive booth at Cintermex.',
     },
   },
 ];
@@ -528,7 +539,7 @@ export const skills: SkillGroup[] = [
     kind: 'concept',
     items: [
       { name: { es: 'World models y RL', en: 'World models & RL' }, projects: ['trackmania'] },
-      { name: { es: 'Visión por computadora', en: 'Computer vision' }, projects: ['terraorbis', 'pi-gem'] },
+      { name: { es: 'Visión por computadora', en: 'Computer vision' }, projects: ['terraorbis', 'pi-gem', 'somnolence'] },
       { name: { es: 'Anti-spoofing de voz', en: 'Voice anti-spoofing' }, projects: ['centinel'] },
       { name: { es: 'Fusión multimodal y calibración', en: 'Multimodal fusion & calibration' }, projects: ['terraorbis', 'centinel'] },
       { name: { es: 'Redes de grafos (GNN)', en: 'Graph neural networks' }, projects: ['terraorbis'] },
@@ -573,7 +584,8 @@ export const skills: SkillGroup[] = [
     kind: 'tool',
     items: [
       { name: 'torchaudio / librosa', projects: ['centinel'] },
-      { name: 'OpenCV', projects: ['trackmania', 'terraorbis'] },
+      { name: 'OpenCV', projects: ['trackmania', 'terraorbis', 'somnolence'] },
+      { name: 'MediaPipe', projects: ['somnolence'] },
       { name: 'ffmpeg', projects: ['centinel', 'trackmania'] },
     ],
   },
